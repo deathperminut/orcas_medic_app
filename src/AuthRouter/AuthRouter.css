@@ -1,5 +1,5 @@
 .body{
     width: 100%;
     min-height: 100vh;
-    background-color: #1f2122;
+    background-image: linear-gradient(to right, #050505, #1d1c1c);
 }

@@ -8,12 +8,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .Form{
     width: 86%;
     max-width: 400px;
-    min-height: 550px;
+    height: 570px;
     border-radius: 30px;
     border: 1px solid #707070;
     margin-top: 40px;
@@ -24,6 +25,18 @@
     padding: 30px;
     background-color: rgba(105, 97, 97, 0.151);
     box-shadow: 5px 5px 10px rgba(57, 56, 56, 0.2);
+}
+.spanText{
+  color: #d1a207;
+  cursor: pointer;
+  text-align: center;
+}
+.spanText:hover{
+  color: #d4b95f;
+}
+.linksContainer{
+  display: flex;
+  flex-direction: column;
 }
 .iconContainer{
     width: 70px;
@@ -60,7 +73,7 @@
 
 .ButtonElement{
     width: 220px;
-    height:40px;
+    min-height:40px;
     background-color: #d1a207;
     border: 1px solid #d1a207;
     border-radius: 20px;
@@ -70,19 +83,40 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    /* position: relative;
-    top: 60px; */
+    position: relative;
+    top: 35px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+.ButtonElementV2{
+    width: 220px;
+    min-height:40px;
+    background-color:transparent;
+    border: 1px solid #d1a207;
+    color: #d1a207;
+    border-radius: 20px;
+    margin-top: 30px;
+    transition: 1s;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+.ButtonElementV2:hover{
+  border: 1px solid  #c4aa58 !important;
+  box-shadow: 5px 5px 10px rgba(113, 113, 113, 0.4);
+}
+.ButtonTextV2{
+  color: #d1a207;
+  font-style: italic;
 }
 .ButtonText{
     color: white;
     font-style: italic;
 }
-.textLogin{
 
-}
 .ButtonElement:hover{
-    border: 2px solid #d1a207;
+    background-color:  #c4aa58 !important;
     box-shadow: 5px 5px 10px rgba(113, 113, 113, 0.4);
 }
 .textLogin{
@@ -93,6 +127,16 @@
 
 .textLogin:hover{
     color: #0987dc;
+}
+
+.eye-password{
+  color:#afaeaa;
+  display: flex;
+  align-self: flex-end;
+  cursor: pointer;
+  position:absolute;
+  left: 90%;
+  bottom: 10px;
 }
 
 
@@ -110,7 +154,7 @@
     border-top: 0px solid transparent !important;
     border-left: 0px solid transparent !important;
     border-right: 0px solid transparent !important;
-    border-bottom: 1px solid #d1a207 !important;
+    border-bottom: 1px solid #afaeaa !important;
     color: var(--color-purple-) !important;
     font-family: var(--font-family-regular-) !important;
     border-radius: 0rem !important;
@@ -140,7 +184,7 @@
     border-top: 0px solid transparent !important;
     border-left: 0px solid transparent !important;
     border-right: 0px solid transparent !important;
-    border-bottom: 1px solid #d1a207 !important;
+    border-bottom: 1px solid #afaeaa !important;
     outline: none !important;
     color: var(--color-purple-) !important;
     font-family: var(--font-family-regular-) !important;
