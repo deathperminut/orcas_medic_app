@@ -11,6 +11,7 @@ export default function CompleteRecovery() {
     
     // use States
     const [eye,setEye]=React.useState(true);
+    const [eye2,setEye2]=React.useState(true);
 
     // passwords
     const SeePassword=()=>{
@@ -24,6 +25,22 @@ export default function CompleteRecovery() {
     const HidePassword=()=>{
     setEye(true);
     const input = document.querySelector("#password");
+
+        input.setAttribute("type", "password");
+        input.classList.remove( "colorWhite" );
+    }
+
+    const SeePassword2=()=>{
+        setEye2(false);
+        const input = document.querySelector("#password2");
+        // When an input is checked, or whatever...
+        input.setAttribute("type", "text");
+        input.classList.add( "colorWhite" );
+    }
+    
+    const HidePassword2=()=>{
+    setEye2(true);
+    const input = document.querySelector("#password2");
 
         input.setAttribute("type", "password");
         input.classList.remove( "colorWhite" );
@@ -52,15 +69,15 @@ export default function CompleteRecovery() {
                         </div>
                         <div className='inputContainer'>
                             <div className='form-floating inner-addon- left-addon-'>
-                                    <input  type="password" className='form-control' id='password' placeholder="Contraseña" />
+                                    <input  type="password" className='form-control' id='password2' placeholder="Contraseña" />
                                     <label className='fs-5- ff-monse-regular-'>Validación contraseña</label>
-                                    {eye===true  ? 
+                                    {eye2===true  ? 
                                     <>
-                                    <AiOutlineEye className='eye-password' onClick={SeePassword}></AiOutlineEye>
+                                    <AiOutlineEye className='eye-password' onClick={SeePassword2}></AiOutlineEye>
                                     </>
                                     :
                                     <>
-                                    <AiOutlineEyeInvisible className='eye-password' onClick={HidePassword}></AiOutlineEyeInvisible>
+                                    <AiOutlineEyeInvisible className='eye-password' onClick={HidePassword2}></AiOutlineEyeInvisible>
                                     </>
                                     }
                             </div>
