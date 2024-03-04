@@ -3,8 +3,8 @@ import './Login.css'
 // importaciones
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import logo from '../../Assets/img/O60PtOwA_400x400__1_-removebg-preview.png'
 import { AppContext } from '../../context';
+import logo from '../../Assets/img/O60PtOwA_400x400__1_-removebg-preview.png'
 import ToggleSwitch from '../../components/buttonToggle/buttonToggle';
 import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai';
 

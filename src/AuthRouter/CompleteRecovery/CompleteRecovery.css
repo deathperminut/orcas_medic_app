@@ -11,10 +11,10 @@
     flex-direction: column;
 }
 
-.Form{
+.FormV3{
     width: 86%;
     max-width: 400px;
-    height: 570px;
+    height: 470px;
     border-radius: 30px;
     border: 1px solid #707070;
     margin-top: 40px;

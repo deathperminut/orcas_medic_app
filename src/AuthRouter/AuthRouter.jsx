@@ -6,6 +6,7 @@ import {Navigate,Route,Routes} from 'react-router-dom';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import Recovery from './Recovery/Recovery';
+import CompleteRecovery from './CompleteRecovery/CompleteRecovery';
 
 export default function AuthRouter() {
     return (
@@ -16,6 +17,7 @@ export default function AuthRouter() {
                     <Route path='Login/*' element={<Login></Login>}></Route>
                     <Route path='Register/*' element={<Register></Register>}></Route>
                     <Route path='Recovery/*' element={<Recovery></Recovery>}></Route>
+                    <Route path='CompleteRecovery/*' element={<CompleteRecovery></CompleteRecovery>}></Route>
                 </Routes>
             </div>
             
