@@ -87,7 +87,7 @@ export default function CompleteRecovery() {
                         </div>
                         
                     </form>
-                    <div className='linksContainer'>
+                    <div onClick={()=>{navigate('/Auth/Login')}}  className='linksContainer'>
                             <span className='spanText'>Ir al login</span>   
                     </div>
             </div>

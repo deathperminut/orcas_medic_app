@@ -71,8 +71,8 @@ export default function Login() {
                         
                     </form>
                     <div className='linksContainer'>
-                            <span className='spanText'>Olvide mi contraseña</span>   
-                            <div className='ButtonElementV2'>
+                            <span onClick={()=>{navigate('/Auth/Recovery')}} className='spanText'>Olvide mi contraseña</span>   
+                            <div  onClick={()=>{navigate('/Auth/Register')}} className='ButtonElementV2'>
                                 <span  className='ButtonTextV2'>Crear cuenta</span>
                             </div> 
                     </div>

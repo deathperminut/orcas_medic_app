@@ -27,7 +27,7 @@ export default function Recovery() {
                         </div>
                         
                     </form>
-                    <div className='linksContainer'>
+                    <div onClick={()=>{navigate('/Auth/Login')}} className='linksContainer'>
                             <span className='spanText'>Volver</span>   
                     </div>
             </div>
