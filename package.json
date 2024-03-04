@@ -25,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "react-slick": "^0.30.2",
+    "react-spinners": "^0.13.8",
     "react-tooltip": "^5.26.3",
     "sweetalert2": "^11.10.5",
     "swiper": "^11.0.7",

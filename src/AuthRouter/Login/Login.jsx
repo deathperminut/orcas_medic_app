@@ -7,6 +7,7 @@ import { AppContext } from '../../context';
 import logo from '../../Assets/img/O60PtOwA_400x400__1_-removebg-preview.png'
 import ToggleSwitch from '../../components/buttonToggle/buttonToggle';
 import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai';
+import Preloader from '../../components/Preloader/Preloader';
 
 export default function Login() {
     const navigate=useNavigate();
@@ -33,8 +34,22 @@ export default function Login() {
         input.classList.remove( "colorWhite" );
     }
 
+    // useStates
+
+    let [preloader,setPreloader] = React.useState(false);
+
+
     return (
         <div>
+            {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+            }
             <div className='formContainer'>
                     <form className='Form'>
                         <img src={logo} width={80}></img>
@@ -65,7 +80,7 @@ export default function Login() {
                             <ToggleSwitch />
                             </div>
                         </div>
-                        <div className='ButtonElement'>
+                        <div onClick={()=>{setPreloader(true)}} className='ButtonElement'>
                                 <span  className='ButtonText'>Inicia sesión</span>
                         </div>
                         
