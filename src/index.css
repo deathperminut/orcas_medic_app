@@ -16,12 +16,12 @@
     --color-black-: #414D55;
     --color-secondary-black-: #161617;
     --color-tertiary-black-: #444444;
-    --color-white-: #0463a2;
-    --color-secondary-white-: #3c8bda;
+    --color-white-: #d1a207;
+    --color-secondary-white-: #d1a207;
     --color-tertiary-white-: #3b3c3d;
     --color-quaternary-white-: #0463a2;
     --color-quinary-lila-: #0463a2;
-    --color-burgundy-: #3c8bda;
+    --color-burgundy-: ##d1a207
     --color-secondary-burgundy-: #3c8bda;
     --color-purple-: white;
     --color-secondary-purple-: #3c8bda;
@@ -42,25 +42,25 @@
     --color-quinary-green-: #A3D338;
     --color-aquamarine-: #54E3E3;
     --color-blue-: #296ff0;
-    --color-secondary-blue-: #0496FF;
+    --color-secondary-blue-: #d1a207;
     --color-tertiary-blue-: #090131;
     --color-quaternary-blue-: #2275d3;
     --color-sectary-blue-: #1B8BC7;
     --color-primary-brown-: #86464E;
     --color-secondary-brown-: #544C47;
-    --color-gray-: #0463a2;
-    --color-secondary-gray-: #0463a2;
-    --color-tertiary-gray-: #0463a2;
+    --color-gray-: #d1a207
+    --color-secondary-gray-: #d1a207;
+    --color-tertiary-gray-: #d1a207;
     --color-quaternary-gray-: #728998;
-    --color-quinary-gray-: #0463a2;
-    --color-white-rgb-: #0463a2;
-    --color-secondary-white-rgba-: #0463a2;
-    --color-tertiary-white-rgba-: #0463a2;
+    --color-quinary-gray-: #d1a207;
+    --color-white-rgb-: #d1a207;
+    --color-secondary-white-rgba-: #d1a207;
+    --color-tertiary-white-rgba-: #d1a207;
     --color-black-rgba-: rgba(0, 0, 0, 0.3);
     --color-secondary-black-rgba-: rgba(0, 0, 0, 0.05);
     --color-tertiary-black-rgba-: rgba(41, 50, 65, 0.5);
-    --color-gray-rgba-: #0463a2;
-    --color-secondary-gray-rgba-: #0463a2;
+    --color-gray-rgba-: #d1a207;
+    --color-secondary-gray-rgba-: #d1a207;
     --color-tertiary-gray-rgba-: --bs-body-bg;
     --color-purple-rgba-: #3c8bda;
     --step--3: clamp(0.66rem, calc(0.60rem + 0.33vw), 0.82rem);
@@ -1140,12 +1140,12 @@
 
 .icon-verification-alert:before {
   content: "\e93f";
-  color: #1671b7;
+  color: #d1a207;
 }
 
 .icon-password-alert:before {
   content: "\e940";
-  color: #1671b7;
+  color: #d1a207;
 }
 
 .icon-Notifications:before {
@@ -2299,8 +2299,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color:  #0463a2 !important;
-  border: 2px solid  #0463a2 !important;
+  background-color:  #d1a207 !important;
+  border: 2px solid  #d1a207!important;
 }
 
 /* ---------------------------------------------------
@@ -2993,7 +2993,7 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 14px;
   font-weight: 500 !important;
   font-family: 'Light', sans-serif  !important;
-  background-color: #2275d3 !important;
+  background-color: #d1a207 !important;
   border-color: transparent !important;
   border: 0px solid transparent !important;
   box-shadow: var(--box-shadow-12-);
