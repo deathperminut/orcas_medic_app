@@ -20,7 +20,6 @@ export default function AuthRouter() {
                     <Route path='CompleteRecovery/*' element={<CompleteRecovery></CompleteRecovery>}></Route>
                 </Routes>
             </div>
-            
         </React.Fragment>
     ) 
 }
