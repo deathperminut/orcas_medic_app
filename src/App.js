@@ -8,6 +8,7 @@ import {Navigate,Route,Routes} from 'react-router-dom';
 
 /* components */
 import AuthRouter from './AuthRouter/AuthRouter';
+import AuthPatient from './MedicApp/Patient/AuthPatient/AuthPatient';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path='' element = {<Navigate to='/Auth'></Navigate>}></Route>
         <Route path='/Auth/*' element={<AuthRouter></AuthRouter>}></Route>
+        <Route path='/AuthPatient/*' element={<AuthPatient></AuthPatient>}></Route>
       </Routes>
     </React.Fragment>
   );

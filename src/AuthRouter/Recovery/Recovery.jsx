@@ -31,6 +31,6 @@ export default function Recovery() {
                             <span className='spanText'>Volver</span>   
                     </div>
             </div>
-        </div>
+     </div>
   )
 }
