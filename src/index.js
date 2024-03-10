@@ -7,11 +7,17 @@ import reportWebVitals from './reportWebVitals';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'swiper/swiper-bundle.css';
+import './normalize.css';
 
 // Importamos bootstrap.budle 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { HashRouter } from 'react-router-dom';
 import { ProviderContext } from './context';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/jquery/dist/jquery.slim.min.js';
+import '../node_modules/jquery/dist/jquery.js';
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

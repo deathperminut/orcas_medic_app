@@ -19,7 +19,7 @@ export default function SmsValidation() {
                                     <label className='fs-5- ff-monse-regular-'>Código</label>
                             </div>
                         </div>
-                        <div onClick={()=>navigate('/AuthPatient/SmsValidation')} className='ButtonElement'>
+                        <div onClick={()=>navigate('/ModulsPatient/')} className='ButtonElement'>
                                 <span  className='ButtonText'>Validar</span>
                         </div>
                         

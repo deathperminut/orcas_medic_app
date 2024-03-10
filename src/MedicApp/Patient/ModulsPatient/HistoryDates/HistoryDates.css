@@ -1,0 +1,325 @@
+/* ---------------------------------------------------
+    CARD APPOINTMENT
+  ----------------------------------------------------- */
+
+  #card-appointment.card {
+    width: 100%;
+    max-width: 100% !important;
+    height: auto;
+    max-height: 100%;
+    min-height: auto;
+    background-color: #272727 !important;
+  }
+  
+  #card-appointment.card .card-header {
+    background-color: #272727 !important;
+    z-index: 1;
+  }
+  
+  .wrapper-list-appointment- {
+    height: auto;
+    max-height: 100vh;
+    overflow: hidden !important;
+  }
+  
+  .wrapper-list-appointment-::-webkit-scrollbar-track {
+    box-shadow: var(--box-shadow-5-);
+    -webkit-box-shadow: var(--box-shadow-5-);
+    background-color: var(--color-secondary-white-);
+    border-radius: 1.875rem;
+    -webkit-border-radius: 1.875rem;
+    -moz-border-radius: 1.875rem;
+    -khtml-border-radius: 1.875rem;
+  }
+  
+  .wrapper-list-appointment-::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #272727;
+    border-radius: 1.875rem;
+    -webkit-border-radius: 1.875rem;
+    -moz-border-radius: 1.875rem;
+    -khtml-border-radius: 1.875rem;
+  }
+  
+  .wrapper-list-appointment-::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary-black-) !important;
+    border: 2px solid var(--color-secondary-black-) !important;
+    border-radius: 1.875rem;
+    -webkit-border-radius: 1.875rem;
+    -moz-border-radius: 1.875rem;
+    -khtml-border-radius: 1.875rem;
+  }
+  
+  /* ---------------------------------------------------
+      CARD USER APPOINTMENT
+    ----------------------------------------------------- */
+  
+  #card-user-appointment.card {
+    width: 100%;
+    max-width: 100% !important;
+    height: 100%;
+    background-color: #575757 !important;
+    box-shadow: var(--box-shadow-15-);
+  }
+  
+  .h-img-user {
+    display: block;
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: cover;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .icon-star.checked-start-:before {
+    color: #f3d826 !important;
+  }
+  
+  /* ---------------------------------------------------
+      TABS APPOINTMENT
+    ----------------------------------------------------- */
+  
+  #card-appointment .nav-pills {
+    z-index: 3;
+    border-bottom: 2px solid#F8F6FE !important;
+  }
+  
+  #card-appointment .nav-pills .nav-item {
+    width: auto !important;
+  }
+  
+  #card-appointment .nav-pills .nav-link {
+    font-size: 13px !important;
+    color: #d8bd08 !important;
+    font-weight: normal !important;
+    cursor: pointer;
+    background-color: transparent !important;
+    border-bottom: 0px solid#f3d826 !important;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+  }
+  
+  #card-appointment .nav-pills .nav-link:hover {
+    color: #d8bd08 !important;
+    font-weight: normal !important;
+    background-color: transparent !important;
+    border-bottom: 0px solid#F8F6FE !important;
+  }
+  
+  #card-appointment .nav-pills .nav-item.show .nav-link,
+  #card-appointment .nav-pills .nav-link.active {
+    color: #d8bd08 !important;
+    font-weight: 600 !important;
+    background-color: transparent !important;
+    border-bottom: 2px solid #d8bd08 !important;
+  }
+  
+  #card-appointment .tab-content>.active {
+    z-index: 1;
+  }
+  
+  #card-appointment .tab-content {
+    z-index: 0;
+  }
+  
+  #card-appointment .badge {
+    font-size: 10px;
+    background-color: var(--color-red-) !important;
+  }
+  
+  /* ---------------------------------------------------
+      BACK TO
+    ----------------------------------------------------- */
+  
+  .btn-back-to {
+    width: 40px;
+    height: 28px;
+    z-index: 1;
+    margin-left: -4px !important;
+    transition: all 0.2s ease-out;
+    -webkit-transition: all 0.2s ease-out;
+  }
+  
+  .btn-back-to:hover {
+    margin-left: -6px !important;
+    transition: all 0.2s ease-out;
+    -webkit-transition: all 0.2s ease-out;
+  }
+  .bg-gray{
+    background-color: #272727 !important;
+    border-radius: 10px !important;
+  }
+  
+  .btn-back-to .icon-left-arrow {
+    position: relative;
+    left: -8px;
+  }
+  
+  /* ---------------------------------------------------
+      GRAPHICS CARD
+    ----------------------------------------------------- */
+  
+  #card-graphic-large- .card-body {
+    height: 450px !important;
+    background-color: red !;
+  }
+  
+  #card-graphic-small- .card-body {
+    height: 350px !important;
+  }
+  
+  #card-graphic-large- .card-body>div>div:first-of-type,
+  #card-graphic-small- .card-body>div>div:first-of-type {
+    width: auto !important;
+    position: relative !important;
+  }
+  
+  #card-graphic-large- .card-body>div>div:first-of-type canvas,
+  #card-graphic-small- .card-body>div>div:first-of-type canvas {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  
+  /* ---------------------------------------------------
+      CHARTS INR
+    ----------------------------------------------------- */
+  
+  #wrapper-porcentage-irn- {
+    width: 170px;
+    height: auto;
+  }
+  
+  /* ---------------------------------------------------
+        REACT CIRCULAR PROGRESSBAR
+      ----------------------------------------------------- */
+  
+  .CircularProgressbar .CircularProgressbar-text {
+    fill: #3e98c7;
+    font-family: var(--font-family-regular-) !important;
+    font-weight: 500 !important;
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+  
+  /* ---------------------------------------------------
+      MODAL ADVERSE EVENT
+    ----------------------------------------------------- */
+  
+  .wrapper-adverse-event- {
+    overflow-x: hidden !important;
+  }
+  
+  /* ---------------------------------------------------
+      MEDIAQUERIES BIOS SERVICES
+    ----------------------------------------------------- */
+  
+  @media (min-width: 0px) and (max-width: 359.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 130px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 360px) and (max-width: 575.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 130px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 576px) and (max-width: 767.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 150px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 768px) and (max-width: 991.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 160px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 160px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 1200px) and (max-width: 1399.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 160px;
+      height: auto;
+    }
+  
+  }
+  
+  @media (min-width: 1400px) and (max-width: 1919.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 165px;
+      height: auto;
+    }
+  
+  }
+  
+  
+  @media (min-width: 1920px) and (max-width: 2699.98px) {
+  
+    /* ---------------------------------------------------
+        CHARTS INR
+      ----------------------------------------------------- */
+  
+    #wrapper-porcentage-irn- {
+      width: 170px;
+      height: auto;
+    }
+  
+  }
