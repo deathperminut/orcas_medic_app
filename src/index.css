@@ -2976,7 +2976,7 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 14px;
   font-weight: 500 !important;
   font-family: 'Light', sans-serif  !important;
-  background-color: var(--color-secondary-purple-) !important;
+  background-color: #e7cc72 !important;
   border-color: transparent !important;
   border: 0px solid transparent !important;
   box-shadow: var(--box-shadow-12-);

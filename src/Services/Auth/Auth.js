@@ -3,8 +3,9 @@ import { environment } from "../../environments/environments";
 
 
 const RegisterUser=async (body)=>{
+    
     const path  = environment.api + environment.register;
-
+    
     return await axios.post(path,body);
 }
 

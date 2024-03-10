@@ -7,7 +7,6 @@ export const environment = {
     api:server,
 
     ///ENDPOINTS
-
     //AUTH
     register:'users/',
     login:'users/token/',

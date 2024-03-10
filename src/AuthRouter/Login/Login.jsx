@@ -38,7 +38,19 @@ export default function Login() {
 
     let [preloader,setPreloader] = React.useState(false);
 
+    const simulate=()=>{
+        setPreloader(true)
+        setTimeout(pauseSimulate,2000)
+        
+    }
 
+    const pauseSimulate=()=>{
+        setPreloader(false);
+        Swal.fire({
+            icon: 'success',
+            title: 'Logueado con éxito'
+        });
+    }
     return (
         <div>
             {
@@ -80,7 +92,7 @@ export default function Login() {
                             <ToggleSwitch />
                             </div>
                         </div>
-                        <div onClick={()=>{setPreloader(true)}} className='ButtonElement'>
+                        <div onClick={simulate} className='ButtonElement'>
                                 <span  className='ButtonText'>Inicia sesión</span>
                         </div>
                         
