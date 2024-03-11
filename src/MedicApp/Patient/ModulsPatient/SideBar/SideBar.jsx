@@ -33,6 +33,11 @@ export default function SideBar() {
             </div>
             <ul className='nav d-flex flex-column' style={{'backgroundColor':'#272727'}}>
               <li className='nav-item' style={{'backgroundColor':'#272727'}}>
+                <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/ModulsPatient'>
+                  <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>P</p>
+                  <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Portafolio</p></NavLink>
+              </li>
+              <li className='nav-item' style={{'backgroundColor':'#272727'}}>
                 <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/ModulsPatient/HistoryDates/'>
                   <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>H.C</p>
                   <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Historial de citas</p></NavLink>

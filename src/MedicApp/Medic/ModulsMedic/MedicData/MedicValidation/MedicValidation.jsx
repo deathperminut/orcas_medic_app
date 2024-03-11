@@ -1,7 +1,6 @@
 import React from 'react'
-import './Validation.css'
+import './MedicValidation.css'
 import Select, { components } from 'react-select'
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
@@ -316,38 +315,75 @@ const weekDays = [
   ["Dom", "Do"],
 ]
 
-
-export default function Validation() {
-
-  let navigate = useNavigate()
-
-  
+export default function MedicValidation() {
   return (
     <React.Fragment>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Validación de usuario</h2>
-        </div>
-      </div>
+
       <div className='row mt-4 mb-4'>
         <div className='col-12'>
           <form id='internal-form' action='' className='position-relative'>
-
+            <div className='row mt-2 mb-2'>
+              <div className='col-12'>
+                <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium'>Datos del usuario</p>
+              </div>
+            </div>
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
                   <input type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
-                  <label className='fs-5- ff-monse-regular- white font_medium'>C.C</label>
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Primer nombre</label>
                 </div>
               </div>
-              <div style={{'position':'relative','top':'8px'}} className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de cita" styles={selectStyles} isClearable={true}/>
+                  <input type="text" className='form-control' id='middleName' placeholder="Ingrese su segundo nombre" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Segundo nombre</label>
                 </div>
               </div>
             </div>
-            <div onClick={()=>navigate('/ModulsMedic/Date_Medic/MakeHistory')}  className='ButtonElement'>
-                                <span  className='ButtonText'>Validar</span>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <input type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Primer apellido</label>
+                </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <input type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Segundo apellido</label>
+                </div>
+              </div>
+            </div>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <Select id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={true}/>
+                </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={true}/>
+
+                </div>
+              </div>
+            </div>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <Select id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={true}/>
+
+                </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <Select id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={true}/>
+
+                </div>
+              </div>
+            </div>
+            <div className='ButtonElement'>
+                                <span  className='ButtonText'>Actualizar</span>
             </div>
           </form>
         </div>
