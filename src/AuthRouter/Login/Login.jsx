@@ -49,6 +49,10 @@ export default function Login() {
         Swal.fire({
             icon: 'success',
             title: 'Logueado con éxito'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                navigate('/ModulsMedic')
+            }
         });
     }
     return (
