@@ -322,7 +322,7 @@ export default function Medicamentos() {
     let pageCount = 10;
   return (
     <>
-        <div className='row mt-4 mb-4'>
+      <div className='row mt-4 mb-4'>
         <div className='col-12'>
           <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'26px'}}>Asignar medicamentos</h2>
         </div>
