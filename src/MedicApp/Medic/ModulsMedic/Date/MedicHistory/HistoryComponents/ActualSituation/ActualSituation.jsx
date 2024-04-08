@@ -7,6 +7,8 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
+import { IoAlertCircleOutline } from "react-icons/io5";
+import Pagination from 'pagination-for-reactjs-component'
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -316,7 +318,133 @@ const weekDays = [
 
 
 export default function ActualSituation() {
+
+  const [pageIndex, setPageIndex] = React.useState(1);
+  let pageCount = 10;
+
+
   return (
-    <div>ActualSituation</div>
+    <> 
+      <div style={{'fontSize':'20px','marginBottom':'30px'}} className='col-12'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'20px','marginBottom':'40px'}}>Resultado test previo</p>
+      </div>
+      <div className='alertContainer'>
+        <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
+        <span className='orangev2 font_medium text-align'>Salud mental baja</span>
+        <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
+        <ul>
+          <li>1) Buscar ayuda profesional urgente.</li>
+          <li>2) Considerar la posibilidad de tomar medicación si es necesario.</li>
+          <li>3) Implementar cambios en su estilo de vida para mejorar su bienestar general.</li>
+          <li>4) Buscar apoyo social en amigos, familiares o grupos de apoyo.</li>
+        </ul>
+        </p>
+      </div>
+      <div className='row mt-4 mb-4'>
+        <div className='col-12'>
+          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'20px'}}>Medicamentos asignados</h2>
+        </div>
+      </div>
+      <div className='row mt-4 mb-4'>
+        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
+          <div className='card border-0 rounded-0 w-100 bg-transparent'>
+            <div className='card-body p-0 w-100'>
+              <div className='table-responsive table-general-'>
+                <table id='table-medication-order-' className='table table-sm table-striped table-no-border- align-middle'>
+                  <thead>
+                  <tr>
+                    <th scope="col" className='th-width-auto-'>
+                      <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
+                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Medicamento</span>
+                      </div>
+                    </th>
+                    <th scope="col" className='th-width-md-'>
+                      <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
+                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Observaciones</span>
+                      </div>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td className='align-middle'>
+                      <div id='internal-form' className='w-100'>
+                          <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                        </div>
+                    </td>
+                    <td className='align-middle'>
+                      <div id='internal-form' className='w-100'>
+                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='align-middle'>
+                    <div id='internal-form' className='w-100'>
+                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                      </div>
+                    </td>
+                    <td className='align-middle'>
+                      <div id='internal-form' className='w-100'>
+                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='align-middle'>
+                    <div id='internal-form' className='w-100'>
+                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                      </div>
+                    </td>
+                    <td className='align-middle'>
+                      <div id='internal-form' className='w-100'>
+                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='row mt-4 mb-4'>
+        <div className='col-12 d-flex flex-row justify-content-center align-items-center align-self-center'>
+          <Pagination
+            pageCount={pageCount}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+          />
+        </div>
+      </div>
+      <div className='row mt-4 mb-4'>
+            <div className='col-12'>
+                <div className='col-12'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'20px'}}>Diagnostico previo</p>
+                </div>
+                <form id='internal-form' action='' className='position-relative'>
+                    <div className='row mt-4 mb-4'>
+                        <div className='col-12'>
+                            <form id='internal-form' action='' className='position-relative'>
+                                <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>valoración</label>
+                                        <textarea className='form-control' id="current-illness" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                    </div>
+                                </div>
+                                <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Recomendaciones</label>
+                                        <textarea className='form-control' id="family-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </>
   )
 }

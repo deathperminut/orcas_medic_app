@@ -355,6 +355,7 @@ export default function MedicHistory() {
       <>
       <UserIdentification></UserIdentification>
       <Antecedentes></Antecedentes>
+      <ActualSituation></ActualSituation>
       <Questionaries></Questionaries>
       </>
       :
