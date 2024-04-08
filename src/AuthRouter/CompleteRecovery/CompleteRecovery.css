@@ -87,6 +87,26 @@
     top: 35px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
+.ButtonBack{
+  width: 60px;
+  min-height:60px;
+  background-color: #d1a207;
+  border: 1px solid #d1a207;
+  border-radius: 20px;
+  margin-top: 30px;
+  transition: 1s;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 35px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+.ButtonBack:hover{
+  border: 1px solid  #c4aa58 !important;
+  box-shadow: 5px 5px 10px rgba(113, 113, 113, 0.4);
+}
 .ButtonElementV2{
     width: 220px;
     min-height:40px;

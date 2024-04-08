@@ -7,13 +7,12 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
-
+import { AppContext } from '../../../../../context';
 /* MEDICAL HISTORY COMPONENTS */
 
 import UserIdentification from './HistoryComponents/UserIdentification/UserIdentification';
 import Questionaries from './HistoryComponents/Questionaires/Questionaries';
 import PartnerData from './HistoryComponents/PartnerData/PartnerData';
-import Diagnosis from './HistoryComponents/Diagnosis/Diagnosis';
 import Antecedentes from './HistoryComponents/Antecedentes/Antecedentes';
 import ActualSituation from './HistoryComponents/ActualSituation/ActualSituation';
 
@@ -328,6 +327,10 @@ export default function MedicHistory() {
 
   let navigate = useNavigate()
 
+  /* APP CONTEXT */
+
+  let {typeDate,setTypeDate} =  React.useContext(AppContext);
+
 
   return (
     <React.Fragment>
@@ -337,11 +340,49 @@ export default function MedicHistory() {
         </div>
       </div>
       
+      {/* SEGMENTAMOS POR CITA */} 
+      {typeDate == "Evaluación inicial"  ? 
+      <>
       <UserIdentification></UserIdentification>
       <Antecedentes></Antecedentes>
       <Questionaries></Questionaries>
+      </>
+      :
+      <></>
+      }
+
+      {typeDate == "Seguimiento regular"  ? 
+      <>
+      <UserIdentification></UserIdentification>
+      <Antecedentes></Antecedentes>
+      <Questionaries></Questionaries>
+      </>
+      :
+      <></>
+      }
+
+      {typeDate == "Cita de emergencia"  ? 
+      <>
+      <UserIdentification></UserIdentification>
+      <Antecedentes></Antecedentes>
+      <Questionaries></Questionaries>
+      </>
+      :
+      <></>
+      }
+
+      {typeDate == "Cita de consulta"  ? 
+      <>
+      <UserIdentification></UserIdentification>
+      <Antecedentes></Antecedentes>
+      <Questionaries></Questionaries>
+      </>
+      :
+      <></>
+      }
+      
       <div style={{'marginBottom':'50px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
-                                <span  className='ButtonText'>Guardar</span>
+                                <span  className='ButtonText'>Siguiente</span>
       </div>
     </React.Fragment>
   )

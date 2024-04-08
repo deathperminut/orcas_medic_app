@@ -1,0 +1,14 @@
+.alertContainer{
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+}
+.text-align{
+    text-align: center;
+}

@@ -13,6 +13,7 @@ import Test1 from './Tests/Test1/Test1';
 import Test2 from './Tests/Test2/Test2';
 import Test3 from './Tests/Test3/Test3';
 import Test4 from './Tests/Test4/Test4';
+import ResultsTest from './ResultsTest/ResultsTest';
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -352,6 +353,7 @@ export default function Questionaries() {
                                 <Test2></Test2>
                                 <Test3></Test3>
                                 <Test4></Test4>
+                                <ResultsTest/>
                             </div>
                         </div>
                     </form>

@@ -406,34 +406,34 @@ export default function UserIdentification() {
                     </div>
                     </div>
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <div className='form-floating inner-addon- left-addon-'>
-                        <div className='form-control' id='date-birth'>
-                            <DatePicker
-                            inputClass="custom-style-date-picker- white font_medium"
-                            placeholder="dd/mm/yyyy"
-                            format="DD/MM/YYYY"
-                            months={months}
-                            weekDays={weekDays}
-                            calendarPosition="bottom-left"
-                            showOtherDays={true}
-                            fixMainPosition={true}
-                            shadow={true}
-                            animation={true}
-                            arrowStyle={{
-                                display: "none"
-                            }}
-                            />
+                        <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                            <div className='form-control' id='date-birth'>
+                                <DatePicker
+                                inputClass="custom-style-date-picker- white font_medium"
+                                placeholder="dd/mm/yyyy"
+                                format="DD/MM/YYYY"
+                                months={months}
+                                weekDays={weekDays}
+                                calendarPosition="bottom-left"
+                                showOtherDays={true}
+                                fixMainPosition={true}
+                                shadow={true}
+                                animation={true}
+                                arrowStyle={{
+                                    display: "none"
+                                }}
+                                />
+                            </div>
+                            <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de nacimiento</label>
+                            </div>
                         </div>
-                        <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de nacimiento</label>
+                        <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                            <input type="text" className='form-control' id='age' placeholder="Ingrese su edad" />
+                            <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Edad</label>
+                            </div>
                         </div>
-                    </div>
-                    <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <div className='form-floating inner-addon- left-addon-'>
-                        <input type="text" className='form-control' id='age' placeholder="Ingrese su edad" />
-                        <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Edad</label>
-                        </div>
-                    </div>
                     </div>
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>

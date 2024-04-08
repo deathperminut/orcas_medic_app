@@ -21,7 +21,7 @@
     --color-tertiary-white-: #3b3c3d;
     --color-quaternary-white-: #0463a2;
     --color-quinary-lila-: #0463a2;
-    --color-burgundy-: ##d1a207
+    --color-burgundy-: #d1a207
     --color-secondary-burgundy-: #3c8bda;
     --color-purple-: white;
     --color-secondary-purple-: #3c8bda;
@@ -1830,6 +1830,9 @@
 
 .icon-generate-report:before {
   content: "\e91b";
+}
+.orangev2{
+  color: #d1a207 !important;
 }
 
 .icon-save:before {

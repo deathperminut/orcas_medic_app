@@ -8,7 +8,13 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
 import Pagination from 'pagination-for-reactjs-component'
+import { IoChevronBack } from "react-icons/io5";
+import { AppContext } from '../../../../../context';
+/* COMPONENTES */
 
+import Medicamentos from './FinishProcessComponents/Medicamentos/Medicamentos';
+import Diagnosis from './FinishProcessComponents/Diagnosis/Diagnosis';
+import Agendamiento from './FinishProcessComponents/Agendamiento/Agendamiento';
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -324,177 +330,26 @@ export default function FinishProcess() {
   const [pageIndex, setPageIndex] = React.useState(1);
   let pageCount = 10;
 
+  /* APP CONTEXT */
+
   return (
     <React.Fragment>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Recomendaciones y formulas</h2>
-        </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'16px'}}>Medicamentos suministrados</h2>
-        </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <form id='internal-form' action='' className='position-relative'>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='medication-order' options={[]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir medicamento" styles={selectStyles} isClearable={true}/>
-                </div>
-              </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                  <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Observaciones</label>
-                  <textarea className='form-control' id="observations-medicaments" rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-              </div>
-            </div>
-            <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
-              <div className='col-auto'>
-                <button className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-alert- bs-1-' type="button" data-bs-toggle="modal" data-bs-target="#pharmacological-alert">
-                    <i className='fa icon-pharmacological-risk me-0 me-sm-0 me-md-2 me-lg-2 md-xl-2 md-xxl-2 d-block'></i>
-                    <span className='lh-1 fs-5- ff-monse-regular- d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block title-alert-'>Riesgo farmacológico</span>
-                </button>
-              </div>
-              <div className='col-auto'>
-                    <div style={{'marginBottom':'20px'}} className='ButtonElement'>
-                                <span  className='ButtonText'>Agregar</span>
-                    </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <p className='m-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Lista de medicamentos suministrados</p>
-        </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <form action="" className='position-relative wrapper-search-small- d-block d-sm-block d-md-block d-lg-block d-xl-block d-xxl-block'>
-            <div className='form-search inner-addon- left-addon-'>
-              <input type="text" className='form-control search-' id="buscador-modulos" placeholder="Buscar" />
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
-          <div className='card border-0 rounded-0 w-100 bg-transparent'>
-            <div className='card-body p-0 w-100'>
-              <div className='table-responsive table-general-'>
-                <table id='table-medication-order-' className='table table-sm table-striped table-no-border- align-middle'>
-                  <thead>
-                  <tr>
-                    <th scope="col" className='th-width-xs-'>
-                      <div className='d-flex flex-row justify-content-start align-items-center align-self-center w-100'>
-                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'></span>
-                      </div>
-                    </th>
-                    <th scope="col" className='th-width-auto-'>
-                      <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Medicamento</span>
-                      </div>
-                    </th>
-                    <th scope="col" className='th-width-md-'>
-                      <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Observaciones</span>
-                      </div>
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td className='align-middle'>
-                      <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                        <div className='checks-radios- me-3'>
-                          <label>
-                            <input type="checkbox" name="radio"/>
-                            <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple-'></span>
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                          <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                        </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='align-middle'>
-                      <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                        <div className='checks-radios- me-3'>
-                          <label>
-                            <input type="checkbox" name="radio"/>
-                            <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple-'></span>
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                    <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='align-middle'>
-                      <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                        <div className='checks-radios- me-3'>
-                          <label>
-                            <input type="checkbox" name="radio"/>
-                            <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple-'></span>
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                    <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+      <div  style={{'width':'20px'}}>
+          <div style={{'marginBottom':'70px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/MakeHistory')}  className='ButtonBack'>
+                                <IoChevronBack  color='white' size={50}/>
           </div>
-        </div>
       </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12 d-flex flex-row justify-content-center align-items-center align-self-center'>
-          <Pagination
-            pageCount={pageCount}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
-          />
-        </div>
-      </div>
+      
+      <Medicamentos></Medicamentos>
+      <Agendamiento></Agendamiento>
+      <Diagnosis></Diagnosis>
+      
+
       <div className='col-auto'>
                     <div style={{'marginBottom':'40px'}} onClick={()=>navigate('/ModulsMedic')}  className='ButtonElement'>
                                 <span  className='ButtonText'>Finalizar historia</span>
                     </div>
-              </div>
+      </div>
 
     </React.Fragment>
   )

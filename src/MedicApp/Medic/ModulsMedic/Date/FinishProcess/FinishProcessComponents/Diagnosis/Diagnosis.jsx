@@ -1,5 +1,6 @@
 import React from 'react'
 import './Diagnosis.css'
+
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
@@ -316,6 +317,32 @@ const weekDays = [
 
 export default function Diagnosis() {
   return (
-    <div>Diagnosis</div>
+    <div className='row mt-4 mb-4'>
+            <div className='col-12'>
+                <div className='col-12'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'26px'}}>Diagnostico</p>
+                </div>
+                <form id='internal-form' action='' className='position-relative'>
+                    <div className='row mt-4 mb-4'>
+                        <div className='col-12'>
+                            <form id='internal-form' action='' className='position-relative'>
+                                <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>valoración</label>
+                                        <textarea className='form-control' id="current-illness" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                    </div>
+                                </div>
+                                <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Recomendaciones</label>
+                                        <textarea className='form-control' id="family-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
   )
 }

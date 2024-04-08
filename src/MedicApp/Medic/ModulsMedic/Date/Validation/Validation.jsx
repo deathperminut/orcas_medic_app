@@ -7,6 +7,8 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
+import { AppContext } from '../../../../../context';
+import Swal from 'sweetalert2';
 
 
 
@@ -42,7 +44,7 @@ const PopulationGroup  = [
   { value: "Evaluación inicial", label: "Evaluación inicial" },
   { value: "Seguimiento regular", label: "Seguimiento regular" },
   { value: "Cita de emergencia", label: "Cita de emergencia" },
-  { value: "Cita de consulta", label: "Cita de emergencia" }
+  { value: "Cita de consulta", label: "Cita de consulta" }
 ];
 
 
@@ -301,6 +303,34 @@ export default function Validation() {
 
   let navigate = useNavigate()
 
+  let {typeDate,setTypeDate} = React.useContext(AppContext);
+
+  const ReadTypeDate=(event)=>{
+
+    if(event){
+      setTypeDate(event.value);
+      
+    }else{
+      setTypeDate(null);
+    }
+
+  }
+
+  const redirect =()=>{
+    if(typeDate !== null){
+
+      navigate('/ModulsMedic/Date_Medic/MakeHistory')
+      
+    }else{
+      
+      Swal.fire({
+        icon: 'info',
+        title: 'Selecciona un tipo de cita'
+      })
+
+    }
+  }
+
   
   return (
     <React.Fragment>
@@ -322,11 +352,11 @@ export default function Validation() {
               </div>
               <div style={{'position':'relative','top':'8px'}} className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de cita" styles={selectStyles} isClearable={true}/>
+                  <Select value={{'value':typeDate,'label':typeDate}} onChange={ReadTypeDate} id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de cita" styles={selectStyles} isClearable={true}/>
                 </div>
               </div>
             </div>
-            <div onClick={()=>navigate('/ModulsMedic/Date_Medic/MakeHistory')}  className='ButtonElement'>
+            <div onClick={redirect}  className='ButtonElement'>
                                 <span  className='ButtonText'>Validar</span>
             </div>
           </form>
