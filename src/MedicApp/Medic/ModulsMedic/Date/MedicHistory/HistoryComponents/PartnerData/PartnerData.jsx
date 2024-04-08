@@ -1,5 +1,5 @@
 import React from 'react'
-import './Validation.css'
+import './PartnerData.css'
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
@@ -7,8 +7,6 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
-
-
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -36,15 +34,35 @@ const animatedComponents = makeAnimated();
  * Data que llena los select
  */
 
-
-
-const PopulationGroup  = [
-  { value: "Evaluación inicial", label: "Evaluación inicial" },
-  { value: "Seguimiento regular", label: "Seguimiento regular" },
-  { value: "Cita de emergencia", label: "Cita de emergencia" },
-  { value: "Cita de consulta", label: "Cita de emergencia" }
+const Parentage = [
+  { value: "opcion-uno", label: "Opcion uno" },
+  { value: "opcion-dos", label: "Opcion dos" },
+  { value: "opcion-tres", label: "Opcion tres" }
 ];
 
+const MaritalStatus = [
+  { value: "opcion-uno", label: "Opcion uno" },
+  { value: "opcion-dos", label: "Opcion dos" },
+  { value: "opcion-tres", label: "Opcion tres" }
+];
+
+const PopulationGroup  = [
+  { value: "opcion-uno", label: "Opcion uno" },
+  { value: "opcion-dos", label: "Opcion dos" },
+  { value: "opcion-tres", label: "Opcion tres" }
+];
+
+const EthnicGroup  = [
+  { value: "opcion-uno", label: "Opcion uno" },
+  { value: "opcion-dos", label: "Opcion dos" },
+  { value: "opcion-tres", label: "Opcion tres" }
+];
+
+const Religion  = [
+  { value: "opcion-uno", label: "Opcion uno" },
+  { value: "opcion-dos", label: "Opcion dos" },
+  { value: "opcion-tres", label: "Opcion tres" }
+];
 
 /**
  * Se genera componente nuevo para soportar el placeholder animado del input 
@@ -296,42 +314,8 @@ const weekDays = [
   ["Dom", "Do"],
 ]
 
-
-export default function Validation() {
-
-  let navigate = useNavigate()
-
-  
+export default function PartnerData() {
   return (
-    <React.Fragment>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Validación de usuario</h2>
-        </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <form id='internal-form' action='' className='position-relative'>
-
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
-                  <label className='fs-5- ff-monse-regular- white font_medium'>C.C</label>
-                </div>
-              </div>
-              <div style={{'position':'relative','top':'8px'}} className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de cita" styles={selectStyles} isClearable={true}/>
-                </div>
-              </div>
-            </div>
-            <div onClick={()=>navigate('/ModulsMedic/Date_Medic/MakeHistory')}  className='ButtonElement'>
-                                <span  className='ButtonText'>Validar</span>
-            </div>
-          </form>
-        </div>
-      </div>
-    </React.Fragment>
+    <div>PartnerData</div>
   )
 }

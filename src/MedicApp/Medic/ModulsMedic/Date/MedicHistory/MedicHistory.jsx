@@ -8,6 +8,15 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
 
+/* MEDICAL HISTORY COMPONENTS */
+
+import UserIdentification from './HistoryComponents/UserIdentification/UserIdentification';
+import Questionaries from './HistoryComponents/Questionaires/Questionaries';
+import PartnerData from './HistoryComponents/PartnerData/PartnerData';
+import Diagnosis from './HistoryComponents/Diagnosis/Diagnosis';
+import Antecedentes from './HistoryComponents/Antecedentes/Antecedentes';
+import ActualSituation from './HistoryComponents/ActualSituation/ActualSituation';
+
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
  */
@@ -327,177 +336,12 @@ export default function MedicHistory() {
           <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Hístoria clínica</h2>
         </div>
       </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <form id='internal-form' action='' className='position-relative'>
-
-          <div className='row mt-2 mb-2'>
-              <div className='col-12'>
-                <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium'>Datos del paciente</p>
-              </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
-                  <label className='fs-5- ff-monse-regular- white font_medium'>Primer nombre</label>
-                </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='middleName' placeholder="Ingrese su segundo nombre" />
-                  <label className='fs-5- ff-monse-regular- white font_medium'>Segundo nombre</label>
-                </div>
-              </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
-                  <label className='fs-5- ff-monse-regular- white font_medium'>Primer apellido</label>
-                </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
-                  <label className='fs-5- ff-monse-regular- white font_medium'>Segundo apellido</label>
-                </div>
-              </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={true}/>
-                </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={true}/>
-
-                </div>
-              </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={true}/>
-
-                </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={true}/>
-
-                </div>
-              </div>
-            </div>
-            <div className='row mt-4 mb-4'>
-        {/* <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- font_medium white'>Anamnesis</h2>
-        </div> */}
-      </div>
-            <div className='row mt-4 mb-4'>
-              <div className='col-12'>
-                <form id='internal-form' action='' className='position-relative'>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Enfermedad actual</label>
-                        <textarea className='form-control' id="current-illness" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Antecedentes familiares</label>
-                        <textarea className='form-control' id="family-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Antecedentes patológicos</label>
-                        <textarea className='form-control' id="pathological-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Antecedentes farmacológicos</label>
-                        <textarea className='form-control' id="pharmacological-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <textarea className='form-control' id="allergic-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Antecedentes alérgicos</label>
-                        <textarea className='form-control' id="allergic-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Cabeza/cuello/boca</label>
-                        <textarea className='form-control' id="physical-examination" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Abdomen</label>
-                        <textarea className='form-control' id="physical-examination" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Extremidades</label>
-                        <textarea className='form-control' id="physical-examination" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Piel</label>
-                        <textarea className='form-control' id="physical-examination" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Ojos</label>
-                        <textarea className='form-control' id="physical-examination" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Análisis de imagenología</label>
-                        <textarea className='form-control' id="imaging-image" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Análisis de paraclínicos</label>
-                        <textarea className='form-control' id="paraclinical-analysis" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Revisión por sistemas</label>
-                        <textarea className='form-control' id="review-by-systems" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                        <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Lateralidad</label>
-                        <textarea className='form-control' id="laterality" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div style={{'marginBottom':'20px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
+      
+      <UserIdentification></UserIdentification>
+      <Antecedentes></Antecedentes>
+      <Questionaries></Questionaries>
+      <div style={{'marginBottom':'50px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
                                 <span  className='ButtonText'>Guardar</span>
-            </div>
-            
-          </form>
-        </div>
       </div>
     </React.Fragment>
   )
