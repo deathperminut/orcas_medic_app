@@ -15,7 +15,7 @@ import Questionaries from './HistoryComponents/Questionaires/Questionaries';
 import PartnerData from './HistoryComponents/PartnerData/PartnerData';
 import Antecedentes from './HistoryComponents/Antecedentes/Antecedentes';
 import ActualSituation from './HistoryComponents/ActualSituation/ActualSituation';
-
+import EegData from './HistoryComponents/EegData/EegData';
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
  */
@@ -346,6 +346,7 @@ export default function MedicHistory() {
       <UserIdentification></UserIdentification>
       <Antecedentes></Antecedentes>
       <Questionaries></Questionaries>
+      <EegData></EegData>
       </>
       :
       <></>
@@ -357,6 +358,7 @@ export default function MedicHistory() {
       <Antecedentes></Antecedentes>
       <ActualSituation></ActualSituation>
       <Questionaries></Questionaries>
+      <EegData></EegData>
       </>
       :
       <></>
