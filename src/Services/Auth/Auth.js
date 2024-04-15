@@ -26,12 +26,12 @@ const getUserData =  async (dni,token)=>{
 }
 
 const resetPassword = async (body)=>{
-    const path = environment.api + environment.resetPassword;
+    const path = environment.api2 + environment.resetPassword;
     return await axios.post(path,body);
 }
 
 const confirmResetPassword =  async (body)=>{
-    const path =  environment.api +  environment.completeReset;
+    const path =  environment.api2 +  environment.completeReset;
     return await axios.post(path,body);
 }
 
