@@ -530,7 +530,7 @@ export default function MedicValidation() {
                                 placeholder="yyyy-mm-dd"
                                 format="YYYY-MM-DD"
                                 months={months}
-                                onChange={changeDate}
+                                onChange={(event)=>changeDate(event,'fecha_nacimiento')}
                                 value={dataUser?.fecha_nacimiento}
                                 weekDays={weekDays}
                                 calendarPosition="bottom-left"

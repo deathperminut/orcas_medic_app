@@ -26,7 +26,7 @@ export default function Appointment_validation() {
     if(age == 1){
       return '1 año'
     }else{
-      return age + 'años'
+      return age + ' años'
     }
     }
     

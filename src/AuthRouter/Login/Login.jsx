@@ -9,6 +9,7 @@ import ToggleSwitch from '../../components/buttonToggle/buttonToggle';
 import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai';
 import Preloader from '../../components/Preloader/Preloader';
 import {getUserData, loginUser} from '../../Services/Auth/Auth'
+import { GetUserData,SaveUserData,cleanUserData } from '../../Services/Auth/LocalStorage';
 
 export default function Login() {
 
@@ -47,8 +48,20 @@ export default function Login() {
         "identificacion":"",
         "password":""
     })
+    let [remember,setRemember] =  React.useState(false)
 
+    
+    React.useEffect(()=>{
+        getDataFromStorage()
+    },[])
 
+    const getDataFromStorage=()=>{
+        let data = GetUserData()
+        if(data?.password !== ""){
+                setRemember(true);
+        }
+        setUser(data)
+    }
 
   
     //////////////////////////////////////////////////
@@ -72,7 +85,12 @@ export default function Login() {
                 })
             })
             if(result){
-                
+                if(remember){
+                    // guardamos en el localStorage la información
+                    SaveUserData(user);
+                }else{
+                    cleanUserData(user);
+                }
                 console.log("datos: ",result.data);
                 setToken(result.data['token']);
                 let result_user =  undefined;
@@ -125,6 +143,12 @@ export default function Login() {
 
     }
 
+    const toggle=(event)=>{
+        
+        setRemember(event.target.checked)
+        
+    }
+
 
 
     return (
@@ -144,13 +168,13 @@ export default function Login() {
                         <p className='TitleLogin'>Ingrese sus credenciales para continuar</p>
                         <div className='inputContainer'>
                             <div className='form-floating inner-addon- left-addon-'>
-                                    <input onChange={(event)=>ReadInput(event,'identificacion')} type="text" className='form-control' id='user' placeholder="Usuario" />
+                                    <input onChange={(event)=>ReadInput(event,'identificacion')} value={user?.identificacion} type="text" className='form-control' id='user' placeholder="Usuario" />
                                     <label className='fs-5- ff-monse-regular-'>Identificación</label>
                             </div>
                         </div>
                         <div className='inputContainer'>
                             <div className='form-floating inner-addon- left-addon-'>
-                                    <input onChange={(event)=>ReadInput(event,'password')}  type="password" className='form-control' id='password' placeholder="Contraseña" />
+                                    <input onChange={(event)=>ReadInput(event,'password')} value={user?.password}  type="password" className='form-control' id='password' placeholder="Contraseña" />
                                     <label className='fs-5- ff-monse-regular-'>Contraseña</label>
                                     {eye===true  ? 
                                     <>
@@ -165,7 +189,7 @@ export default function Login() {
                         </div>
                         <div className="" style={{marginTop:'60px'}}>
                             <div className="col-12">
-                            <ToggleSwitch />
+                            <ToggleSwitch checked={remember} toggle={toggle} />
                             </div>
                         </div>
                         <div onClick={startLogin} className='ButtonElement'>

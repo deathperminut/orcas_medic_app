@@ -4,8 +4,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
 import $ from "jquery"
+import Swal from 'sweetalert2';
+import { AppContext } from '../../../../context';
 
 export default function Sidebar_medic() {
+
+  /* APP CONTEXT */
+  let {setUserData,setToken}  = React.useContext(AppContext);
 
   /* USE CONTEXT */
   $(document).ready(function () {
@@ -25,6 +30,15 @@ export default function Sidebar_medic() {
       mouseWheelPixels: 100
     });
   },[])
+
+  const cleanContext=()=>{
+    setUserData(null);
+    setToken(null);
+    Swal.fire({
+      icon: 'success',
+      title: 'Sesión cerrada con éxito.'
+    })
+  }
 
   return (
     <React.Fragment>
@@ -79,12 +93,13 @@ export default function Sidebar_medic() {
                   <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>Ad.</p>
                   <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Administración</p></NavLink>
               </li>
-              <li className='nav-item' style={{'backgroundColor':'#272727'}}>
-                <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/Auth/Login'>
-                  <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>
-                    <CiLogout></CiLogout>
-                  </p>
-                  <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Cerrar sesión</p></NavLink>
+              <li onClick={cleanContext} className='nav-item' style={{'backgroundColor':'#272727'}}>
+                  <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/Auth/Login'>
+                    <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>
+                      <CiLogout></CiLogout>
+                    </p>
+                    <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Cerrar sesión</p>
+                  </NavLink>
               </li>
               
             </ul>

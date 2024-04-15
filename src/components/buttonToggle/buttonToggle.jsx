@@ -3,7 +3,7 @@
 import React from "react";
 import "./buttonToggle.css";
   
-const ToggleSwitch = () => {
+const ToggleSwitch = (props) => {
 
 
 
@@ -11,7 +11,7 @@ const ToggleSwitch = () => {
     <div className="container">
       <span className="labelSwitch">{'Recordarme'}{" "}</span>
       <div className="toggle-switch">
-        <input type="checkbox" className="checkbox" 
+        <input checked={props.checked} onChange={props.toggle} type="checkbox" className="checkbox" 
                 name={'Recordarme'} id={'Recordarme'} />
         <label className="label" htmlFor={'Recordarme'}>
           <span className="inner" />
