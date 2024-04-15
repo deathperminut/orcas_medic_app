@@ -12,8 +12,17 @@ const RegisterUser=async (body)=>{
 
 const loginUser= async (body)=>{
     const path =  environment.api + environment.login;
-
     return await axios.post(path,body);
+}
+
+const getUserData =  async (dni,token)=>{
+    const path = environment.api + environment.userData+dni;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+    return await axios.get(path,config)
 }
 
 const resetPassword = async (body)=>{
@@ -26,4 +35,4 @@ const confirmResetPassword =  async (body)=>{
     return await axios.post(path,body);
 }
 
-export {RegisterUser,loginUser,resetPassword,confirmResetPassword}
+export {getUserData,RegisterUser,loginUser,resetPassword,confirmResetPassword}

@@ -1,10 +1,36 @@
 import React from 'react'
 import $ from "jquery"
 import 'malihu-custom-scrollbar-plugin';
+import { AppContext } from '../../../../../context';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 require('jquery-mousewheel');
 
 export default function Appointment_validation() {
+
+    /* APP CONTEXT */
+    let {userData} = React.useContext(AppContext);
+
+    const GetAge=(dateString)=>{
+      /* 
+    Función para obtener la edad segun la fecha
+    de nacimiento.
+    */
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if(age == 1){
+      return '1 año'
+    }else{
+      return age + 'años'
+    }
+    }
+    
+
 
     React.useEffect(()=>{
         $('.wrapper-notifications-').mCustomScrollbar({
@@ -25,7 +51,7 @@ export default function Appointment_validation() {
             <div className='col-12'>
               <ul className='nav nav-pills d-flex flex-row justify-content-between' role="tablist">
                 <li className='nav-item' role="presentation">
-                  <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#scheduling" type="button" role="tab" aria-controls="scheduling" aria-selected="true"> <span className='ff-monse-regular- me-2'>Información Médico</span></button>
+                  <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#scheduling" type="button" role="tab" aria-controls="scheduling" aria-selected="true"> <span className='ff-monse-regular- me-2'>Información</span></button>
                 </li>
               </ul>
             </div>
@@ -37,17 +63,18 @@ export default function Appointment_validation() {
               <div className='row mt-4'>
                 <div className='d-flex justify-content-start align-items-start align-self-center position-relative position-relative'>
                   <div className='w-auto'>
-                    <p className='lh-sm mb-1 fs-4- ff-monse-regular- fw-normal tx-black-v white font_medium'>Pedro Coral Barragán</p>
+                    <p className='lh-sm mb-1 fs-4- ff-monse-regular- fw-normal tx-black-v white font_medium'>{userData?.primer_nombre+' '+userData?.segundo_nombre+' '+userData?.primer_apellido+' '+userData?.segundo_apellido}</p>
                   </div>
                 </div>
               </div>
               <div className='row mt-3'>
-                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Ciudad:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>Manizales</span></p>
-                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Teléfono:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>+57 3165497658</span></p>
-                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Correo:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>drpedroc@hotmail.com</span></p>
-                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Edad:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>46 años</span></p>
-                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Lugar de residencia:</strong> <span className='m-0 fs-5- ff-monse-regular- tx-black- white'>Manizales</span></p>
-                <p className='mb-2 lh-sm fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Dirección:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>Calle 26 #51-49 edf yerbabuena apto 402 BL 4</span></p>
+                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Ciudad residencia:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>{userData?.ciudad_residencia}</span></p>
+                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Teléfono:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>{userData?.numero_celular}</span></p>
+                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Correo:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>{userData?.email}</span></p>
+                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Edad:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>{GetAge(userData?.fecha_nacimiento)}</span></p>
+                <p className='mb-2 fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Barrio:</strong> <span className='m-0 fs-5- ff-monse-regular- tx-black- white'>{userData?.barrio}</span></p>
+                <p className='mb-2 lh-sm fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Dirección:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>{userData?.direccion}</span></p>
+                <p className='mb-2 lh-sm fs-5- ff-monse-regular- tx-black- gray font_medium'><strong>Identificación:</strong> <span className='m-0 fs-5- ff-monse-regular- fst-normal tx-black- white'>{userData?.identificacion}</span></p>
               </div>
               <div className='row'>
                 <div className='col-12 bg-white- pt-2 pb-2'>

@@ -6,9 +6,12 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
-
-
-
+import { AppContext } from '../../../../../context';
+import Swal from 'sweetalert2';
+import moment from "moment";
+import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai';
+import Preloader from '../../../../../components/Preloader/Preloader';
+import {updateUser} from '../../../../../Services/MainApp/Users/User'
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
  */
@@ -42,9 +45,10 @@ const Parentage = [
 ];
 
 const MaritalStatus = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
+  { value: "CC", label: "CC" },
+  { value: "PEP", label: "PEP" },
+  { value: "PETT", label: "PETT" },
+  { value: "CE", label: "CE" }
 ];
 
 const PopulationGroup  = [
@@ -316,9 +320,124 @@ const weekDays = [
 ]
 
 export default function MedicValidation() {
+
+  /* APP CONTEXT */
+  let {userData,token,setUserData} = React.useContext(AppContext);
+
+  /* useState */
+
+  let [dataUser,setDataUser] = React.useState({...userData})
+
+
+  /* FUNCIONES */
+
+  React.useEffect(()=>{
+
+    setDataUser({...userData});
+
+  },[userData])
+
+  
+  /* READ INPUTS */
+  const ReadInput =(event,type)=>{
+
+    setDataUser({...dataUser,[type]:event.target.value})
+
+  }
+
+  /* READ SELECTS */
+
+  const ReadSelect =(event,type)=>{
+
+    if(event){
+      setDataUser({...dataUser,[type]:event.value})
+    }else{
+      setDataUser({...dataUser,[type]:""})
+    }
+    
+
+  }
+
+  const getDateFormat=(date)=>{
+    /* 
+    Función para obtener una fecha en formato
+    string de la forma YYYY-MM-DD
+    */
+    let DATE = new Date(date);
+    return moment(DATE).format('YYYY-MM-DD');
+
+
+  }
+
+  /* READ BIRTHDAY */
+
+  const changeDate = (e,Type) => {
+    setDataUser({... dataUser,[Type]:getDateFormat(e)})
+  };
+
+  // use States
+  let [preloader,setPreloader] = React.useState(false);
+  const [eye,setEye]=React.useState(true);
+
+  // passwords
+  const SeePassword=()=>{
+      console.log("dd")
+      setEye(false);
+      const input = document.querySelector("#password");
+      // When an input is checked, or whatever...
+      input.setAttribute("type", "text");
+      input.classList.add( "colorWhite" );
+  }
+  
+  const HidePassword=()=>{
+  console.log("dad")
+  setEye(true);
+  const input = document.querySelector("#password");
+
+      input.setAttribute("type", "password");
+      input.classList.remove( "colorWhite" );
+  }
+
+  /* UPDATE FUNCTION */
+
+  const UpdateUser=async()=>{
+
+    let result =  undefined;
+    setPreloader(true);
+    result =  await updateUser(dataUser,token).catch((error)=>{
+      console.log(error);
+      setPreloader(false);
+      Swal.fire({
+        icon: 'info',
+        title: 'Problemas para actualizar usuario'
+      })
+    })
+
+    if(result){
+      setPreloader(false);
+      console.log("ACTUALIZADO: ",result.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Actualizado con éxito.'
+      })
+      setUserData(result.data);
+    }
+
+  }
+  
+
+
   return (
     <React.Fragment>
+      {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
 
+                <></>
+      }
       <div className='row mt-4 mb-4'>
         <div className='col-12'>
           <form id='internal-form' action='' className='position-relative'>
@@ -330,13 +449,13 @@ export default function MedicValidation() {
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
+                  <input value={dataUser?.primer_nombre} onChange={(event)=>ReadInput(event,'primer_nombre')} type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
                   <label className='fs-5- ff-monse-regular- white font_medium'>Primer nombre</label>
                 </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='middleName' placeholder="Ingrese su segundo nombre" />
+                  <input value={dataUser?.segundo_nombre} onChange={(event)=>ReadInput(event,'segundo_nombre')} type="text" className='form-control' id='middleName' placeholder="Ingrese su segundo nombre" />
                   <label className='fs-5- ff-monse-regular- white font_medium'>Segundo nombre</label>
                 </div>
               </div>
@@ -344,13 +463,13 @@ export default function MedicValidation() {
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
+                  <input value={dataUser?.primer_apellido} onChange={(event)=>ReadInput(event,'primer_apellido')} type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
                   <label className='fs-5- ff-monse-regular- white font_medium'>Primer apellido</label>
                 </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                  <input value={dataUser?.segundo_apellido} onChange={(event)=>ReadInput(event,'segundo_apellido')} type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
                   <label className='fs-5- ff-monse-regular- white font_medium'>Segundo apellido</label>
                 </div>
               </div>
@@ -358,31 +477,79 @@ export default function MedicValidation() {
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={true}/>
+                  <input value={dataUser?.ciudad_residencia} onChange={(event)=>ReadInput(event,'ciudad_residencia')} type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Ciudad de residencia</label>
                 </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={true}/>
-
+                  <input value={dataUser?.numero_celular} onChange={(event)=>ReadInput(event,'numero_celular')} type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Número de celular</label>
                 </div>
               </div>
             </div>
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={true}/>
-
+                  <input value={dataUser?.email} onChange={(event)=>ReadInput(event,'email')} type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Correo</label>
                 </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <Select id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={true}/>
-
+                  <input value={dataUser?.barrio} onChange={(event)=>ReadInput(event,'barrio')} type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Barrio</label>
                 </div>
               </div>
             </div>
-            <div className='ButtonElement'>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <input value={dataUser?.direccion} onChange={(event)=>ReadInput(event,'direccion')} type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Dirección</label>
+                </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <input value={dataUser?.identificacion} onChange={(event)=>ReadInput(event,'identificacion')} type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                  <label className='fs-5- ff-monse-regular- white font_medium'>Identificación</label>
+                </div>
+              </div>
+            </div>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4' style={{'marginTop':'8px'}}>
+                <div className='form-floating inner-addon- left-addon-'>
+                  <Select value={{'value':dataUser['tipo_identificacion'],'label':dataUser['tipo_identificacion']}} onChange={(event)=>ReadSelect(event,'tipo_identificacion')} id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true}/>
+                </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+              <div className='form-floating inner-addon- left-addon-'>
+                            <div className='form-control' id='date-birth'>
+                                <DatePicker
+                                inputClass="custom-style-date-picker- white font_medium"
+                                placeholder="yyyy-mm-dd"
+                                format="YYYY-MM-DD"
+                                months={months}
+                                onChange={changeDate}
+                                value={dataUser?.fecha_nacimiento}
+                                weekDays={weekDays}
+                                calendarPosition="bottom-left"
+                                showOtherDays={true}
+                                fixMainPosition={true}
+                                shadow={true}
+                                animation={true}
+                                arrowStyle={{
+                                    display: "none"
+                                }}
+                                />
+                            </div>
+                            <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de nacimiento</label>
+                            </div>           
+              </div>
+              
+              
+            </div>
+            <div onClick={UpdateUser} className='ButtonElement'>
                                 <span  className='ButtonText'>Actualizar</span>
             </div>
           </form>

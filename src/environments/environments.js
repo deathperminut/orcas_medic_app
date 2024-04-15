@@ -11,5 +11,7 @@ export const environment = {
     register:'users/',
     login:'users/token/',
     resetPassword:'password_reset/',
-    completeReset:'password_reset/confirm/'
+    completeReset:'password_reset/confirm/',
+    userData:'users/',
+    updateUser:'users/actualizar/'
 }
