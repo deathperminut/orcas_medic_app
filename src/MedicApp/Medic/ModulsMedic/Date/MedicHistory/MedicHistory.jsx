@@ -364,7 +364,7 @@ export default function MedicHistory() {
       <></>
       }
 
-      {typeDate == "Cita de emergencia"  ? 
+      {/* {typeDate == "Cita de emergencia"  ? 
       <>
       <UserIdentification></UserIdentification>
       <Antecedentes></Antecedentes>
@@ -382,7 +382,7 @@ export default function MedicHistory() {
       </>
       :
       <></>
-      }
+      } */}
       
       <div style={{'marginBottom':'50px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
                                 <span  className='ButtonText'>Siguiente</span>

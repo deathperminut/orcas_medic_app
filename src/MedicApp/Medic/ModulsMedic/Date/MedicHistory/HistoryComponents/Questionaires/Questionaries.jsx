@@ -324,17 +324,28 @@ const weekDays = [
 /* OPTION SELECTS */
 
 const TypeIdentification = [
-    { value: "Relaciones sociales", label: "Relaciones sociales" },
-    { value: "Bienestar general", label: "Bienestar general" },
-    { value: "Hábitos y estilo de vida", label: "Hábitos y estilo de vida" },
+    { value: "Test de ansiedad", label: "Test de ansiedad" },
+    { value: "Test de depresión", label: "Test de depresión" },
+    { value: "Test de estrés", label: "Test de estrés" },
   ];
 
 export default function Questionaries() {
+
+  let  [forms,setForms] =  React.useState([]);
+
+  const ReadSelect =(event)=>{
+
+    console.log("datos : ",event);
+    setForms(event);
+
+  }
+
+    
     return (
         <div className='row mt-4 mb-4'>
                 <div className='col-12'>
                     <div className='col-12'>
-                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium'>Tests</p>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'33px'}}>Test General</p>
                     </div>
                     <form id='internal-form' action='' className='position-relative'>
                         
@@ -343,19 +354,63 @@ export default function Questionaries() {
                                 <Test1></Test1>
                             </div>
                         </div>
+                        <div className='row mt-4 mb-4'>
+                            <div className='col-12'>
+                                <ResultsTest/>
+                            </div>
+                        </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Selecciona los cuestionarios adicionales" isMulti={true} styles={selectStyles} isClearable={true}/>
+                            <Select id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Selecciona los cuestionarios adicionales" isMulti={true} onChange={ReadSelect} value={forms} styles={selectStyles} isClearable={true}/>
                             </div>
+                        </div>
+                        {forms.filter((obj)=>obj.value == "Test de ansiedad").length !== 0 ? 
+                        <>
+                        <div className='col-12'>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'33px'}}>Test de ansiedad</p>
                         </div>
                         <div className='row mt-4 mb-4'>
                             <div className='col-12'>
                                 <Test2></Test2>
+                                <ResultsTest/>
+                            </div>
+                        </div>
+                        </>
+                        :
+                        <></>
+                        }
+                        {forms.filter((obj)=>obj.value == "Test de depresión").length !== 0 ? 
+                        <>
+                        <div className='col-12'>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'33px'}}>Test de depresión</p>
+                        </div>
+                        <div className='row mt-4 mb-4'>
+                            <div className='col-12'>
                                 <Test3></Test3>
+                                <ResultsTest/>
+                            </div>
+                        </div>
+                        </>
+                        :
+                        <></>
+                        }
+
+                        {forms.filter((obj)=>obj.value == "Test de estrés").length !== 0 ? 
+                        <>
+                        <div className='col-12'>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'33px'}}>Test de estrés</p>
+                        </div>
+                        <div className='row mt-4 mb-4'>
+                            <div className='col-12'>
                                 <Test4></Test4>
                                 <ResultsTest/>
                             </div>
                         </div>
+                        </>
+                        :
+                        <></>
+                        }
+                        
                     </form>
                 </div>
         </div>

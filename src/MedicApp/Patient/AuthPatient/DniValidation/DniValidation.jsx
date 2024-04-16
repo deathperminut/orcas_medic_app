@@ -8,6 +8,27 @@ import Swal from 'sweetalert2';
 
 export default function DniValidation() { 
 
+   /* useStates */
+   let [dni,setDni] = React.useState("");
+   /* functions */
+
+   let ReadInput =(event)=>{
+
+        setDni(event.target.value);
+
+   }
+   
+
+   /* submit */
+
+   const submit =async()=>{
+
+        let result = undefined;
+
+   }
+
+  
+
   // use Navigate 
   const navigate=useNavigate();
   return (

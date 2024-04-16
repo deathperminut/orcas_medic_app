@@ -356,8 +356,7 @@ export default function Agendamiento() {
                             <div className='form-floating inner-addon- left-addon-'>
                             <Select id='medication-order' options={[{ value: "Evaluación inicial", label: "Evaluación inicial" },
             { value: "Seguimiento regular", label: "Seguimiento regular" },
-            { value: "Cita de emergencia", label: "Cita de emergencia" },
-            { value: "Cita de consulta", label: "Cita de consulta" }]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir tipo de cita" styles={selectStyles} isClearable={true}/>
+            ]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir tipo de cita" styles={selectStyles} isClearable={true}/>
                             </div>
                         </div>
             </div>

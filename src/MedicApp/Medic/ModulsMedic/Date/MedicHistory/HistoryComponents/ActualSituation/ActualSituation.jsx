@@ -8,7 +8,8 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
 import { IoAlertCircleOutline } from "react-icons/io5";
-import Pagination from 'pagination-for-reactjs-component'
+import Pagination from 'pagination-for-reactjs-component';
+import { GrStatusGood } from "react-icons/gr";
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -325,12 +326,12 @@ export default function ActualSituation() {
 
   return (
     <> 
-      <div style={{'fontSize':'20px','marginBottom':'30px'}} className='col-12'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'20px','marginBottom':'40px'}}>Resultado test previo</p>
+      <div style={{'fontSize':'35px','marginBottom':'30px'}} className='col-12'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'30px','marginBottom':'40px'}}>Tests previos</p>
       </div>
       <div className='alertContainer'>
-        <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
-        <span className='orangev2 font_medium text-align'>Salud mental baja</span>
+        <IoAlertCircleOutline color='#F96767' size={55}></IoAlertCircleOutline>
+        <span className='red font_medium text-align' style={{'color':'#F96767'}}>Salud mental baja</span>
         <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
         <ul>
           <li>1) Buscar ayuda profesional urgente.</li>
@@ -340,7 +341,43 @@ export default function ActualSituation() {
         </ul>
         </p>
       </div>
-      <div className='row mt-4 mb-4'>
+      <div className='alertContainer'>
+        <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
+        <span className='orangev2 font_medium text-align'>Ansiedad moderada</span>
+        <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
+        <ul>
+          <li>1) Buscar ayuda profesional urgente.</li>
+          <li>2) Considerar la posibilidad de tomar medicación si es necesario.</li>
+          <li>3) Implementar cambios en su estilo de vida para mejorar su bienestar general.</li>
+          <li>4) Buscar apoyo social en amigos, familiares o grupos de apoyo.</li>
+        </ul>
+        </p>
+      </div>
+      <div className='alertContainer'>
+        <IoAlertCircleOutline color='#F96767' size={55}></IoAlertCircleOutline>
+        <span className='font_medium text-align' style={{'color':'#F96767'}}>Depresión grave</span>
+        <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
+        <ul>
+          <li>1) Buscar ayuda profesional urgente.</li>
+          <li>2) Considerar la posibilidad de tomar medicación si es necesario.</li>
+          <li>3) Implementar cambios en su estilo de vida para mejorar su bienestar general.</li>
+          <li>4) Buscar apoyo social en amigos, familiares o grupos de apoyo.</li>
+        </ul>
+        </p>
+      </div>
+      <div className='alertContainer'>
+        <GrStatusGood color='#58D931' size={55}></GrStatusGood>
+        <span className='font_medium text-align' style={{'color':'#58D931'}}>Sin estrés</span>
+        <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
+        <ul>
+          <li>1) Buscar ayuda profesional urgente.</li>
+          <li>2) Considerar la posibilidad de tomar medicación si es necesario.</li>
+          <li>3) Implementar cambios en su estilo de vida para mejorar su bienestar general.</li>
+          <li>4) Buscar apoyo social en amigos, familiares o grupos de apoyo.</li>
+        </ul>
+        </p>
+      </div>
+      {/* <div className='row mt-4 mb-4'>
         <div className='col-12'>
           <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'20px'}}>Medicamentos asignados</h2>
         </div>
@@ -408,8 +445,8 @@ export default function ActualSituation() {
             </div>
           </div>
         </div>
-      </div>
-      <div className='row mt-4 mb-4'>
+      </div> */}
+      {/* <div className='row mt-4 mb-4'>
         <div className='col-12 d-flex flex-row justify-content-center align-items-center align-self-center'>
           <Pagination
             pageCount={pageCount}
@@ -417,7 +454,7 @@ export default function ActualSituation() {
             setPageIndex={setPageIndex}
           />
         </div>
-      </div>
+      </div> */}
       <div className='row mt-4 mb-4'>
             <div className='col-12'>
                 <div className='col-12'>

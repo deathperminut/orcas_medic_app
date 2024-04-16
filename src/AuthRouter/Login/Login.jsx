@@ -199,8 +199,8 @@ export default function Login() {
                     </form>
                     <div className='linksContainer'>
                             <span onClick={()=>{navigate('/Auth/Recovery')}} className='spanText'>Olvide mi contraseña</span>   
-                            <div  onClick={()=>{navigate('/Auth/Register')}} className='ButtonElementV2'>
-                                <span  className='ButtonTextV2'>Crear cuenta</span>
+                            <div  onClick={()=>{navigate('/AuthPatient')}} className='ButtonElementV2'>
+                                <span  className='ButtonTextV2'>Pacientes</span>
                             </div> 
                     </div>
             </div>

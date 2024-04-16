@@ -340,7 +340,7 @@ export default function FinishProcess() {
           </div>
       </div>
       
-      <Medicamentos></Medicamentos>
+      {/* <Medicamentos></Medicamentos> */}
       <Agendamiento></Agendamiento>
       <Diagnosis></Diagnosis>
       

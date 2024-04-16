@@ -43,8 +43,8 @@ const animatedComponents = makeAnimated();
 const PopulationGroup  = [
   { value: "Evaluación inicial", label: "Evaluación inicial" },
   { value: "Seguimiento regular", label: "Seguimiento regular" },
-  { value: "Cita de emergencia", label: "Cita de emergencia" },
-  { value: "Cita de consulta", label: "Cita de consulta" }
+  // { value: "Cita de emergencia", label: "Cita de emergencia" },
+  // { value: "Cita de consulta", label: "Cita de consulta" }
 ];
 
 
