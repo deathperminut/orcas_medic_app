@@ -25,6 +25,16 @@ const getUserData =  async (dni,token)=>{
     return await axios.get(path,config)
 }
 
+const getUsers= async(token)=>{
+    const path = environment.api + environment.getUsers;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+    return await axios.get(path,config)
+}
+
 const resetPassword = async (body)=>{
     const path = environment.api2 + environment.resetPassword;
     return await axios.post(path,body);
@@ -51,4 +61,4 @@ const verifyCode = async (code)=>{
     return await axios.post(path,body);
 }
 
-export {getUserData,RegisterUser,loginUser,resetPassword,confirmResetPassword,LoginPatient,verifyCode}
+export {getUserData,RegisterUser,loginUser,resetPassword,confirmResetPassword,LoginPatient,verifyCode,getUsers}

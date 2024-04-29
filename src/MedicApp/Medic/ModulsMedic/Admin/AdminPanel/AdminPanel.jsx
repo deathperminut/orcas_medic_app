@@ -5,20 +5,120 @@ import Pagination from 'pagination-for-reactjs-component'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { CiEdit } from "react-icons/ci";
 import { MdGppGood } from "react-icons/md";
+import { getUsers } from '../../../../../Services/Auth/Auth';
+import { AppContext } from '../../../../../context';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function AdminPanel() {
-  
 
+  // use Navigate 
+  const navigate=useNavigate();
+
+  /* appContext */
+
+  let {token} = React.useContext(AppContext);
+
+  /* useStates */
   let [users,setUsers] = React.useState([]);
   let [ListReference,setListReference] = React.useState([]);
   let [supportList,setSupportList] = React.useState([]);
   let [preloader,setPreloader] = React.useState(false);
   let [selectUser,setSelectUser] = React.useState(null);
 
+
   /* PAGINATION */
   const [pageIndex, setPageIndex] = React.useState(1);
   const [pageCount,setPageCount] = React.useState(10);
   const paginationRef = React.useRef();
+
+  /* useEffect */
+
+  React.useEffect(()=>{
+
+    if(token){
+
+      // Cargamos los datos de los usuarios
+      loadUsers();
+
+    }else{
+      navigate('/Auth/Login')
+    }
+
+  },[token])
+
+  /* functions */
+
+  const loadUsers=async()=>{
+
+    let result =  undefined;
+    setPreloader(true);
+    result =  await getUsers(token).catch((error)=>{
+      console.log(error);
+      Swal.fire({
+        icon: 'info',
+        title: 'Problemas para obtener los datos de los usuarios'
+      })
+      setPreloader(false);
+    })
+
+    if(result){
+      console.log(result.data);
+      setUsers(result.data);
+      setListReference(result.data);
+      setPreloader(false);
+    }
+
+  }
+
+  // funciones para generar el efecto de paginación
+
+  function obtenerSublista(Lista,Tamaño, Numero_secuencia) {
+    // obtenemos la lista dependiendo de la pagina
+    // teniendo en cuenta la cantidad de paginas
+    // y el número de la pagina
+    const inicio = (Numero_secuencia-1) * Tamaño;
+    return Lista.slice(inicio, inicio + Tamaño);
+
+  }
+  
+  function obtenerCantidadPaginas(Lista,Tamaño){
+
+    // obtenemos la cantidad de total de paginas
+    // segun el tamaño de la lista
+    console.log("KUISTADW : ",Lista)
+    let CantidadPaginas=Lista.length/Tamaño;
+    if (!Number.isInteger(CantidadPaginas)){
+       return Math.trunc(CantidadPaginas)+1
+    }else{
+      return CantidadPaginas
+    }
+
+  }
+
+  React.useEffect(()=>{
+    //console.log("LISTA DE PRODUCTOS: ",ListProducts);
+    setPageCount(obtenerCantidadPaginas(users,10));
+    let Sublist=obtenerSublista(users,10,pageIndex)
+    setSupportList(Sublist);
+    setListReference(users);
+     
+    },[setUsers])
+
+    React.useEffect(()=>{
+
+      if(pageIndex!==0){
+    
+        setPageCount(obtenerCantidadPaginas(ListReference,10));
+        let Sublist=obtenerSublista(ListReference,10,pageIndex)
+        setSupportList(Sublist);
+    
+      }
+      
+      
+    },[pageIndex,ListReference])
+
+
 
 
   return (
@@ -149,7 +249,7 @@ export default function AdminPanel() {
                                     {obj?.es_paciente ? 
                                     <div className='row gx-1 d-flex flex-row justify-content-center align-items-start align-self-start'>
                                       <div className='col-auto'>
-                                          <MdGppGood size={'24'} color={'#0463a2'} />
+                                          <MdGppGood size={'24'} color={'#d1a207'} />
                                       </div>
                                     </div>
                                     :
@@ -160,7 +260,7 @@ export default function AdminPanel() {
                                     {obj?.es_doctor ? 
                                     <div className='row gx-1 d-flex flex-row justify-content-center align-items-start align-self-start'>
                                       <div className='col-auto'>
-                                          <MdGppGood size={'24'} color={'#0463a2'} />
+                                          <MdGppGood size={'24'} color={'#d1a207'} />
                                       </div>
                                     </div>
                                     :
@@ -171,7 +271,7 @@ export default function AdminPanel() {
                                     {obj?.es_admin ? 
                                     <div className='row gx-1 d-flex flex-row justify-content-center align-items-start align-self-start'>
                                       <div className='col-auto'>
-                                          <CiEdit size={'24'} color={'#0463a2'} />
+                                          <MdGppGood size={'24'} color={'#d1a207'} />
                                       </div>
                                     </div>
                                     :
@@ -184,7 +284,7 @@ export default function AdminPanel() {
                                       <div className='col-auto' onClick={()=>{
                                         setSelectUser(index);
                                         }}>
-                                          <MdGppGood size={'24'} color={'#0463a2'} style={{'cursor':'pointer'}}/>
+                                          <CiEdit size={'24'} color={'#d1a207'} style={{'cursor':'pointer'}}/>
                                           
                                       </div>
                                     </div>

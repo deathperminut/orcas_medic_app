@@ -17,4 +17,5 @@ export const environment = {
     updateUser:'users/actualizar/',
     LoginPatient:'gestion-usuario/login-paciente/',
     verifyCode:'gestion-usuario/validacion-login-paciente/',
+    getUsers:'users/',
 }
