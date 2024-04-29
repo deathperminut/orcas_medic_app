@@ -15,4 +15,6 @@ export const environment = {
     completeReset:'password_reset/confirm/',
     userData:'users/',
     updateUser:'users/actualizar/',
+    LoginPatient:'gestion-usuario/login-paciente/',
+    verifyCode:'gestion-usuario/validacion-login-paciente/',
 }

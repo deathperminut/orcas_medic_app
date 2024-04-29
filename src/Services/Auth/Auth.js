@@ -35,4 +35,20 @@ const confirmResetPassword =  async (body)=>{
     return await axios.post(path,body);
 }
 
-export {getUserData,RegisterUser,loginUser,resetPassword,confirmResetPassword}
+const LoginPatient = async (dni)=>{
+    const path =  environment.api + environment.LoginPatient;
+    let body = {
+        "identificacion":dni
+    }
+    return await axios.post(path,body)
+}
+
+const verifyCode = async (code)=>{
+    const path =  environment.api + environment.verifyCode;
+    let body = {
+        "code":"e26558f1"
+    }
+    return await axios.post(path,body);
+}
+
+export {getUserData,RegisterUser,loginUser,resetPassword,confirmResetPassword,LoginPatient,verifyCode}

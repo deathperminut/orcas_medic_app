@@ -10,11 +10,12 @@ function ProviderContext(props){
     let [userData,setUserData]  = React.useState(null);
     let [token,setToken] = React.useState(null);
     let [typeDate,setTypeDate] = React.useState(null);
+    let [dni,setDni] = React.useState("");
     
 
     return (
         
-        <AppContext.Provider value={{token,setToken,userData,setUserData,typeDate,setTypeDate}}>
+        <AppContext.Provider value={{dni,setDni,token,setToken,userData,setUserData,typeDate,setTypeDate}}>
             {props.children}
         </AppContext.Provider>
         
