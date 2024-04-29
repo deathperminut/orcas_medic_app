@@ -118,6 +118,31 @@ export default function AdminPanel() {
       
     },[pageIndex,ListReference])
 
+    /* FILTER */
+
+
+    let [filter,setfilter] = React.useState("");
+
+    const FilterArray=(event)=>{
+      
+      if(event.target.value!==""){
+        
+
+        let ArrayFilter=users.filter((obj)=>obj.identificacion.toLowerCase().includes(event.target.value.toLowerCase()));
+        //setSupportList([...ArrayFilter]);
+        setListReference(ArrayFilter);
+        setPageIndex(1);
+
+
+      }else if(event.target.value===""){
+
+        setListReference(users);
+        setPageIndex(1);
+
+      }
+      setfilter(event.target.value);
+    }
+
 
 
 
@@ -167,7 +192,7 @@ export default function AdminPanel() {
                       <form action="" className='position-relative wrapper-search-small- d-block d-sm-block d-md-block d-lg-block d-xl-block d-xxl-block'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                            <input value={filter} onChange={FilterArray} type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
                             <label className='fs-5- ff-monse-regular- white font_medium'>Busca por cédula</label>
                           </div>
                         </div>
