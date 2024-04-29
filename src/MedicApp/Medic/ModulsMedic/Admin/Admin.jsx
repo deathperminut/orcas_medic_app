@@ -59,22 +59,16 @@ export default function Admin() {
       </div>
 
       <div className='row g-4 mt-3'>
-        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 col-xxl-4'>
+        {/* <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 col-xxl-4'>
             <Routes>
               <Route path="" element={ <Navigate to="userGestion" /> }/>
               <Route path="userGestion/*" element={<AdminPanel/>} />
             </Routes>
-        </div>
-        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 bg-gray'>
-          <div id="card-view" className='card border-0 rounded-3 w-100 bs-2- bg-gray'>
-            <div className='card-body w-100 min-h-'>
-            <Routes>
+        </div> */}
+        <Routes>
               <Route path="" element={ <Navigate to="userGestion" /> }/>
-              <Route path="userGestion/*" element={<TableUser/>} />
-            </Routes>
-            </div>
-          </div>
-        </div>
+              <Route path="userGestion/*" element={<AdminPanel/>} />
+        </Routes>
       </div>
     </div>
     )
