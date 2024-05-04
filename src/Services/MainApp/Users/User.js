@@ -11,5 +11,15 @@ const updateUser =  async (user,token)=>{
     return await axios.put(path,user,config)
 }
 
+const GetPatientUserDates =  async(dni,token)=>{
+    const path  = environment.api + environment.patient_next_dates +dni;
+    let config = {
+        headers:{
+            Authorization:'Token '+ token,
+        },
+    };
+    return await axios.get(path,config)
+}
 
-export {updateUser}
+
+export {updateUser,GetPatientUserDates}

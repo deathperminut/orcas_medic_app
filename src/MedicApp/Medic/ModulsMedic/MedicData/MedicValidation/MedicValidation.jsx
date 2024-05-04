@@ -2,14 +2,11 @@ import React from 'react'
 import './MedicValidation.css'
 import Select, { components } from 'react-select'
 import DatePicker from "react-multi-date-picker";
-import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../../../../context';
 import Swal from 'sweetalert2';
 import moment from "moment";
-import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai';
 import Preloader from '../../../../../components/Preloader/Preloader';
 import {updateUser} from '../../../../../Services/MainApp/Users/User'
 /**

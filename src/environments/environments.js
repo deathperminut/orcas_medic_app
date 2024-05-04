@@ -22,5 +22,9 @@ export const environment = {
     // DOCTOR DATES
     doctor_dates:'agendamiento/retornar-proximas-citas-doctor/',
 
+    // PATIENT DATES
+    patient_next_dates:'agendamiento/retornar-proximas-citas-paciente/',
+    patient_complete_dates:'',
+
 
 }

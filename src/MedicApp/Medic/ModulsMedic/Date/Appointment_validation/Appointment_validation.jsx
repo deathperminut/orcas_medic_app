@@ -23,49 +23,49 @@ export default function Appointment_validation() {
 
     let [preloader,setPreloader] = React.useState(false);
     let [dates,setDates] = React.useState([
-      // {
-      //     "id": 1,
-      //     "hora_inicio": "2023-12-01T12:15:00-05:00",
-      //     "hora_finalizacion": null,
-      //     "es_completada": false,
-      //     "cita_id": {
-      //         "id": 1,
-      //         "observaciones": "Observaciones de la cita 2",
-      //         "fecha_realizacion_consulta": "2024-03-17T10:00:00-05:00",
-      //         "fecha_siguiente_consulta": "2024-04-17T10:00:00-05:00",
-      //         "documento": "Documento de la cita",
-      //         "calificacion_examen": 9.5,
-      //         "user_id": {
-      //             "id": "60279df3-a039-4c3a-a6f8-70f03a41f79c",
-      //             "id_ubicacion": null,
-      //             "tipo_identificacion": "CC",
-      //             "identificacion": "12345",
-      //             "email": "estivenvalenciacastrillon@gmail.com",
-      //             "primer_nombre": "estiven",
-      //             "segundo_nombre": "sebas",
-      //             "primer_apellido": "paciente",
-      //             "segundo_apellido": "castrillon",
-      //             "fecha_nacimiento": "2023-04-04",
-      //             "genero": "Masculino",
-      //             "ocupacion": "Ingeniero",
-      //             "direccion": "Cra 9c #50 41",
-      //             "departamento": "Caldas",
-      //             "ciudad_residencia": "Manizales",
-      //             "barrio": "Comuneros",
-      //             "numero_celular": "3137844779",
-      //             "eps": "Salud total",
-      //             "tipo_regimen": "Contributivo 2",
-      //             "aseguradora": "Sura",
-      //             "es_paciente": false,
-      //             "es_doctor": false,
-      //             "es_admin": false,
-      //             "es_superusuario": false
-      //         },
-      //         "doctor_id": "f53db8d2-5674-487f-969b-2b0bb45433ab"
-      //     },
-      //     "doctor_id": "f53db8d2-5674-487f-969b-2b0bb45433ab"
-      // }
-  ]);
+        // {
+        //     "id": 1,
+        //     "hora_inicio": "2023-12-01T12:15:00-05:00",
+        //     "hora_finalizacion": null,
+        //     "es_completada": false,
+        //     "cita_id": {
+        //         "id": 1,
+        //         "observaciones": "Observaciones de la cita 2",
+        //         "fecha_realizacion_consulta": "2024-03-17T10:00:00-05:00",
+        //         "fecha_siguiente_consulta": "2024-04-17T10:00:00-05:00",
+        //         "documento": "Documento de la cita",
+        //         "calificacion_examen": 9.5,
+        //         "user_id": {
+        //             "id": "60279df3-a039-4c3a-a6f8-70f03a41f79c",
+        //             "id_ubicacion": null,
+        //             "tipo_identificacion": "CC",
+        //             "identificacion": "12345",
+        //             "email": "estivenvalenciacastrillon@gmail.com",
+        //             "primer_nombre": "estiven",
+        //             "segundo_nombre": "sebas",
+        //             "primer_apellido": "paciente",
+        //             "segundo_apellido": "castrillon",
+        //             "fecha_nacimiento": "2023-04-04",
+        //             "genero": "Masculino",
+        //             "ocupacion": "Ingeniero",
+        //             "direccion": "Cra 9c #50 41",
+        //             "departamento": "Caldas",
+        //             "ciudad_residencia": "Manizales",
+        //             "barrio": "Comuneros",
+        //             "numero_celular": "3137844779",
+        //             "eps": "Salud total",
+        //             "tipo_regimen": "Contributivo 2",
+        //             "aseguradora": "Sura",
+        //             "es_paciente": false,
+        //             "es_doctor": false,
+        //             "es_admin": false,
+        //             "es_superusuario": false
+        //         },
+        //         "doctor_id": "f53db8d2-5674-487f-969b-2b0bb45433ab"
+        //     },
+        //     "doctor_id": "f53db8d2-5674-487f-969b-2b0bb45433ab"
+        // }
+    ]);
 
     const GetAge=(dateString)=>{
     /* 
