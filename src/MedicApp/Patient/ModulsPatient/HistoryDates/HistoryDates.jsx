@@ -6,6 +6,7 @@ import MedicalPDF from './MedicalPDF/MedicalPDF';
 import TableDates from './TableDates/TableDates';
 import RoutesTable from './TableDates/RoutesTable/RoutesTable';
 import PersonalAppointment from '../PersonalData/PersonalAppointment/PersonalAppointment';
+import StadisticsPatient from './StadisticsPatient/StadisticsPatient';
 
 export default function HistoryDates() {
   useEffect(() => {
@@ -70,6 +71,7 @@ export default function HistoryDates() {
               <Route path="" element={ <Navigate to="TableDates" /> }/>
               <Route path="TableDates/*" element={<TableDates/>} />
               <Route path="medicalPDF/*" element={<MedicalPDF/>} />
+              <Route path="StadisticsDate/*" element={<StadisticsPatient/>} />
             </Routes>
             </div>
           </div>
