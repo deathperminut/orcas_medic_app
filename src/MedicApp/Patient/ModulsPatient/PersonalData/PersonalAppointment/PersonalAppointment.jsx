@@ -161,6 +161,15 @@ export default function PersonalAppointment() {
 
   return (
     <React.Fragment>
+        {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+        }
         <div id="card-appointment" className='card border-0 rounded-3 w-100 position-relative bs-2-'>
         <div className='card-header border-0 rounded-3'>
           <div className='row'>

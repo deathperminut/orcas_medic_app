@@ -4,18 +4,57 @@ import Pagination from 'pagination-for-reactjs-component';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'malihu-custom-scrollbar-plugin';
+import { AppContext } from '../../../../../context';
+import Swal from 'sweetalert2';
+import Preloader from '../../../../../components/Preloader/Preloader';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 import { FaEye } from "react-icons/fa";
 require('jquery-mousewheel');
 
 
 export default function TableDates() {
-
+  /* NAVIGATE */
   let navigate=useNavigate()
+  
+  /* APP CONTEXT */
+  let {userData,token} = React.useContext(AppContext);
+
+  /* USESTATE */
+  let [preloader,setPreloader] = React.useState(false);
+  let [dates,setDates] = React.useState([]);
+
+  /* USEEFFECTS */
+  React.useEffect(()=>{
+    if(token){
+      loadCompleteDates(userData);
+    }else{
+      navigate('/Auth/Login');
+    }
+  },[])
+
+
+  /* functions */
+
+  const loadCompleteDates=async()=>{
+
+    // results
+
+  }
+
+  /* PAGINATION */
   const [pageIndex, setPageIndex] = React.useState(1);
   let pageCount = 10;
   return (
     <React.Fragment>
+        {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+        }
         <div className='row mt-4 mb-4'>
         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
           <div className='card border-0 rounded-0 w-100 bg-transparent'>
