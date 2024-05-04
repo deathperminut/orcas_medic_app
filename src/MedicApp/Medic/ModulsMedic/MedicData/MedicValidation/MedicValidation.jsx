@@ -523,28 +523,28 @@ export default function MedicValidation() {
                 </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-              <div className='form-floating inner-addon- left-addon-'>
-                            <div className='form-control' id='date-birth'>
-                                <DatePicker
-                                inputClass="custom-style-date-picker- white font_medium"
-                                placeholder="yyyy-mm-dd"
-                                format="YYYY-MM-DD"
-                                months={months}
-                                onChange={(event)=>changeDate(event,'fecha_nacimiento')}
-                                value={dataUser?.fecha_nacimiento}
-                                weekDays={weekDays}
-                                calendarPosition="bottom-left"
-                                showOtherDays={true}
-                                fixMainPosition={true}
-                                shadow={true}
-                                animation={true}
-                                arrowStyle={{
-                                    display: "none"
-                                }}
-                                />
-                            </div>
-                            <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de nacimiento</label>
-                            </div>           
+                <div className='form-floating inner-addon- left-addon-'>
+                              <div className='form-control' id='date-birth'>
+                                  <DatePicker
+                                  inputClass="custom-style-date-picker- white font_medium"
+                                  placeholder="yyyy-mm-dd"
+                                  format="YYYY-MM-DD"
+                                  months={months}
+                                  onChange={(event)=>changeDate(event,'fecha_nacimiento')}
+                                  value={dataUser?.fecha_nacimiento}
+                                  weekDays={weekDays}
+                                  calendarPosition="bottom-left"
+                                  showOtherDays={true}
+                                  fixMainPosition={true}
+                                  shadow={true}
+                                  animation={true}
+                                  arrowStyle={{
+                                      display: "none"
+                                  }}
+                                  />
+                              </div>
+                              <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de nacimiento</label>
+                </div>           
               </div>
               
               

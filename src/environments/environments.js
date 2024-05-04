@@ -18,4 +18,7 @@ export const environment = {
     LoginPatient:'gestion-usuario/login-paciente/',
     verifyCode:'gestion-usuario/validacion-login-paciente/',
     getUsers:'users/',
+    registerUser:'users/register/'
+
+
 }

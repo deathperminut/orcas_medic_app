@@ -14,3 +14,17 @@
 .input_admin{
     color: white !important;
 }
+
+.offcanvasBody{
+    background-color: #272727 !important;
+}
+
+.btn-offcanvas{
+    background-color: #d1a207;
+    color:white;
+}
+
+.btn-offcanvas:hover{
+    background-color: #a47f05 !important;
+    color:white;
+}

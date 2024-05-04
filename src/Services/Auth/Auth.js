@@ -2,11 +2,15 @@ import axios from "axios";
 import { environment } from "../../environments/environments";
 
 
-const RegisterUser=async (body)=>{
+const RegisterUser=async (body,token)=>{
     
-    const path  = environment.api + environment.register;
-    
-    return await axios.post(path,body);
+    const path  = environment.api + environment.registerUser;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+    return await axios.post(path,body,config);
 }
 
 
@@ -56,7 +60,7 @@ const LoginPatient = async (dni)=>{
 const verifyCode = async (code)=>{
     const path =  environment.api + environment.verifyCode;
     let body = {
-        "code":"e26558f1"
+        "code":code
     }
     return await axios.post(path,body);
 }
