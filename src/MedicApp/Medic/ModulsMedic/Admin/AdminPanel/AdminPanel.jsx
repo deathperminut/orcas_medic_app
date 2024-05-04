@@ -448,6 +448,7 @@ export default function AdminPanel() {
         "segundo_nombre": "",
         "primer_apellido": "",
         "segundo_apellido": "",
+        "password":"",
         "fecha_nacimiento": "",
         "genero": "",
         "ocupacion": "",
@@ -571,7 +572,7 @@ export default function AdminPanel() {
 
     let RegisterData = async()=>{
 
-      if(userRegister.fecha_nacimiento!=="" && userRegister.primer_nombre !== "" && userRegister.primer_apellido !== "" && userRegister.email !== "" && userRegister.identificacion !=="" && userRegister.tipo_identificacion !=="" && userRegister.numero_celular !== "" && (userRegister.es_doctor || userRegister.es_admin || userRegister.es_paciente)){
+      if(userRegister.password !=="" && userRegister.fecha_nacimiento!=="" && userRegister.primer_nombre !== "" && userRegister.primer_apellido !== "" && userRegister.email !== "" && userRegister.identificacion !=="" && userRegister.tipo_identificacion !=="" && userRegister.numero_celular !== "" && (userRegister.es_doctor || userRegister.es_admin || userRegister.es_paciente)){
         let result = undefined
         setPreloader(true);
         result =  await RegisterUser(userRegister,token).catch((error)=>{
@@ -611,6 +612,7 @@ export default function AdminPanel() {
                 "tipo_identificacion": "",
                 "identificacion": "",
                 "email": "",
+                "password":"",
                 "primer_nombre": "",
                 "segundo_nombre": "",
                 "primer_apellido": "",
@@ -637,7 +639,7 @@ export default function AdminPanel() {
       }else{
         Swal.fire({
           icon: 'info',
-          title: 'Debe tener almenos un rol asignado y los campos de primer nombre, primero apellido , correo , número de celular , tipo de identificación,identificación y fecha de nacimiento no pueden estar vacios'
+          title: 'Debe tener almenos un rol asignado y los campos de primer nombre, primero apellido , correo , contraseña , número de celular , tipo de identificación,identificación y fecha de nacimiento no pueden estar vacios'
         });
       }
 
@@ -873,6 +875,7 @@ export default function AdminPanel() {
                 "primer_apellido": "",
                 "segundo_apellido": "",
                 "fecha_nacimiento": "",
+                "password":"",
                 "genero": "",
                 "ocupacion": "",
                 "direccion": "",
@@ -925,6 +928,12 @@ export default function AdminPanel() {
                     <div className='form-floating inner-addon- left-addon- '>
                         <input value={userRegister.segundo_apellido} onChange={(event)=>ReadInputRegister(event,'segundo_apellido')} type="text" className='form-control' id='identificationNumber' placeholder=""/>
                         <label className='lh-sm fs-5- ff-monse-regular- black font_medium ' style={{'color':'#000'}}>Segundo apellido</label>
+                      </div>
+                  </div>
+                  <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5' style={{'marginBottom':'20px'}}>
+                    <div className='form-floating inner-addon- left-addon- '>
+                        <input value={userRegister.password} onChange={(event)=>ReadInputRegister(event,'password')} type="password" className='form-control' id='identificationNumber' placeholder=""/>
+                        <label className='lh-sm fs-5- ff-monse-regular- black font_medium ' style={{'color':'#000'}}>Contraseña</label>
                       </div>
                   </div>
                   <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5' style={{'marginBottom':'20px'}}>
