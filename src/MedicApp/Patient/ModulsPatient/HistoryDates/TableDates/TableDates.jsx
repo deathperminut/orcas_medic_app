@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import Preloader from '../../../../../components/Preloader/Preloader';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 import { FaEye } from "react-icons/fa";
+import { GetPatientCompleteDates } from '../../../../../Services/MainApp/Users/User';
 require('jquery-mousewheel');
 
 
@@ -35,15 +36,105 @@ export default function TableDates() {
 
   /* functions */
 
-  const loadCompleteDates=async()=>{
+  const loadCompleteDates=async(data)=>{
 
     // results
+    let result =  undefined;
+    setPreloader(true);
+    result = await GetPatientCompleteDates(data?.identificacion,token).catch((error)=>{
+      console.log("PROBLEMAS CITAS PREVIAS: ",error);
+      setPreloader(false);
+      Swal.fire({
+        icon: 'info',
+        title: 'Problemas para cargar el historial de citas'
+      })
+    })
+    if(result){
+      console.log("RESULTADOS CITAS PREVIAS: ",result.data);
+      setPreloader(false);
+      setDates(result.data.reverse())
+    }
+  }
+  
+  /* date functions */
+  // dateFormat
+  const GetDataHour=(dateString)=>{
+
+    const fecha = new Date(dateString);
+
+    // Obtener la fecha en formato YYYY-MM-DD
+    const fechaFormateada = fecha.toISOString().split('T')[0];
+
+    // Obtener la hora en formato 12 horas con AM/PM
+    let horas = fecha.getHours();
+    const minutos = fecha.getMinutes();
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    horas = horas % 12;
+    horas = horas ? horas : 12; // Ajustar las 12:00 PM y 12:00 AM
+    const horaFormateada = horas + ':' + (minutos < 10 ? '0' : '') + minutos + ' ' + ampm;
+    
+
+    return [fechaFormateada,horaFormateada]
 
   }
 
+
+
+  
   /* PAGINATION */
+  let [ListReference,setListReference] = React.useState([]);
+  let [supportList,setSupportList] = React.useState([]);
   const [pageIndex, setPageIndex] = React.useState(1);
-  let pageCount = 10;
+  const [pageCount,setPageCount] = React.useState(10);
+
+
+  // funciones para generar el efecto de paginación
+
+  function obtenerSublista(Lista,Tamaño, Numero_secuencia) {
+    // obtenemos la lista dependiendo de la pagina
+    // teniendo en cuenta la cantidad de paginas
+    // y el número de la pagina
+    const inicio = (Numero_secuencia-1) * Tamaño;
+    return Lista.slice(inicio, inicio + Tamaño);
+
+  }
+  
+  function obtenerCantidadPaginas(Lista,Tamaño){
+
+    // obtenemos la cantidad de total de paginas
+    // segun el tamaño de la lista
+    let CantidadPaginas=Lista.length/Tamaño;
+    if (!Number.isInteger(CantidadPaginas)){
+       return Math.trunc(CantidadPaginas)+1
+    }else{
+      return CantidadPaginas
+    }
+
+  }
+
+  React.useEffect(()=>{
+    //console.log("LISTA DE PRODUCTOS: ",ListProducts);
+    setPageCount(obtenerCantidadPaginas(dates,10));
+    let Sublist=obtenerSublista(dates,10,pageIndex)
+    setSupportList(Sublist);
+    setListReference(dates);
+     
+    },[dates])
+
+    React.useEffect(()=>{
+
+      if(pageIndex!==0){
+    
+        setPageCount(obtenerCantidadPaginas(ListReference,10));
+        let Sublist=obtenerSublista(ListReference,10,pageIndex)
+        setSupportList(Sublist);
+    
+      }
+      
+      
+    },[pageIndex,ListReference])
+
+
   return (
     <React.Fragment>
         {
@@ -70,6 +161,11 @@ export default function TableDates() {
                       </th>
                       <th scope="col" className='th-width-auto-'>
                         <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
+                          <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple- font_medium'>Hora</span>
+                        </div>
+                      </th>
+                      <th scope="col" className='th-width-auto-'>
+                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
                           <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple- font_medium'>Médico</span>
                         </div>
                       </th>
@@ -81,174 +177,42 @@ export default function TableDates() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye onClick={()=>navigate('/ModulsPatient/HistoryDates/medicalPDF/')} cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className=' p-0 text-center input-large- white font_medium
-                          '> 2022-03-20</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p className=' p-0 text-center input-large- white font_medium'> Juan Sebastian Mendez Rondon</p>
-                        </div>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <p  className='p-0 text-center input-large- white font_medium'>
-                          <FaEye cursor={'pointer'} color='white'/>
-                          </p>
-                        </div>
-                      </td>
-                      
-                    </tr>
+                    {supportList.map((obj,index)=>{
+                      return (
+                        <tr key={index}>
+                          <td className='align-middle'>
+                            <div id='internal-form' className='w-100'>
+                              <p  className=' p-0 text-center input-large- white font_medium
+                              '>{GetDataHour(obj?.fecha_realizacion_consulta)[0]}</p>
+                            </div>
+                          </td>
+                          <td className='align-middle'>
+                            <div id='internal-form' className='w-100'>
+                              <p  className=' p-0 text-center input-large- white font_medium
+                              '>{GetDataHour(obj?.fecha_realizacion_consulta)[1]}</p>
+                            </div>
+                          </td>
+                          <td className='align-middle'>
+                            <div id='internal-form' className='w-100'>
+                              <p className=' p-0 text-center input-large- white font_medium'>{ typeof(obj?.doctor_id) === typeof("string") ? "" : obj?.doctor_id?.primer_nombre + ' '+ obj?.doctor_id?.segundo_nombre+ ' '+obj?.doctor_id?.primer_apellido }</p>
+                            </div>
+                          </td>
+                          <td className='align-middle'>
+                            {obj?.analisis_senal_activo !== null ? 
+                              <div id='internal-form' className='w-100'>
+                              <p  className='p-0 text-center input-large- white font_medium'>
+                              <FaEye onClick={()=>navigate('/ModulsPatient/HistoryDates/medicalPDF/')} cursor={'pointer'} color='white'/>
+                              </p>
+                            </div>
+                            :
+                            <></>
+                            }
+                            
+                          </td>
+                        </tr>
+                      )
+                    })}
+                    
                   </tbody>
                 </table>
               </div>

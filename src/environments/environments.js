@@ -24,7 +24,7 @@ export const environment = {
 
     // PATIENT DATES
     patient_next_dates:'agendamiento/retornar-proximas-citas-paciente/',
-    patient_complete_dates:'',
+    patient_complete_dates:'historia-clinica/retornar-cita-paciente/',
 
 
 }

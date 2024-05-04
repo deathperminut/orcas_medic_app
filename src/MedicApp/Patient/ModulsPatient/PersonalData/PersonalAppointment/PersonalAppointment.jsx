@@ -86,7 +86,7 @@ export default function PersonalAppointment() {
       setPreloader(true);
       let result = undefined;
 
-      result = await GetPatientUserDates(data.identificacion,token).catch((error)=>{
+      result = await GetPatientUserDates(data?.identificacion,token).catch((error)=>{
             console.log(error);
             setPreloader(false);
             Swal.fire({
