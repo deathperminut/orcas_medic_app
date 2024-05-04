@@ -10,6 +10,7 @@ import { MdGppGood } from "react-icons/md";
 import { RegisterUser, getUsers } from '../../../../../Services/Auth/Auth';
 import { AppContext } from '../../../../../context';
 import { useNavigate } from 'react-router-dom';
+import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import makeAnimated from 'react-select/animated';
 import { IoIosClose } from "react-icons/io";
@@ -310,12 +311,32 @@ export default function AdminPanel() {
   let [supportList,setSupportList] = React.useState([]);
   let [preloader,setPreloader] = React.useState(false);
   let [selectUser,setSelectUser] = React.useState(null);
+  // use States
+  const [eye,setEye]=React.useState(true);
 
 
   /* PAGINATION */
   const [pageIndex, setPageIndex] = React.useState(1);
   const [pageCount,setPageCount] = React.useState(10);
   const paginationRef = React.useRef();
+
+
+   // passwords
+   const SeePassword=()=>{
+    setEye(false);
+    const input = document.querySelector("#password");
+    // When an input is checked, or whatever...
+    input.setAttribute("type", "text");
+    input.classList.add( "colorWhite" );
+    }
+
+    const HidePassword=()=>{
+    setEye(true);
+    const input = document.querySelector("#password");
+
+        input.setAttribute("type", "password");
+        input.classList.remove( "colorWhite" );
+    }
 
   /* useEffect */
 
@@ -599,7 +620,7 @@ export default function AdminPanel() {
           
         })
         if(result){
-          
+          HidePassword();
           handleClose2();
             loadUsers();
             Swal.fire({
@@ -862,6 +883,7 @@ export default function AdminPanel() {
         </div>
     </div>
     <Offcanvas className="offcanvasBody" show={show2} onHide={()=>{
+        HidePassword();
         handleClose2();
         loadUsers();
         setUserRegister(
@@ -897,8 +919,38 @@ export default function AdminPanel() {
       <div className='offcanvas-header pb-4 padding-40-'>
           <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- font_medium white'>Registrar usuario</h2>
           <IoIosClose style={{'cursor':'pointer'}} color='white' onClick={()=>{
+        HidePassword();
         handleClose2();
         loadUsers();
+        setUserRegister(
+              {
+                "id_ubicacion": null,
+                "tipo_identificacion": "",
+                "identificacion": "",
+                "email": "",
+                "primer_nombre": "",
+                "segundo_nombre": "",
+                "primer_apellido": "",
+                "segundo_apellido": "",
+                "fecha_nacimiento": "",
+                "password":"",
+                "genero": "",
+                "ocupacion": "",
+                "direccion": "",
+                "ciudad_residencia": "",
+                "barrio": "",
+                "numero_celular": "",
+                "aseguradora": "",
+                "estado_civil": "",
+                "grupo_social": "",
+                "grupo_etnico": "",
+                "religion": "",
+                "es_paciente": false,
+                "es_doctor": false,
+                "es_admin": false,
+                "es_superusuario": false
+            }
+            );
         }} size={30} className='fa icon-close'></IoIosClose>
         </div>
         <div className='offcanvas-body ps-4 pe-4'>
@@ -932,8 +984,17 @@ export default function AdminPanel() {
                   </div>
                   <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5' style={{'marginBottom':'20px'}}>
                     <div className='form-floating inner-addon- left-addon- '>
-                        <input value={userRegister.password} onChange={(event)=>ReadInputRegister(event,'password')} type="password" className='form-control' id='identificationNumber' placeholder=""/>
+                        <input value={userRegister.password} onChange={(event)=>ReadInputRegister(event,'password')} id="password" type="password" className='form-control' placeholder=""/>
                         <label className='lh-sm fs-5- ff-monse-regular- black font_medium ' style={{'color':'#000'}}>Contraseña</label>
+                        {eye===true  ? 
+                        <>
+                        <AiOutlineEye className='eye-password' onClick={SeePassword}></AiOutlineEye>
+                        </>
+                        :
+                        <>
+                        <AiOutlineEyeInvisible className='eye-password' onClick={HidePassword}></AiOutlineEyeInvisible>
+                        </>
+                        }
                       </div>
                   </div>
                   <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5' style={{'marginBottom':'20px'}}>
