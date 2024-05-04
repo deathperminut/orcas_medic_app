@@ -549,7 +549,7 @@ export default function AdminPanel() {
 
     let editUser = async()=>{
 
-      if(supportList[selectUser].primer_nombre !== "" && supportList[selectUser].primer_apellido !== "" && supportList[selectUser].email !== "" && supportList[selectUser].identificacion !=="" && supportList[selectUser].tipo_identificacion !=="" && supportList[selectUser].numero_celular !== "" && (supportList[selectUser].es_doctor || supportList[selectUser].es_admin || supportList[selectUser].es_paciente)){
+      if(supportList[selectUser].primer_nombre !== "" && supportList[selectUser].primer_apellido !== "" && supportList[selectUser].email !== "" && supportList[selectUser].identificacion !=="" && supportList[selectUser].tipo_identificacion !=="" && supportList[selectUser].numero_celular !== "" ){
         let result = undefined
         setPreloader(true);
         console.log("DATOS PARA ACTUALIZAR: ",supportList[selectUser]);
@@ -586,14 +586,14 @@ export default function AdminPanel() {
       }else{
         Swal.fire({
           icon: 'info',
-          title: 'Debe tener almenos un rol asignado y los campos de primer nombre, primero apellido , correo , número de celular , tipo de identificación e identificación no pueden estar vacios'
+          title: 'Los campos de primer nombre, primero apellido , correo , número de celular , tipo de identificación e identificación no pueden estar vacios'
         });
       }
     }
 
     let RegisterData = async()=>{
 
-      if(userRegister.password !=="" && userRegister.fecha_nacimiento!=="" && userRegister.primer_nombre !== "" && userRegister.primer_apellido !== "" && userRegister.email !== "" && userRegister.identificacion !=="" && userRegister.tipo_identificacion !=="" && userRegister.numero_celular !== "" && (userRegister.es_doctor || userRegister.es_admin || userRegister.es_paciente)){
+      if(userRegister.password !=="" && userRegister.fecha_nacimiento!=="" && userRegister.primer_nombre !== "" && userRegister.primer_apellido !== "" && userRegister.email !== "" && userRegister.identificacion !=="" && userRegister.tipo_identificacion !=="" && userRegister.numero_celular !== "" ){
         let result = undefined
         setPreloader(true);
         result =  await RegisterUser(userRegister,token).catch((error)=>{
@@ -660,7 +660,7 @@ export default function AdminPanel() {
       }else{
         Swal.fire({
           icon: 'info',
-          title: 'Debe tener almenos un rol asignado y los campos de primer nombre, primero apellido , correo , contraseña , número de celular , tipo de identificación,identificación y fecha de nacimiento no pueden estar vacios'
+          title: 'Los campos de primer nombre, primero apellido , correo , contraseña , número de celular , tipo de identificación,identificación y fecha de nacimiento no pueden estar vacios'
         });
       }
 
@@ -1060,7 +1060,7 @@ export default function AdminPanel() {
                                   </div>
                                   <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de nacimiento</label>
                   </div>  
-                  <div className='row g-0 g-sm-0 g-md-2 g-lg-2 g-xl-2 g-xxl-2 mt-3'>
+                  {/* <div className='row g-0 g-sm-0 g-md-2 g-lg-2 g-xl-2 g-xxl-2 mt-3'>
                     <div className='col-12 d-flex flex-column flex-sm-column flex-md-column flex-lg-column flex-xl-column flex-xxl-column justify-content-between align-items-center align-self-center mb-2'>
                       <p className='m-0 me-0 me-sm-3 me-md-3 me-lg-3 me-xl-3 me-xxl-3 mb-3 lh-sm text-center fs-5- ff-monse-regular- fw-normal tx-light-black-'>¿Desea activar este usuario <br /> <span className='fs-6- white'>(Aqui podra proporcionar el rol de  <strong>"Paciente"</strong>)  a su usuario correspondiente</span></p>
                       <div className='d-flex flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center'>
@@ -1116,7 +1116,7 @@ export default function AdminPanel() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
                     <div className='col-auto'>
                       <button onClick={RegisterData} className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-dark-purple- bs-1- btn-offcanvas' type="button">

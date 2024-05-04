@@ -1,17 +1,74 @@
 import React from 'react'
 import $ from "jquery"
 import 'malihu-custom-scrollbar-plugin';
+import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../../../../context';
+import Preloader from '../../../../../components/Preloader/Preloader';
+import { GetDatesMedic } from '../../../../../Services/MainApp/Medic/dates';
+import Swal from 'sweetalert2';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 require('jquery-mousewheel');
 
+
 export default function Appointment_validation() {
 
+    /* navigate */
+
+    const navigate=useNavigate();
+
     /* APP CONTEXT */
-    let {userData} = React.useContext(AppContext);
+    let {userData,token} = React.useContext(AppContext);
+
+    /* useState */
+
+    let [preloader,setPreloader] = React.useState(false);
+    let [dates,setDates] = React.useState([
+      // {
+      //     "id": 1,
+      //     "hora_inicio": "2023-12-01T12:15:00-05:00",
+      //     "hora_finalizacion": null,
+      //     "es_completada": false,
+      //     "cita_id": {
+      //         "id": 1,
+      //         "observaciones": "Observaciones de la cita 2",
+      //         "fecha_realizacion_consulta": "2024-03-17T10:00:00-05:00",
+      //         "fecha_siguiente_consulta": "2024-04-17T10:00:00-05:00",
+      //         "documento": "Documento de la cita",
+      //         "calificacion_examen": 9.5,
+      //         "user_id": {
+      //             "id": "60279df3-a039-4c3a-a6f8-70f03a41f79c",
+      //             "id_ubicacion": null,
+      //             "tipo_identificacion": "CC",
+      //             "identificacion": "12345",
+      //             "email": "estivenvalenciacastrillon@gmail.com",
+      //             "primer_nombre": "estiven",
+      //             "segundo_nombre": "sebas",
+      //             "primer_apellido": "paciente",
+      //             "segundo_apellido": "castrillon",
+      //             "fecha_nacimiento": "2023-04-04",
+      //             "genero": "Masculino",
+      //             "ocupacion": "Ingeniero",
+      //             "direccion": "Cra 9c #50 41",
+      //             "departamento": "Caldas",
+      //             "ciudad_residencia": "Manizales",
+      //             "barrio": "Comuneros",
+      //             "numero_celular": "3137844779",
+      //             "eps": "Salud total",
+      //             "tipo_regimen": "Contributivo 2",
+      //             "aseguradora": "Sura",
+      //             "es_paciente": false,
+      //             "es_doctor": false,
+      //             "es_admin": false,
+      //             "es_superusuario": false
+      //         },
+      //         "doctor_id": "f53db8d2-5674-487f-969b-2b0bb45433ab"
+      //     },
+      //     "doctor_id": "f53db8d2-5674-487f-969b-2b0bb45433ab"
+      // }
+  ]);
 
     const GetAge=(dateString)=>{
-      /* 
+    /* 
     Función para obtener la edad segun la fecha
     de nacimiento.
     */
@@ -29,7 +86,38 @@ export default function Appointment_validation() {
       return age + ' años'
     }
     }
-    
+
+
+    /* nextDates */
+    React.useEffect(()=>{
+      if(token){
+        loadDates(userData);
+      }else{
+        navigate('/Auth/Login');
+      }
+      
+    },[])
+
+    const loadDates=async(data)=>{
+      setPreloader(true);
+      let result = undefined;
+      result = await GetDatesMedic(data.identificacion,token).catch((error)=>{
+            console.log(error);
+            setPreloader(false);
+            Swal.fire({
+              icon: 'info',
+              title: 'Problemas para cargar las proximas citas'
+            })
+      })
+
+      if(result){
+        // RESULTADOS
+        console.log(result.data);
+        setPreloader(false);
+        setDates(result.data);
+      }
+
+    }
 
 
     React.useEffect(()=>{
@@ -43,8 +131,39 @@ export default function Appointment_validation() {
           mouseWheelPixels: 100
         });
       },[])
+
+      // dateFormat
+      const GetDataHour=(dateString)=>{
+
+        const fecha = new Date(dateString);
+
+        // Obtener la fecha en formato YYYY-MM-DD
+        const fechaFormateada = fecha.toISOString().split('T')[0];
+
+        // Obtener la hora en formato 12 horas con AM/PM
+        let horas = fecha.getHours();
+        const minutos = fecha.getMinutes();
+        const ampm = horas >= 12 ? 'PM' : 'AM';
+        horas = horas % 12;
+        horas = horas ? horas : 12; // Ajustar las 12:00 PM y 12:00 AM
+        const horaFormateada = horas + ':' + (minutos < 10 ? '0' : '') + minutos + ' ' + ampm;
+        
+
+        return [fechaFormateada,horaFormateada]
+
+      }
+
   return (
     <React.Fragment>
+        {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+        }
         <div id="card-appointment" className='card border-0 rounded-3 w-100 position-relative bs-2-'>
         <div className='card-header border-0 rounded-3'>
           <div className='row'>
@@ -82,9 +201,9 @@ export default function Appointment_validation() {
                     <li className='nav-item' role="presentation">
                       <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#pills-next-consultation" type="button" role="tab" aria-controls="pills-next-consultation" aria-selected="true"> <span className='ff-monse-regular- me-2'>Proximas consultas</span></button>
                     </li>
-                    <li className='nav-item' role="presentation">
+                    {/* <li className='nav-item' role="presentation">
                       <button className='nav-link rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#pills-consultation-history" type="button" role="tab" aria-controls="pills-consultation-history" aria-selected="true"> <span className='ff-monse-regular- me-2'>Historial de consultas</span></button>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 
@@ -97,48 +216,58 @@ export default function Appointment_validation() {
                         <div className='tab-content' id='myTabContent'>
                           <div className='tab-pane fade show active' id='scheduling' role="tabpanel" aria-labelledby="data-patient-tab" tabIndex="0">
                             <div className='row g-2'>
-                              <div className='col-12'>
-                                <div id="card-user-appointment" className='card border-0 rounded-3 w-100'>
-                                  <div className='card-body w-100'>
-                                    <div className='d-flex flex-row justify-content-between align-items-start align-self-center'>
-                                      <div className='d-flex flex-row justify-content-start align-items-start align-self-center'>
-                                        <div className='p-2 me-2 rounded-circle bg-burgundy-'></div>
-                                        <div className='w-auto'>
-                                          <p className='m-0 lh-sm fs-4- ff-monse-regular- fw-normal tx-black- white font_medium'>Carmen Ligia Jaramillo Posada</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
-                                      <div className='w-auto'>
-                                        <p className='m-0 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-bold white font_medium'>Manizales</span> | <span className='fw-normal'>Calle 98 #35-37 la enea edificio condado de la cruz apt 604 frente a fresby de la 98</span></p>
-                                      </div>
-                                    </div>
-                                    <div className='d-grid gap-3 d-flex flex-row justify-content-between align-items-center align-self-center mt-3 ps-4 pe-1'>
-                                      <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>28 JUL 2022</span> / <span className='fw-normal '> 7:00 AM </span></p>
-                                      <a className='btn bg-transparent btn-transparent- p-0' data-bs-toggle="collapse" href="#collapseExampleOne" role="button" aria-expanded="false" aria-controls="collapseExampleOne">
-                                      <p className='p-0 m-0 lh-sm fs-6- ff-monse-regular- tx-neutral-purple- white'>Detalles</p>
-                                      </a>
-                                    </div>
-                                    <div className='collapse' id="collapseExampleOne">
-                                      <div className='card card-body border-0 bg-transparent p-2 ps-4 pe-1 white'>
-                                        <div className='w-100 d-flex flex-row justify-content-between align-items-center align-self-center'>
-                                          <div className='w-auto d-flex flex-row justify-content-start align-items-center align-self-center'>
-                                            <p className='m-0 lh-sm fs-6- ff-monse-regular- fw-bold tx-black- me-1'><i className='fa icon-id-number d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none'></i> <span className='d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block gray font_medium'>Costo</span></p>
+                              {dates.map((obj,index)=>{
+                                return(
+                                  <div className='col-12' key={index}>
+                                    <div id="card-user-appointment" className='card border-0 rounded-3 w-100'>
+                                      <div className='card-body w-100'>
+                                        <div className='d-flex flex-row justify-content-between align-items-start align-self-center'>
+                                          <div className='d-flex flex-row justify-content-start align-items-start align-self-center'>
+                                            <div className='p-2 me-2 rounded-circle bg-burgundy-'></div>
+                                            <div className='w-auto'>
+                                              <p className='m-0 lh-sm fs-4- ff-monse-regular- fw-normal tx-black- white font_medium'>{obj?.cita_id?.user_id?.primer_nombre + ' ' + obj?.cita_id?.user_id?.segundo_nombre + ' ' + obj?.cita_id?.user_id?.primer_apellido + ' ' + obj?.cita_id?.user_id?.segundo_apellido}</p>
+                                            </div>
                                           </div>
-                                          <p className='m-0 lh-sm fs-6- ff-monse-regular- fw-bold tx-black- white font_medium'>$199.999</p>
+                                        </div>
+                                        <div className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
+                                          <div className='w-auto'>
+                                            <p className='m-0 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-bold white font_medium'>Email</span> | <span className='fw-normal'>{obj?.cita_id?.user_id?.email}</span></p>
+                                          </div>
+                                        </div>
+                                        <div className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
+                                          <div className='w-auto'>
+                                            <p className='m-0 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-bold white font_medium'>Celular</span> | <span className='fw-normal'>{obj?.cita_id?.user_id?.numero_celular}</span></p>
+                                          </div>
+                                        </div>
+                                        <div className='d-grid gap-3 d-flex flex-row justify-content-between align-items-center align-self-center mt-3 ps-4 pe-1'>
+                                          <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{GetDataHour(obj?.hora_inicio)[0]}</span> / <span className='fw-normal '>{GetDataHour(obj?.hora_inicio)[1]}</span></p>
+                                          <a className='btn bg-transparent btn-transparent- p-0' data-bs-toggle="collapse" href={"#collapseExample"+index} role="button" aria-expanded="false" aria-controls={"collapseExample"+index}>
+                                          <p className='p-0 m-0 lh-sm fs-6- ff-monse-regular- tx-neutral-purple- white'>Detalles</p>
+                                          </a>
+                                        </div>
+                                        <div className='collapse' id={"collapseExample"+index}>
+                                          <div className='card card-body border-0 bg-transparent p-2 ps-4 pe-1 white'>
+                                            <div className='w-100 d-flex flex-row justify-content-between align-items-center align-self-center'>
+                                              <div className='w-auto d-flex flex-row justify-content-start align-items-center align-self-center'>
+                                                <p className='m-0 lh-sm fs-6- ff-monse-regular- fw-bold tx-black- me-1'><i className='fa icon-id-number d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none'></i> <span className='d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block gray font_medium'>Identificación</span></p>
+                                              </div>
+                                              <p className='m-0 lh-sm fs-6- ff-monse-regular- fw-bold tx-black- white font_medium'>{obj?.cita_id?.user_id?.identificacion}</p>
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
+                                )
+                              })}
                             </div>
                           </div>
                         </div>
                       </div>
+                      
                     </div>
                   </div>
-                  <div className='tab-pane fade' id="pills-consultation-history" role="tabpanel" aria-labelledby="consultation-history-tab" tabIndex="0">
+                  {/* <div className='tab-pane fade' id="pills-consultation-history" role="tabpanel" aria-labelledby="consultation-history-tab" tabIndex="0">
                     <div className='row'>
                       <div className='col-12 wrapper-notifications-'>
                         <div className='tab-content' id='myTabContent'>
@@ -184,7 +313,7 @@ export default function Appointment_validation() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
