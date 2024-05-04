@@ -5,6 +5,7 @@ import $ from 'jquery';
 import MedicalPDF from './MedicalPDF/MedicalPDF';
 import TableDates from './TableDates/TableDates';
 import RoutesTable from './TableDates/RoutesTable/RoutesTable';
+import PersonalAppointment from '../PersonalData/PersonalAppointment/PersonalAppointment';
 
 export default function HistoryDates() {
   useEffect(() => {
@@ -60,7 +61,7 @@ export default function HistoryDates() {
 
       <div className='row g-4 mt-3'>
         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 col-xxl-4'>
-            <RoutesTable></RoutesTable>
+            <PersonalAppointment></PersonalAppointment>
         </div>
         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 bg-gray'>
           <div id="card-view" className='card border-0 rounded-3 w-100 bs-2- bg-gray'>
