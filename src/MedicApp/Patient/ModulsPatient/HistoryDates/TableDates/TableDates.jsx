@@ -203,10 +203,10 @@ export default function TableDates() {
                                 <p  className='p-0 text-center input-large- white font_medium'>
                                 <FaEye onClick={()=>{
                                   // Guardamos el objeto en el Context
-                                  setSelectCompleteDate(obj)
+                                  //setSelectCompleteDate(obj)
                                   //Redirigimos a la pestaña correspondiente
-                                  navigate('/ModulsPatient/HistoryDates/StadisticsDate/')
-                                  
+                                  //navigate('/ModulsPatient/HistoryDates/StadisticsDate/')
+                                  window.open(obj?.documento_topoplot_test)
                                   
                                 }} cursor={'pointer'} color='white'/>
                                 </p>
