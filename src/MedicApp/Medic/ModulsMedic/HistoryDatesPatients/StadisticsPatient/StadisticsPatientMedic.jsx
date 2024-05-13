@@ -52,28 +52,31 @@ export default function StadisticsPatientMedic() {
         /**
      * GRAFICA SIGN IMC, PESO Y TALLA (LINE CHART)
      */
+    if(selectCompleteDate !== null){
 
     let chartVitalSignsthree = echarts.init(document.getElementById('chart-vital-sign-three-'));
     let optionVitalSignsthree;
 
     const dataVitalSignsthree = [
-      { valueOne: 'C1', valueTwo: 120, valueThree: 80, valueFour: 70 },
-      { valueOne: 'C2', valueTwo: 23, valueThree: 10, valueFour: 25 },
-      { valueOne: 'C3', valueTwo: 20, valueThree: 8, valueFour: 10 },
-      { valueOne: 'C4', valueTwo: 30, valueThree: 15, valueFour: 32 },
-      { valueOne: 'C5', valueTwo: 29, valueThree: 9, valueFour: 19 },
-      { valueOne: 'C6', valueTwo: 21, valueThree: 6, valueFour: 20 },
-      { valueOne: 'C7', valueTwo: 25, valueThree: 20, valueFour: 15 },
-      { valueOne: 'C8', valueTwo: 20, valueThree: 10, valueFour: 15 },
-      { valueOne: 'C9', valueTwo: 45, valueThree: 22, valueFour: 39 },
-      { valueOne: 'C10', valueTwo: 50, valueThree: 40, valueFour: 40 },
-      { valueOne: 'C11', valueTwo: 35, valueThree: 32, valueFour: 45 },
-      { valueOne: 'C12', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C13', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C14', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C15', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C16', valueTwo: 5, valueThree: 2, valueFour: 52 }
+      { valueOne: 'C1', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c1']?.toFixed(2), valueThree:selectCompleteDate?.analisis_senal_activo?.theta?.media['c1']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c1']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c1']?.toFixed(2) },
+      { valueOne: 'C2', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c2']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c2']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c2']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c2']?.toFixed(2) },
+      { valueOne: 'C3', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c3']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c3']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c3']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c3']?.toFixed(2) },
+      { valueOne: 'C4', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c4']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c4']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c4']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c4']?.toFixed(2) },
+      { valueOne: 'C5', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c5']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c5']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c5']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c5']?.toFixed(2) },
+      { valueOne: 'C6', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c6']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c6']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c6']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c6']?.toFixed(2) },
+      { valueOne: 'C7', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c7']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c7']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c7']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c7']?.toFixed(2) },
+      { valueOne: 'C8', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c8']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c8']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c8']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c8']?.toFixed(2) },
+      { valueOne: 'C9', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c9']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c9']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c9']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c9']?.toFixed(2) },
+      { valueOne: 'C10', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c10']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c10']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c10']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c10']?.toFixed(2) },
+      { valueOne: 'C11', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c11']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c11']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c11']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c11']?.toFixed(2) },
+      { valueOne: 'C12', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c12']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c12']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c12']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c12']?.toFixed(2) },
+      { valueOne: 'C13', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c13']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c13']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c13']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c13']?.toFixed(2) },
+      { valueOne: 'C14', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c14']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c14']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c14']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c14']?.toFixed(2) },
+      { valueOne: 'C15', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c15']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c15']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c15']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c15']?.toFixed(2) },
+      { valueOne: 'C16', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.media['c16']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.media['c16']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.media['c16']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.media['c16']?.toFixed(2) }
     ];
+
+    console.log("DATOS : ",dataVitalSignsthree)
 
     optionVitalSignsthree = {
       tooltip: {
@@ -529,11 +532,11 @@ export default function StadisticsPatientMedic() {
             emphasis: {
               focus: 'series'
             },
-            data: dataVitalSignsthree.map(item => item.valueFour),
+            data: dataVitalSignsthree.map(item => item.valueFive),
             animationDelay: function (idx) {
               return idx * 15;
             }
-          }
+        },
       ],
       animationEasing: 'elasticOut',
       animationDelayUpdate: function (idx) {
@@ -548,6 +551,9 @@ export default function StadisticsPatientMedic() {
         chartVitalSignsthree.resize();
       }
     });
+
+    } 
+    
     },[])
 
     React.useEffect(()=>{
@@ -559,22 +565,22 @@ export default function StadisticsPatientMedic() {
     let optionVitalSignsthree;
 
     const dataVitalSignsthree = [
-      { valueOne: 'C1', valueTwo: 120, valueThree: 80, valueFour: 70 },
-      { valueOne: 'C2', valueTwo: 23, valueThree: 10, valueFour: 25 },
-      { valueOne: 'C3', valueTwo: 20, valueThree: 8, valueFour: 10 },
-      { valueOne: 'C4', valueTwo: 30, valueThree: 15, valueFour: 32 },
-      { valueOne: 'C5', valueTwo: 29, valueThree: 9, valueFour: 19 },
-      { valueOne: 'C6', valueTwo: 21, valueThree: 6, valueFour: 20 },
-      { valueOne: 'C7', valueTwo: 25, valueThree: 20, valueFour: 15 },
-      { valueOne: 'C8', valueTwo: 20, valueThree: 10, valueFour: 15 },
-      { valueOne: 'C9', valueTwo: 45, valueThree: 22, valueFour: 39 },
-      { valueOne: 'C10', valueTwo: 50, valueThree: 40, valueFour: 40 },
-      { valueOne: 'C11', valueTwo: 35, valueThree: 32, valueFour: 45 },
-      { valueOne: 'C12', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C13', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C14', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C15', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C16', valueTwo: 5, valueThree: 2, valueFour: 52 }
+      { valueOne: 'C1', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c1']?.toFixed(2), valueThree:selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c1']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c1']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c1']?.toFixed(2) },
+      { valueOne: 'C2', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c2']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c2']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c2']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c2']?.toFixed(2) },
+      { valueOne: 'C3', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c3']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c3']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c3']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c3']?.toFixed(2) },
+      { valueOne: 'C4', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c4']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c4']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c4']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c4']?.toFixed(2) },
+      { valueOne: 'C5', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c5']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c5']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c5']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c5']?.toFixed(2) },
+      { valueOne: 'C6', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c6']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c6']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c6']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c6']?.toFixed(2) },
+      { valueOne: 'C7', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c7']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c7']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c7']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c7']?.toFixed(2) },
+      { valueOne: 'C8', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c8']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c8']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c8']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c8']?.toFixed(2) },
+      { valueOne: 'C9', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c9']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c9']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c9']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c9']?.toFixed(2) },
+      { valueOne: 'C10', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c10']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c10']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c10']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c10']?.toFixed(2) },
+      { valueOne: 'C11', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c11']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c11']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c11']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c11']?.toFixed(2) },
+      { valueOne: 'C12', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c12']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c12']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c12']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c12']?.toFixed(2) },
+      { valueOne: 'C13', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c13']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c13']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c13']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c13']?.toFixed(2) },
+      { valueOne: 'C14', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c14']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c14']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c14']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c14']?.toFixed(2) },
+      { valueOne: 'C15', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c15']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c15']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c15']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c15']?.toFixed(2) },
+      { valueOne: 'C16', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.mediana['c16']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.mediana['c16']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.mediana['c16']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.mediana['c16']?.toFixed(2) }
     ];
 
     optionVitalSignsthree = {
@@ -1031,7 +1037,7 @@ export default function StadisticsPatientMedic() {
             emphasis: {
               focus: 'series'
             },
-            data: dataVitalSignsthree.map(item => item.valueFour),
+            data: dataVitalSignsthree.map(item => item.valueFive),
             animationDelay: function (idx) {
               return idx * 15;
             }
@@ -1062,22 +1068,22 @@ export default function StadisticsPatientMedic() {
     let optionVitalSignsthree;
 
     const dataVitalSignsthree = [
-      { valueOne: 'C1', valueTwo: 120, valueThree: 80, valueFour: 70 },
-      { valueOne: 'C2', valueTwo: 23, valueThree: 10, valueFour: 25 },
-      { valueOne: 'C3', valueTwo: 20, valueThree: 8, valueFour: 10 },
-      { valueOne: 'C4', valueTwo: 30, valueThree: 15, valueFour: 32 },
-      { valueOne: 'C5', valueTwo: 29, valueThree: 9, valueFour: 19 },
-      { valueOne: 'C6', valueTwo: 21, valueThree: 6, valueFour: 20 },
-      { valueOne: 'C7', valueTwo: 25, valueThree: 20, valueFour: 15 },
-      { valueOne: 'C8', valueTwo: 20, valueThree: 10, valueFour: 15 },
-      { valueOne: 'C9', valueTwo: 45, valueThree: 22, valueFour: 39 },
-      { valueOne: 'C10', valueTwo: 50, valueThree: 40, valueFour: 40 },
-      { valueOne: 'C11', valueTwo: 35, valueThree: 32, valueFour: 45 },
-      { valueOne: 'C12', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C13', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C14', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C15', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C16', valueTwo: 5, valueThree: 2, valueFour: 52 }
+      { valueOne: 'C1', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c1']?.toFixed(2), valueThree:selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c1']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c1']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c1']?.toFixed(2) },
+      { valueOne: 'C2', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c2']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c2']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c2']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c2']?.toFixed(2) },
+      { valueOne: 'C3', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c3']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c3']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c3']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c3']?.toFixed(2) },
+      { valueOne: 'C4', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c4']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c4']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c4']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c4']?.toFixed(2) },
+      { valueOne: 'C5', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c5']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c5']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c5']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c5']?.toFixed(2) },
+      { valueOne: 'C6', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c6']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c6']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c6']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c6']?.toFixed(2) },
+      { valueOne: 'C7', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c7']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c7']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c7']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c7']?.toFixed(2) },
+      { valueOne: 'C8', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c8']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c8']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c8']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c8']?.toFixed(2) },
+      { valueOne: 'C9', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c9']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c9']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c9']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c9']?.toFixed(2) },
+      { valueOne: 'C10', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c10']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c10']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c10']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c10']?.toFixed(2) },
+      { valueOne: 'C11', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c11']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c11']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c11']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c11']?.toFixed(2) },
+      { valueOne: 'C12', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c12']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c12']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c12']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c12']?.toFixed(2) },
+      { valueOne: 'C13', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c13']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c13']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c13']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c13']?.toFixed(2) },
+      { valueOne: 'C14', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c14']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c14']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c14']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c14']?.toFixed(2) },
+      { valueOne: 'C15', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c15']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c15']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c15']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c15']?.toFixed(2) },
+      { valueOne: 'C16', valueTwo: selectCompleteDate?.analisis_senal_activo?.general?.varianza['c16']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_activo?.theta?.varianza['c16']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_activo?.alpha?.varianza['c16']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_activo?.beta?.varianza['c16']?.toFixed(2) }
     ];
 
     optionVitalSignsthree = {
@@ -1534,7 +1540,7 @@ export default function StadisticsPatientMedic() {
             emphasis: {
               focus: 'series'
             },
-            data: dataVitalSignsthree.map(item => item.valueFour),
+            data: dataVitalSignsthree.map(item => item.valueFive),
             animationDelay: function (idx) {
               return idx * 15;
             }
@@ -1569,22 +1575,22 @@ export default function StadisticsPatientMedic() {
     let optionVitalSignsthree;
 
     const dataVitalSignsthree = [
-      { valueOne: 'C1', valueTwo: 120, valueThree: 80, valueFour: 70 },
-      { valueOne: 'C2', valueTwo: 23, valueThree: 10, valueFour: 25 },
-      { valueOne: 'C3', valueTwo: 20, valueThree: 8, valueFour: 10 },
-      { valueOne: 'C4', valueTwo: 30, valueThree: 15, valueFour: 32 },
-      { valueOne: 'C5', valueTwo: 29, valueThree: 9, valueFour: 19 },
-      { valueOne: 'C6', valueTwo: 21, valueThree: 6, valueFour: 20 },
-      { valueOne: 'C7', valueTwo: 25, valueThree: 20, valueFour: 15 },
-      { valueOne: 'C8', valueTwo: 20, valueThree: 10, valueFour: 15 },
-      { valueOne: 'C9', valueTwo: 45, valueThree: 22, valueFour: 39 },
-      { valueOne: 'C10', valueTwo: 50, valueThree: 40, valueFour: 40 },
-      { valueOne: 'C11', valueTwo: 35, valueThree: 32, valueFour: 45 },
-      { valueOne: 'C12', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C13', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C14', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C15', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C16', valueTwo: 5, valueThree: 2, valueFour: 52 }
+      { valueOne: 'C1', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c1']?.toFixed(2), valueThree:selectCompleteDate?.analisis_senal_reposo?.theta?.media['c1']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c1']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c1']?.toFixed(2) },
+      { valueOne: 'C2', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c2']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c2']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c2']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c2']?.toFixed(2) },
+      { valueOne: 'C3', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c3']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c3']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c3']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c3']?.toFixed(2) },
+      { valueOne: 'C4', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c4']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c4']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c4']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c4']?.toFixed(2) },
+      { valueOne: 'C5', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c5']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c5']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c5']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c5']?.toFixed(2) },
+      { valueOne: 'C6', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c6']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c6']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c6']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c6']?.toFixed(2) },
+      { valueOne: 'C7', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c7']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c7']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c7']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c7']?.toFixed(2) },
+      { valueOne: 'C8', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c8']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c8']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c8']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c8']?.toFixed(2) },
+      { valueOne: 'C9', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c9']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c9']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c9']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c9']?.toFixed(2) },
+      { valueOne: 'C10', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c10']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c10']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c10']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c10']?.toFixed(2) },
+      { valueOne: 'C11', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c11']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c11']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c11']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c11']?.toFixed(2) },
+      { valueOne: 'C12', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c12']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c12']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c12']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c12']?.toFixed(2) },
+      { valueOne: 'C13', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c13']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c13']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c13']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c13']?.toFixed(2) },
+      { valueOne: 'C14', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c14']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c14']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c14']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c14']?.toFixed(2) },
+      { valueOne: 'C15', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c15']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c15']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c15']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c15']?.toFixed(2) },
+      { valueOne: 'C16', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.media['c16']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.media['c16']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.media['c16']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.media['c16']?.toFixed(2) }
     ];
 
     optionVitalSignsthree = {
@@ -2041,7 +2047,7 @@ export default function StadisticsPatientMedic() {
             emphasis: {
               focus: 'series'
             },
-            data: dataVitalSignsthree.map(item => item.valueFour),
+            data: dataVitalSignsthree.map(item => item.valueFive),
             animationDelay: function (idx) {
               return idx * 15;
             }
@@ -2071,22 +2077,22 @@ export default function StadisticsPatientMedic() {
     let optionVitalSignsthree;
 
     const dataVitalSignsthree = [
-      { valueOne: 'C1', valueTwo: 120, valueThree: 80, valueFour: 70 },
-      { valueOne: 'C2', valueTwo: 23, valueThree: 10, valueFour: 25 },
-      { valueOne: 'C3', valueTwo: 20, valueThree: 8, valueFour: 10 },
-      { valueOne: 'C4', valueTwo: 30, valueThree: 15, valueFour: 32 },
-      { valueOne: 'C5', valueTwo: 29, valueThree: 9, valueFour: 19 },
-      { valueOne: 'C6', valueTwo: 21, valueThree: 6, valueFour: 20 },
-      { valueOne: 'C7', valueTwo: 25, valueThree: 20, valueFour: 15 },
-      { valueOne: 'C8', valueTwo: 20, valueThree: 10, valueFour: 15 },
-      { valueOne: 'C9', valueTwo: 45, valueThree: 22, valueFour: 39 },
-      { valueOne: 'C10', valueTwo: 50, valueThree: 40, valueFour: 40 },
-      { valueOne: 'C11', valueTwo: 35, valueThree: 32, valueFour: 45 },
-      { valueOne: 'C12', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C13', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C14', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C15', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C16', valueTwo: 5, valueThree: 2, valueFour: 52 }
+      { valueOne: 'C1', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c1']?.toFixed(2), valueThree:selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c1']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c1']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c1']?.toFixed(2) },
+      { valueOne: 'C2', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c2']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c2']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c2']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c2']?.toFixed(2) },
+      { valueOne: 'C3', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c3']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c3']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c3']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c3']?.toFixed(2) },
+      { valueOne: 'C4', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c4']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c4']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c4']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c4']?.toFixed(2) },
+      { valueOne: 'C5', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c5']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c5']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c5']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c5']?.toFixed(2) },
+      { valueOne: 'C6', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c6']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c6']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c6']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c6']?.toFixed(2) },
+      { valueOne: 'C7', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c7']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c7']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c7']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c7']?.toFixed(2) },
+      { valueOne: 'C8', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c8']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c8']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c8']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c8']?.toFixed(2) },
+      { valueOne: 'C9', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c9']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c9']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c9']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c9']?.toFixed(2) },
+      { valueOne: 'C10', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c10']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c10']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c10']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c10']?.toFixed(2) },
+      { valueOne: 'C11', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c11']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c11']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c11']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c11']?.toFixed(2) },
+      { valueOne: 'C12', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c12']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c12']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c12']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c12']?.toFixed(2) },
+      { valueOne: 'C13', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c13']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c13']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c13']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c13']?.toFixed(2) },
+      { valueOne: 'C14', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c14']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c14']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c14']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c14']?.toFixed(2) },
+      { valueOne: 'C15', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c15']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c15']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c15']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c15']?.toFixed(2) },
+      { valueOne: 'C16', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.mediana['c16']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.mediana['c16']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.mediana['c16']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.mediana['c16']?.toFixed(2) }
     ];
 
     optionVitalSignsthree = {
@@ -2543,7 +2549,7 @@ export default function StadisticsPatientMedic() {
             emphasis: {
               focus: 'series'
             },
-            data: dataVitalSignsthree.map(item => item.valueFour),
+            data: dataVitalSignsthree.map(item => item.valueFive),
             animationDelay: function (idx) {
               return idx * 15;
             }
@@ -2573,23 +2579,23 @@ export default function StadisticsPatientMedic() {
     let chartVitalSignsthree = echarts.init(document.getElementById('chart-vital-sign-nine-'));
     let optionVitalSignsthree;
 
-    const dataVitalSignsthree = [
-      { valueOne: 'C1', valueTwo: 120, valueThree: 80, valueFour: 70 },
-      { valueOne: 'C2', valueTwo: 23, valueThree: 10, valueFour: 25 },
-      { valueOne: 'C3', valueTwo: 20, valueThree: 8, valueFour: 10 },
-      { valueOne: 'C4', valueTwo: 30, valueThree: 15, valueFour: 32 },
-      { valueOne: 'C5', valueTwo: 29, valueThree: 9, valueFour: 19 },
-      { valueOne: 'C6', valueTwo: 21, valueThree: 6, valueFour: 20 },
-      { valueOne: 'C7', valueTwo: 25, valueThree: 20, valueFour: 15 },
-      { valueOne: 'C8', valueTwo: 20, valueThree: 10, valueFour: 15 },
-      { valueOne: 'C9', valueTwo: 45, valueThree: 22, valueFour: 39 },
-      { valueOne: 'C10', valueTwo: 50, valueThree: 40, valueFour: 40 },
-      { valueOne: 'C11', valueTwo: 35, valueThree: 32, valueFour: 45 },
-      { valueOne: 'C12', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C13', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C14', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C15', valueTwo: 5, valueThree: 2, valueFour: 52 },
-      { valueOne: 'C16', valueTwo: 5, valueThree: 2, valueFour: 52 }
+    const dataVitalSignsthree =[
+      { valueOne: 'C1', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c1']?.toFixed(2), valueThree:selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c1']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c1']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c1']?.toFixed(2) },
+      { valueOne: 'C2', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c2']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c2']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c2']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c2']?.toFixed(2) },
+      { valueOne: 'C3', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c3']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c3']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c3']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c3']?.toFixed(2) },
+      { valueOne: 'C4', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c4']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c4']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c4']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c4']?.toFixed(2) },
+      { valueOne: 'C5', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c5']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c5']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c5']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c5']?.toFixed(2) },
+      { valueOne: 'C6', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c6']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c6']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c6']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c6']?.toFixed(2) },
+      { valueOne: 'C7', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c7']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c7']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c7']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c7']?.toFixed(2) },
+      { valueOne: 'C8', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c8']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c8']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c8']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c8']?.toFixed(2) },
+      { valueOne: 'C9', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c9']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c9']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c9']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c9']?.toFixed(2) },
+      { valueOne: 'C10', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c10']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c10']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c10']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c10']?.toFixed(2) },
+      { valueOne: 'C11', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c11']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c11']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c11']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c11']?.toFixed(2) },
+      { valueOne: 'C12', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c12']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c12']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c12']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c12']?.toFixed(2) },
+      { valueOne: 'C13', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c13']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c13']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c13']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c13']?.toFixed(2) },
+      { valueOne: 'C14', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c14']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c14']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c14']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c14']?.toFixed(2) },
+      { valueOne: 'C15', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c15']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c15']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c15']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c15']?.toFixed(2) },
+      { valueOne: 'C16', valueTwo: selectCompleteDate?.analisis_senal_reposo?.general?.varianza['c16']?.toFixed(2), valueThree: selectCompleteDate?.analisis_senal_reposo?.theta?.varianza['c16']?.toFixed(2), valueFour: selectCompleteDate?.analisis_senal_reposo?.alpha?.varianza['c16']?.toFixed(2) ,valueFive: selectCompleteDate?.analisis_senal_reposo?.beta?.varianza['c16']?.toFixed(2) }
     ];
 
     optionVitalSignsthree = {
@@ -3046,7 +3052,7 @@ export default function StadisticsPatientMedic() {
             emphasis: {
               focus: 'series'
             },
-            data: dataVitalSignsthree.map(item => item.valueFour),
+            data: dataVitalSignsthree.map(item => item.valueFive),
             animationDelay: function (idx) {
               return idx * 15;
             }
@@ -3118,16 +3124,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium orangeV3'>C1</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>19</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3135,16 +3141,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C2</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>23</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3152,16 +3158,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C3</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3169,16 +3175,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C4</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>30</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3186,16 +3192,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C5</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>29</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3203,16 +3209,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C6</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>21</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3220,16 +3226,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C7</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>25</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3237,16 +3243,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C8</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3254,16 +3260,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C9</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>45</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3271,16 +3277,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C10</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>50</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3288,16 +3294,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C11</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>35</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3305,16 +3311,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C12</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3322,16 +3328,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C13</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3339,16 +3345,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C14</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3356,16 +3362,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C15</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3373,16 +3379,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C16</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -3430,16 +3436,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium orangeV3'>C1</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>19</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3447,16 +3453,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C2</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>23</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3464,16 +3470,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C3</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3481,16 +3487,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C4</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>30</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3498,16 +3504,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C5</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>29</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3515,16 +3521,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C6</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>21</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3532,16 +3538,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C7</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>25</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3549,16 +3555,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C8</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3566,16 +3572,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C9</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>45</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3583,16 +3589,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C10</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>50</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3600,16 +3606,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C11</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>35</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3617,16 +3623,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C12</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3634,16 +3640,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C13</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3651,16 +3657,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C14</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3668,16 +3674,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C15</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3685,16 +3691,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C16</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.general?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.theta?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_activo?.alpha?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_activo?.beta?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -3702,12 +3708,6 @@ export default function StadisticsPatientMedic() {
                                     </div>
                                 </div>
                 </div>
-                
-                {/* <div className='card-body p-4 w-100' style={{'width':'100%','height':'400px'}}>
-                    <div className='w-100 h-100 mx-auto' id='chart-adverse-events-one-' style={{'width':'100%','height':'400px'}}></div>
-                </div> */}
-                
-
                 <div className='d-flex flex-row justify-content-between align-items-center align-self-center mb-1' style={{'marginTop':'20px'}}>
                     <h5 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- font_medium white'>
                         Medidas de tendencia 
@@ -3770,16 +3770,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium orangeV3'>C1</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>19</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c1']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3787,16 +3787,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C2</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>23</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c2']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3804,16 +3804,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C3</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c3']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3821,16 +3821,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C4</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>30</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c4']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3838,16 +3838,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C5</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>29</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c5']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3855,16 +3855,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C6</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>21</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c6']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3872,16 +3872,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C7</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>25</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c7']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3889,16 +3889,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C8</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c8']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3906,16 +3906,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C9</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>45</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c9']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3923,16 +3923,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C10</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>50</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c10']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3940,16 +3940,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C11</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>35</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c11']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3957,16 +3957,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C12</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c12']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3974,16 +3974,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C13</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c13']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -3991,16 +3991,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C14</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c14']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4008,16 +4008,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C15</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c15']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4025,16 +4025,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C16</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.maximo['c16']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -4082,16 +4082,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium orangeV3'>C1</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>19</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c1']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4099,16 +4099,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C2</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>23</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c2']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4116,16 +4116,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C3</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c3']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4133,16 +4133,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C4</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>30</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c4']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4150,16 +4150,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C5</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>29</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c5']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4167,16 +4167,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C6</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>21</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c6']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4184,16 +4184,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C7</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>25</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c7']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4201,16 +4201,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C8</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>20</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c8']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4218,16 +4218,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C9</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>45</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c9']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4235,16 +4235,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C10</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>50</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c10']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4252,16 +4252,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C11</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>35</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center '>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c11']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4269,16 +4269,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C12</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c12']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4286,16 +4286,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C13</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c13']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4303,16 +4303,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C14</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c14']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4320,16 +4320,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C15</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c15']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -4337,16 +4337,16 @@ export default function StadisticsPatientMedic() {
                                             <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center orangeV3'>C16</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>5</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.general?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>10</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.theta?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{selectCompleteDate?.analisis_senal_reposo?.alpha?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                             <td className='align-middle'>
-                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>0.28%</p>
+                                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center font_medium'>{selectCompleteDate?.analisis_senal_reposo?.beta?.minimo['c16']?.toFixed(2)}</p>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -4392,10 +4392,8 @@ export default function StadisticsPatientMedic() {
                         </div>
                 </div>
 
-                <div className='d-flex flex-row justify-content-between align-items-center align-self-center mb-1' style={{'marginTop':'20px'}}>
-                    <h5 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- font_medium white'>
-                        Visualiza el pdf asociado 
-                    </h5>
+                <div onClick={()=>window.open(selectCompleteDate?.documento_topoplot_test)}  className='ButtonElement'style={{'marginBottom':'80px'}}>
+                                <span  className='ButtonText'>Visualizar pdf</span>
                 </div>
             </div>
             
