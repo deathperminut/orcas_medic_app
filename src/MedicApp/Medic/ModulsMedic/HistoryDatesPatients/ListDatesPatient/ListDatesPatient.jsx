@@ -21,10 +21,13 @@ export default function ListDatesPatient() {
 
     /* USESTATE */
     let [preloader,setPreloader] = React.useState(false);
-    let [dates,setDates] = React.useState(datesPatient);
+    let [dates,setDates] = React.useState([]);
 
     React.useEffect(()=>{
-        setDates(datesPatient.reverse());
+        if(dates.length == 0){
+            setDates(datesPatient.reverse());
+        }
+        
     },[datesPatient])
 
 
@@ -111,7 +114,7 @@ export default function ListDatesPatient() {
         
     },[pageIndex,ListReference])
 
-    
+
 
 
   return (
@@ -129,6 +132,9 @@ export default function ListDatesPatient() {
           <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
             <div className='card border-0 rounded-0 w-100 bg-transparent'>
               <div className='card-body p-0 w-100'>
+                <div className='ButtonElement' style={{'marginBottom':'80px'}}>
+                                    <span  className='ButtonText'>Ver historia</span>
+                </div>
                 <div className='table-responsive table-general-'>
                   <table id='table-medication-' className='table table-sm table-striped table-no-border- align-middle'>
                     <thead>
