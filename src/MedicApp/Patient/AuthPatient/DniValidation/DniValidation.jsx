@@ -100,7 +100,7 @@ return (
                 <></>
         } 
         <div className='formContainer'>
-                <form className='FormRecovery'>
+                <div className='FormRecovery'>
                         <img src={logo} width={80}></img>
                         <p className='TitleLogin'>Ingrese su cédula para poder acceder a su historial clínico.</p>
                         <div className='inputContainer'>
@@ -116,7 +116,7 @@ return (
                                 <span  className='ButtonTextV2'>Volver</span>
                         </div> 
                         
-                    </form>
+                </div>
             </div>
      </div>
   )

@@ -6,7 +6,11 @@ import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import Swal from 'sweetalert2';
+import { AppContext } from '../../../../../context';
+import Preloader from '../../../../../components/Preloader/Preloader';
 import makeAnimated from 'react-select/animated';
+import { GetPatientCompleteDates } from '../../../../../Services/MainApp/Users/User';
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -318,10 +322,72 @@ const weekDays = [
 
 export default function Validation_history() {
 
+  /* APPCONTEXT */
+
+  let {userData,token} = React.useContext(AppContext);
+
+  /* useStates */
+
+  let [dniUser,setDniUser] = React.useState("");
+  let [preloader,setPreloader] = React.useState(false);
+
+  const ReadInputText=(event)=>{
+
+    setDniUser(event.target.value);
+
+  }
+
+
+  const consultPatient= async()=>{
+
+    if(dniUser ==""){
+      Swal.fire({
+        icon: 'info',
+        title: 'Debes ingresar un número de cédula para consultar'
+      })
+    }else{
+
+      let result  = undefined;
+      setPreloader(true);
+      
+      result = await GetPatientCompleteDates(userData?.identificacion,token).catch((error)=>{
+        console.log(error);
+        setPreloader(false);
+        Swal.fire({
+          icon: 'info',
+          title: 'Problemas para cargar la información del paciente'
+        })
+      })
+
+      if(result){
+        console.log(result.data);
+        setPreloader(false);
+        Swal.fire({
+          icon: 'info',
+          title: 'Datos cargado exitosamente'
+        })
+
+      }
+
+    }
+
+  }
+
+
+
     let navigate = useNavigate()
 
     return (
-        <React.Fragment>
+      <React.Fragment>
+      {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+      }
       <div className='row mt-4 mb-4'>
         <div className='col-12'>
           <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Consultar paciente</h2>
@@ -334,7 +400,7 @@ export default function Validation_history() {
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                 <div className='form-floating inner-addon- left-addon-'>
-                  <input type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
+                  <input onChange={ReadInputText} type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
                   <label className='fs-5- ff-monse-regular- white font_medium'>C.C</label>
                 </div>
               </div>

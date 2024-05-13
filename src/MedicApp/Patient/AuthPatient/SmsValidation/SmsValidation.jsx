@@ -108,7 +108,7 @@ export default function SmsValidation() {
                 <></>
                 } 
                                 <div className='formContainer'>
-                                                <form className='FormRecovery'>
+                                                <div className='FormRecovery'>
                                                         <img src={logo} width={80}></img>
                                                         <p className='TitleLogin'>Ingrese el código enviado a su correo electronico y número de telefono para completar el ingreso</p>
                                                         <div className='inputContainer'>
@@ -124,7 +124,7 @@ export default function SmsValidation() {
                                                                 <span  className='ButtonTextV2'>Volver</span>
                                                         </div> 
                                                         
-                                                </form>
+                                                </div>
                                 </div>
                 </div>
         )
