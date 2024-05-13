@@ -1,0 +1,62 @@
+
+
+.ContainerGraph{
+    width: 100%;
+    min-height: 500px;
+}
+.orangeV3{
+    color:#d1a207 !important;
+}
+
+.topoplotsContainer{
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.topoplotContainer{
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    background-color: white;
+    margin: 10px;
+    transition: 1s transform;
+    cursor: pointer;
+}
+.topoplotContainer:hover{
+
+    transform: scale(1.05);
+    border: 1px solid #d1a207;
+
+}
+
+.topoplot{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.nameTopoplot{
+    position: relative;
+    color: black;
+    left: 20px;
+    bottom: 30px;
+}
+
+
+/* movile screens */
+
+@media (max-width:600px) {
+
+    .topoplotsContainer{
+        width: 100%;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

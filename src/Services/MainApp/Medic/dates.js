@@ -16,6 +16,23 @@ const GetDatesMedic=async (identificacion,token)=>{
 }
 
 
+const GetPdfPatient=async(identificacion,token)=>{
+    const path  = environment.api + environment.pdf_patient;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+
+    let body={
+        'identificacion':identificacion
+    }
 
 
-export {GetDatesMedic}
+    return await axios.post(path,body,config);
+}
+
+
+
+
+export {GetDatesMedic,GetPdfPatient}

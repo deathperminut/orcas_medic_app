@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import Preloader from '../../../../../components/Preloader/Preloader';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 import { FaEye } from "react-icons/fa";
+import { GetPdfPatient } from '../../../../../Services/MainApp/Medic/dates';
 require('jquery-mousewheel');
 
 export default function ListDatesPatient() {
@@ -17,7 +18,7 @@ export default function ListDatesPatient() {
   let navigate=useNavigate()
   
   /* APP CONTEXT */
-  let {userData,token,selectCompleteDate,setSelectCompleteDate,datesPatient} = React.useContext(AppContext);
+  let {userHistoryDni,userData,token,selectCompleteDate,setSelectCompleteDate,datesPatient} = React.useContext(AppContext);
 
     /* USESTATE */
     let [preloader,setPreloader] = React.useState(false);
@@ -115,6 +116,33 @@ export default function ListDatesPatient() {
     },[pageIndex,ListReference])
 
 
+    const seeHistoryPdf=async()=>{
+
+        /* load history pdf */
+
+        let result =  undefined;
+        setPreloader(true);
+        result = await GetPdfPatient(userHistoryDni,token).catch((error)=>{
+            console.log(error);
+            setPreloader(false);
+            Swal.fire({
+                icon: 'info',
+                title: 'Problemas para cargar el pdf.'
+            })
+        })
+
+        if(result){
+            console.log(result.data);
+            setPreloader(false);
+            Swal.fire({
+                icon: 'success',
+                title: 'Pdf generado correctamente'
+            })
+        }
+        
+    }
+
+
 
 
   return (
@@ -132,7 +160,7 @@ export default function ListDatesPatient() {
           <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
             <div className='card border-0 rounded-0 w-100 bg-transparent'>
               <div className='card-body p-0 w-100'>
-                <div className='ButtonElement' style={{'marginBottom':'80px'}}>
+                <div onClick={seeHistoryPdf} className='ButtonElement' style={{'marginBottom':'80px'}}>
                                     <span  className='ButtonText'>Ver historia</span>
                 </div>
                 <div className='table-responsive table-general-'>
@@ -188,10 +216,10 @@ export default function ListDatesPatient() {
                                 <p  className='p-0 text-center input-large- white font_medium'>
                                 <FaEye onClick={()=>{
                                   // Guardamos el objeto en el Context
-                                  //setSelectCompleteDate(obj)
+                                  setSelectCompleteDate(obj)
                                   //Redirigimos a la pestaña correspondiente
-                                  //navigate('/ModulsPatient/HistoryDates/StadisticsDate/')
-                                  window.open(obj?.documento_topoplot_test)
+                                  navigate('/ModulsMedic/HistoryDatesPatients/StadisticsPatientMedic')
+                                  //window.open(obj?.documento_topoplot_test)
                                   
                                 }} cursor={'pointer'} color='white'/>
                                 </p>
