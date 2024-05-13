@@ -324,7 +324,7 @@ export default function Validation_history() {
 
   /* APPCONTEXT */
 
-  let {userData,token} = React.useContext(AppContext);
+  let {userData,token,datesPatient,setDatesPatient,userHistoryDni,setUserHistoryDni} = React.useContext(AppContext);
 
   /* useStates */
 
@@ -349,8 +349,8 @@ export default function Validation_history() {
 
       let result  = undefined;
       setPreloader(true);
-      
-      result = await GetPatientCompleteDates(userData?.identificacion,token).catch((error)=>{
+      console.log("DATOS : ",userData?.identificacion)
+      result = await GetPatientCompleteDates(dniUser,token).catch((error)=>{
         console.log(error);
         setPreloader(false);
         Swal.fire({
@@ -361,11 +361,32 @@ export default function Validation_history() {
 
       if(result){
         console.log(result.data);
-        setPreloader(false);
-        Swal.fire({
-          icon: 'info',
-          title: 'Datos cargado exitosamente'
-        })
+        if(result.data.length == 0){
+          setPreloader(false);
+          Swal.fire({
+            icon: 'info',
+            title: 'No hay citas registradas para este número de identificación.'
+          })
+        }else{
+          setPreloader(false);
+          Swal.fire({
+            icon: 'success',
+            title: 'Historial cargado.'
+          }).then((r)=>{
+            if(r.isConfirmed){
+              setUserHistoryDni(dniUser);
+              setDatesPatient(result.data);
+              navigate('/ModulsMedic/HistoryDatesPatients/ListPatientDates')
+            }else{
+              setUserHistoryDni(dniUser);
+              setDatesPatient(result.data);
+              navigate('/ModulsMedic/HistoryDatesPatients/ListPatientDates')
+            }
+          })
+          //navigate('/ModulsMedic/HistoryDatesPatients/History')
+        }
+        
+        
 
       }
 
@@ -405,7 +426,7 @@ export default function Validation_history() {
                 </div>
               </div>
             </div>
-            <div onClick={()=>navigate('/ModulsMedic/HistoryDatesPatients/History')}  className='ButtonElement'>
+            <div onClick={consultPatient}  className='ButtonElement'>
                                 <span  className='ButtonText'>Consultar</span>
             </div>
           </form>

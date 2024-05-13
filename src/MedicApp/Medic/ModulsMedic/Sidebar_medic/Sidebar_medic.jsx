@@ -13,13 +13,14 @@ export default function Sidebar_medic() {
   let {userData,setUserData,setToken}  = React.useContext(AppContext);
 
   /* USE CONTEXT */
-  $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-      $('#sidebar-, #content-').toggleClass('active');
-    });
-  });
+  
 
   React.useEffect(()=>{
+    $(document).ready(function () {
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar-, #content-').toggleClass('active');
+      });
+    });
     $('#sidebar-').mCustomScrollbar({
       theme: "minimal",
       mouseWheel:{

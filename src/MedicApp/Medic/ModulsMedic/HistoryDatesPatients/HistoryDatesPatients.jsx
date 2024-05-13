@@ -6,6 +6,7 @@ import Validation_history from './Validation_history/Validation_history';
 import History_pdf from './History_pdf/History_pdf';
 import Appointment from '../Date/Appointment/Appointment';
 import Appointment_validation from '../Date/Appointment_validation/Appointment_validation';
+import ListDatesPatient from './ListDatesPatient/ListDatesPatient';
 
 export default function HistoryDatesPatients() {
 
@@ -66,6 +67,7 @@ export default function HistoryDatesPatients() {
               <Route path="" element={ <Navigate to="Validation" /> }/>
               <Route path="Validation/*" element={<Appointment_validation/>} />
               <Route path="History/*" element={<Appointment/>} />
+              <Route path="ListPatientDates/*" element={<Appointment/>} />
             </Routes>
         </div>
         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 bg-gray'>
@@ -74,6 +76,7 @@ export default function HistoryDatesPatients() {
             <Routes>
               <Route path="" element={ <Navigate to="Validation" /> }/>
               <Route path="Validation/*" element={<Validation_history/>} />
+              <Route path="ListPatientDates/*" element={<ListDatesPatient/>}/>
               <Route path="History/*" element={<History_pdf/>} />
             </Routes>
             </div>
