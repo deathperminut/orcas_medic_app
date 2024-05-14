@@ -3079,6 +3079,9 @@ export default function StadisticsPatientMedic() {
     return (
         <React.Fragment>
             <div className='ContainerGraph'>
+                <div onClick={()=>navigate('/ModulsMedic/HistoryDatesPatients/ListPatientDates/')}  className='ButtonElement'style={{'marginBottom':'80px'}}>
+                                <span  className='ButtonText'>Regresar</span>
+                </div>
                 <div className='d-flex flex-row justify-content-between align-items-center align-self-center mb-1'>
                         <h1 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- font_medium white orangeV3'>
                             Análisis señal activa

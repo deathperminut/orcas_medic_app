@@ -25,11 +25,9 @@ export default function ListDatesPatient() {
     let [dates,setDates] = React.useState([]);
 
     React.useEffect(()=>{
-        if(dates.length == 0){
-            setDates(datesPatient.reverse());
-        }
-        
-    },[datesPatient])
+      console.log("DAtES PATIENT",);
+      setDates([...datesPatient].reverse());
+    },[])
 
 
 

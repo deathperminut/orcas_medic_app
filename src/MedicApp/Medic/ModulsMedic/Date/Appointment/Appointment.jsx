@@ -245,7 +245,7 @@ export default function Appointment() {
                                           </div>
                                         </div>
                                         <div className='d-grid gap-3 d-flex flex-row justify-content-between align-items-center align-self-center mt-3 ps-4 pe-1'>
-                                          <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{GetDataHour(obj?.hora_inicio)[0]}</span> / <span className='fw-normal '>{GetDataHour(obj?.hora_inicio)[1]}</span></p>
+                                          <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{GetDataHour(obj?.cita_id?.fecha_realizacion_consulta)[0]}</span> / <span className='fw-normal '>{GetDataHour(obj?.cita_id?.fecha_realizacion_consulta)[1]}</span></p>
                                           <a className='btn bg-transparent btn-transparent- p-0' data-bs-toggle="collapse" href={"#collapseExample"+index} role="button" aria-expanded="false" aria-controls={"collapseExample"+index}>
                                           <p className='p-0 m-0 lh-sm fs-6- ff-monse-regular- tx-neutral-purple- white'>Detalles</p>
                                           </a>
