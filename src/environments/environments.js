@@ -25,7 +25,13 @@ export const environment = {
     // PATIENT DATES
     patient_next_dates:'agendamiento/retornar-proximas-citas-paciente/',
     patient_complete_dates:'historia-clinica/retornar-cita-paciente/',
-    pdf_patient:'historia-clinica/consultar-historia-clinica/'
+    pdf_patient:'historia-clinica/consultar-historia-clinica/',
 
+    // INDICADORES
+    'test_general':'indicadores/retornar-test-general/',
+    'test_ansiedad':'indicadores/retornar-test-ansiedad/',
+    'test_depresion':'indicadores/retornar-test-depresion/',
+    'test_estres':'indicadores/retornar-test-estres/'
+    
 
 }

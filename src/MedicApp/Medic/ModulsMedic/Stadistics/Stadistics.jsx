@@ -38,7 +38,7 @@ export default function Stadistics() {
     <div className='container-fluid overflow-x-hidden'>
       <div className='row'>
         <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-3- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Cita médica</h2>
+          <h2 className='m-0 p-0 lh-sm fs-3- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Indicadores</h2>
         </div>
       </div>
       <div className='row mt-4'>

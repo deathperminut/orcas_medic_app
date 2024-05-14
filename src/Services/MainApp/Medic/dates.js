@@ -32,7 +32,61 @@ const GetPdfPatient=async(identificacion,token)=>{
     return await axios.post(path,body,config);
 }
 
+/* INDICADORES */
+const GetGeneralIndicators=async(body,token)=>{
+    const path  = environment.api + environment.test_general;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
 
 
 
-export {GetDatesMedic,GetPdfPatient}
+    return await axios.post(path,body,config);
+}
+
+const GetAnsiedadIndicators=async(body,token)=>{
+    const path  = environment.api + environment.test_ansiedad;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+
+
+
+    return await axios.post(path,body,config);
+}
+
+const GetDepresionIndicators=async(body,token)=>{
+    const path  = environment.api + environment.test_depresion;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+
+
+
+    return await axios.post(path,body,config);
+}
+
+const GetEstresIndicators=async(body,token)=>{
+    const path  = environment.api + environment.test_estres;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+
+
+
+    return await axios.post(path,body,config);
+}
+
+
+
+
+
+export {GetDatesMedic,GetPdfPatient,GetGeneralIndicators,GetAnsiedadIndicators,GetDepresionIndicators,GetEstresIndicators}
