@@ -31,7 +31,10 @@ export const environment = {
     'test_general':'indicadores/retornar-test-general/',
     'test_ansiedad':'indicadores/retornar-test-ansiedad/',
     'test_depresion':'indicadores/retornar-test-depresion/',
-    'test_estres':'indicadores/retornar-test-estres/'
-    
+    'test_estres':'indicadores/retornar-test-estres/',
+
+    // HISTORIA CLINICA
+
+    create_antescedentes:''
 
 }

@@ -175,7 +175,7 @@ export default function Appointment() {
             <div className='col-12'>
               <ul className='nav nav-pills d-flex flex-row justify-content-between' role="tablist">
                 <li className='nav-item' role="presentation">
-                  <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#scheduling" type="button" role="tab" aria-controls="scheduling" aria-selected="true"> <span className='ff-monse-regular- me-2'>Información paciente</span></button>
+                  <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#scheduling" type="button" role="tab" aria-controls="scheduling" aria-selected="true"> <span className='ff-monse-regular- me-2'>Información</span></button>
                 </li>
               </ul>
             </div>
@@ -245,7 +245,7 @@ export default function Appointment() {
                                           </div>
                                         </div>
                                         <div className='d-grid gap-3 d-flex flex-row justify-content-between align-items-center align-self-center mt-3 ps-4 pe-1'>
-                                          <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{GetDataHour(obj?.cita_id?.fecha_realizacion_consulta)[0]}</span> / <span className='fw-normal '>{GetDataHour(obj?.cita_id?.fecha_realizacion_consulta)[1]}</span></p>
+                                          <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{ obj?.hora_inicio!== null ?  GetDataHour(obj?.hora_inicio)[0]: ""}</span> / <span className='fw-normal '>{obj?.hora_inicio !== null ?  GetDataHour(obj?.hora_inicio)[1] : ""}</span></p>
                                           <a className='btn bg-transparent btn-transparent- p-0' data-bs-toggle="collapse" href={"#collapseExample"+index} role="button" aria-expanded="false" aria-controls={"collapseExample"+index}>
                                           <p className='p-0 m-0 lh-sm fs-6- ff-monse-regular- tx-neutral-purple- white'>Detalles</p>
                                           </a>
