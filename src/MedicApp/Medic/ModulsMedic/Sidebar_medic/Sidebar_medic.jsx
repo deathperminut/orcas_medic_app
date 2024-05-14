@@ -1,6 +1,7 @@
 import './Sidebar_medic.css'
 import LogoMedical from '../../../../Assets/img/O60PtOwA_400x400__1_-removebg-preview.png';
 import React from 'react'
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import { NavLink } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
 import $ from "jquery"
@@ -9,8 +10,10 @@ import { AppContext } from '../../../../context';
 
 export default function Sidebar_medic() {
 
+  let navigate = useNavigate()
+
   /* APP CONTEXT */
-  let {userData,setUserData,setToken}  = React.useContext(AppContext);
+  let {userData,setUserData,setToken,token}  = React.useContext(AppContext);
 
   /* USE CONTEXT */
   
@@ -31,6 +34,13 @@ export default function Sidebar_medic() {
       mouseWheelPixels: 100
     });
   },[])
+
+  React.useEffect(()=>{
+    if(!token){
+      navigate('/Auth/Login')
+    }
+  },[])
+
 
   const cleanContext=()=>{
     setUserData(null);

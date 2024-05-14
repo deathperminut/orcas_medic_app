@@ -170,7 +170,7 @@ export default function Appointment_validation() {
             <div className='col-12'>
               <ul className='nav nav-pills d-flex flex-row justify-content-between' role="tablist">
                 <li className='nav-item' role="presentation">
-                  <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#scheduling" type="button" role="tab" aria-controls="scheduling" aria-selected="true"> <span className='ff-monse-regular- me-2'>Información</span></button>
+                  <button className='nav-link active rounded-0 d-flex flex-row justify-content-center align-items-center align-self-center' id="data-patient-tab" data-bs-toggle="pill" data-bs-target="#scheduling" type="button" role="tab" aria-controls="scheduling" aria-selected="true"> <span className='ff-monse-regular- me-2'>Información usuario</span></button>
                 </li>
               </ul>
             </div>
