@@ -13,7 +13,7 @@ export default function Sidebar_medic() {
   let navigate = useNavigate()
 
   /* APP CONTEXT */
-  let {userData,setUserData,setToken,token}  = React.useContext(AppContext);
+  let {userData,setUserData,setToken,token,cleanContext}  = React.useContext(AppContext);
 
   /* USE CONTEXT */
   
@@ -42,11 +42,10 @@ export default function Sidebar_medic() {
   },[])
 
 
-  const cleanContext=()=>{
-    setUserData(null);
-    setToken(null);
+  const cleanContext2=()=>{
+    cleanContext();
     Swal.fire({
-      icon: 'info',
+      icon: 'success',
       title: 'Sesión cerrada con éxito.'
     })
   }
@@ -108,7 +107,7 @@ export default function Sidebar_medic() {
               :
               <></>
               }
-              <li onClick={cleanContext} className='nav-item' style={{'backgroundColor':'#272727'}}>
+              <li onClick={cleanContext2} className='nav-item' style={{'backgroundColor':'#272727'}}>
                   <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/Auth/Login'>
                     <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>
                       <CiLogout></CiLogout>

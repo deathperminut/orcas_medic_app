@@ -2,12 +2,35 @@ import './SideBar.css'
 import LogoMedical from '../../../../Assets/img/O60PtOwA_400x400__1_-removebg-preview.png';
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { CiLogout } from "react-icons/ci";
+import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../../../context';
 
 export default function SideBar() {
 
+  /* navigation */
+  const navigate=useNavigate();
+
   /* USE CONTEXT */
 
+  let {token,cleanContext} =  React.useContext(AppContext);
+
+  React.useEffect(()=>{
+    if(!token){
+      navigate('/Auth/Login')
+    }
+  },[])
+
+
+  const cleanContext2=()=>{
+    cleanContext();
+    Swal.fire({
+      icon: 'success',
+      title: 'Sesión cerrada con éxito.'
+    })
+  }
+  
 
   return (
     <React.Fragment>
@@ -47,12 +70,7 @@ export default function SideBar() {
                   <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>D.P</p>
                   <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Datos pérsonales</p></NavLink>
               </li>
-              {/* <li className='nav-item' style={{'backgroundColor':'#272727'}}>
-                <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/dashboard/portfolio'>
-                  <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>P.C</p>
-                  <p className='m-0 ms-4 align-items-center align-self-center fs-5- ff-monse-regular- unabbreviated- lh-sm'>Próximas citas</p></NavLink>
-              </li> */}
-              <li className='nav-item' style={{'backgroundColor':'#272727'}}>
+              <li onClick={cleanContext2} className='nav-item' style={{'backgroundColor':'#272727'}}>
                 <NavLink  className='nav-link d-flex flex-row justify-content-start align-items-center align-self-center position-relative fs-5- ff-monse-regular-' style={({ isActive }) => ({ color: isActive ? '#272727' : '#4e4d4d', background: isActive ? '#4e4d4d' : '#272727', })} to='/AuthPatient'>
                   <p className='m-0 align-items-center align-self-center fs-5- ff-monse-regular- fw-bold abbreviated- tx-decoration-'>
                     <CiLogout></CiLogout>
