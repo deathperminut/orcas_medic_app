@@ -3,6 +3,7 @@ import './StadisticsPatientMedic.css';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'malihu-custom-scrollbar-plugin';
+import { IoMdDownload } from "react-icons/io";
 import { AppContext } from '../../../../../context';
 import Swal from 'sweetalert2';
 import * as echarts from 'echarts';
@@ -4385,13 +4386,19 @@ export default function StadisticsPatientMedic() {
                         </h1>
                 </div>
                 <div className='topoplotsContainer'>
-                        <div onClick={()=>window.open(selectCompleteDate?.imag_topo_activo)} className='topoplotContainer'>
-                                <img src={selectCompleteDate?.imag_topo_activo} className='topoplot'></img>
+                        <div  className='topoplotContainer'>
+                                <img onClick={()=>window.open(selectCompleteDate?.imag_topo_activo)} src={selectCompleteDate?.imag_topo_activo} className='topoplot'></img>
                                 <span className='nameTopoplot font_medium'>Activo</span>
+                                <div onClick={()=>window.open(selectCompleteDate?.documento_test_activo)} className='IConTopoplot'>
+                                      <IoMdDownload  color='white' size={20}/>
+                                </div> 
                         </div>
                         <div onClick={()=>window.open(selectCompleteDate?.imag_topo_reposo)} className='topoplotContainer'>
                                 <img src={selectCompleteDate?.imag_topo_reposo} className='topoplot'></img>
                                 <span className='nameTopoplot font_medium'>Reposo</span>
+                                <div onClick={()=>window.open(selectCompleteDate?.documento_test_reposo)} className='IConTopoplot'>
+                                      <IoMdDownload  color='white' size={20}/>
+                                </div>
                         </div>
                 </div>
 
