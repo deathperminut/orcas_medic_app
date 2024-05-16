@@ -5,8 +5,11 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
+import { AppContext } from '../../../../../../../context';
+import Swal from 'sweetalert2';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
+
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -354,6 +357,35 @@ const TypeIdentification = [
   ];
 
 export default function UserIdentification() {
+
+    /* AppContext */
+
+    let {typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData} = React.useContext(AppContext);
+
+    /* useEffect */
+
+    React.useEffect(()=>{
+      console.log("DATOS USUARIO: ",userDateData);
+    },[])
+
+    /* useStates */
+
+    let [preloader,setPreloader] = React.useState(false);
+    let [Data,setData] = React.useState({...userDateData});
+
+    /* functions */
+
+    let readInputs =(event,type)=>{
+        setData({...Data,[type]:event.target.value})
+    }
+
+    let readSelect=(event,type)=>{
+      // QUE NO SE PUEDA ELIMINAR LOS ELEMENTOS
+      setData({...Data,[type]:event.value})
+    }
+
+
+    
     return (
         <div className='row mt-4 mb-4'>
             <div className='col-12'>
@@ -367,13 +399,13 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                         <div className='form-floating inner-addon- left-addon-'>
-                        <input type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
+                        <input value={Data?.primer_nombre} onChange={(event)=>readInputs(event,'primer_nombre')} type="text" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
                         <label className='fs-5- ff-monse-regular- white font_medium'>Primer nombre</label>
                         </div>
                     </div>
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                         <div className='form-floating inner-addon- left-addon-'>
-                        <input type="text" className='form-control' id='middleName' placeholder="Ingrese su segundo nombre" />
+                        <input value={Data?.segundo_nombre} onChange={(event)=>readInputs(event,'segundo_nombre')} type="text" className='form-control' id='middleName' placeholder="Ingrese su segundo nombre" />
                         <label className='fs-5- ff-monse-regular- white font_medium'>Segundo nombre</label>
                         </div>
                     </div>
@@ -381,13 +413,13 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                         <div className='form-floating inner-addon- left-addon-'>
-                        <input type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
+                        <input value={Data?.primer_apellido} onChange={(event)=>readInputs(event,'primer_apellido')} type="text" className='form-control' id='firstLastName' placeholder="Ingrese su primer apellido" />
                         <label className='fs-5- ff-monse-regular- white font_medium'>Primer apellido</label>
                         </div>
                     </div>
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                         <div className='form-floating inner-addon- left-addon-'>
-                        <input type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
+                        <input value={Data?.segundo_apellido} onChange={(event)=>readInputs(event,'segundo_apellido')} type="text" className='form-control' id='middleLastName' placeholder="Ingrese su segundo pellido" />
                         <label className='fs-5- ff-monse-regular- white font_medium'>Segundo apellido</label>
                         </div>
                     </div>
@@ -400,7 +432,7 @@ export default function UserIdentification() {
                     </div>
                     <div style={{'position':'relative','bottom':'7px'}} className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Ingrese su # identificación" />
+                            <input value={Data?.identificacion} onChange={(event)=>readInputs(event,'identificacion')} type="text" className='form-control' id='identificationNumber' placeholder="Ingrese su # identificación" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Número de identificación</label>
                             </div>
                     </div>
@@ -430,7 +462,7 @@ export default function UserIdentification() {
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='age' placeholder="Ingrese su edad" />
+                            <input disabled   type="text" className='form-control' id='age' placeholder="Ingrese su edad" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Edad</label>
                             </div>
                         </div>
@@ -443,7 +475,7 @@ export default function UserIdentification() {
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='occupation' placeholder="Ingrese su ocupación" />
+                            <input value={Data?.ocupacion} onChange={(event)=>readInputs(event,'ocupacion')} type="text" className='form-control' id='occupation' placeholder="Ingrese su ocupación" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Ocupación</label>
                             </div>
                         </div>
@@ -451,13 +483,13 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='address' placeholder="Ingrese su dirección" />
+                            <input value={Data?.direccion} onChange={(event)=>readInputs(event,'direccion')} type="text" className='form-control' id='address' placeholder="Ingrese su dirección" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Dirección</label>
                             </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='neighborhood' placeholder="Ingrese su barrio" />
+                            <input value={Data?.barrio} onChange={(event)=>readInputs(event,'barrio')} type="text" className='form-control' id='neighborhood' placeholder="Ingrese su barrio" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Barrio</label>
                             </div>
                         </div>
@@ -465,13 +497,13 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="tel" className='form-control' id='phone' placeholder="Ingrese su teléfono" />
+                            <input value={Data?.numero_celular} onChange={(event)=>readInputs(event,'numero_celular')} type="tel" className='form-control' id='phone' placeholder="Ingrese su teléfono" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Teléfono</label>
                             </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='age' placeholder="Ingrese su lugar de residencia" />
+                            <input value={Data?.ciudad_residencia} onChange={(event)=>readInputs(event,'ciudad_residencia')} type="text" className='form-control' id='age' placeholder="Ingrese su lugar de residencia" />
                             <label className='fs-5- ff-monse-regular- white font_medium'>Lugar de residencia</label>
                             </div>
                         </div>
