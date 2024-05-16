@@ -319,7 +319,7 @@ export default function Test3() {
     return (
         <form id='internal-form' action='' className='position-relative'>
                                         <div className='col-12'>
-                                                <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium'>Bienestar General</p>
+                                                <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium'>Estado de ánimo</p>
                                         </div>
                                         <div className='col-12 col-sm-12 col-md-auto col-lg-auto col-xl-auto col-xxl-auto flex-grow-1 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4 bg-t'>
                                             <ul class="list-group border-0 bg-t">

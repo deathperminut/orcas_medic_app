@@ -66,8 +66,8 @@ export default function Date_Medic() {
             <Routes>
               <Route path="" element={ <Navigate to="Validation" /> }/>
               <Route path="Validation/*" element={<Appointment_validation/>} />
-              <Route path="MakeHistory/*" element={<Appointment/>} />
-              <Route path="FinishProcess/*" element={<Appointment/>} />
+              {/* <Route path="MakeHistory/*" element={<Appointment/>} />
+              <Route path="FinishProcess/*" element={<Appointment/>} /> */}
             </Routes>
         </div>
         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 bg-gray'>

@@ -40,7 +40,7 @@ const obtenerTestAnsiedad=async(dni,token)=>{
 
 
 
-    return await axios.get(path,body,config);
+    return await axios.get(path,config);
 }
 
 
