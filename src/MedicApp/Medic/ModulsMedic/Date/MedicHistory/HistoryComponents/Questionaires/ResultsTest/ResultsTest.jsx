@@ -167,7 +167,7 @@ export default function ResultsTest(props) {
         {props.result >= 46 && props.result <=65 ? 
         <>
         <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
-        <span className='orangev2 font_medium text-align'>Test de depresión</span>
+        <span className='orangev2 font_medium text-align'>Test de estrés</span>
         <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
         Estrés moderada.
         </p>
@@ -177,7 +177,7 @@ export default function ResultsTest(props) {
         {props.result >= 66  ? 
         <>
         <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
-        <span className='orangev2 font_medium text-align'>Test de depresión</span>
+        <span className='orangev2 font_medium text-align'>Test de estrés</span>
         <p className='white font_medium text-align' style={{'marginTop':'10px'}}>
         Estrés grave.
         </p>

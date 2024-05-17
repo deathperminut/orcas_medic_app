@@ -11,6 +11,7 @@ import MedicHistory_2 from './MedicHistory_2/MedicHistory_2';
 import MedicHistory_3 from './MedicHistory_3/MedicHistory_3';
 import MedicHistory_4 from './MedicHistory_4/MedicHistory_4';
 import MedicHistory_5 from './MedicHistory_5/MedicHistory_5';
+import CompleteHistory from './CompleteHistory/CompleteHistory';
 
 export default function Date_Medic() {
 
@@ -86,6 +87,7 @@ export default function Date_Medic() {
               <Route path="MakeHistory4/*" element={<MedicHistory_4/>} />
               <Route path="MakeHistory5/*" element={<MedicHistory_5/>} />
               <Route path="FinishProcess/*" element={<FinishProcess/>} />
+              <Route path="CompleteHistory" element={<CompleteHistory/>} />
             </Routes>
             </div>
           </div>

@@ -27,7 +27,7 @@ const actualizarAntescedentes=async(body,token)=>{
 
 
 
-    return await axios.post(path,body,config);
+    return await axios.put(path,body,config);
 }
 
 const obtenerAntescedentes=async(dni,token)=>{

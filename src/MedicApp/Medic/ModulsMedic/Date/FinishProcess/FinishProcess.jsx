@@ -342,12 +342,9 @@ export default function FinishProcess() {
       
       {/* <Medicamentos></Medicamentos> */}
       <Agendamiento></Agendamiento>
-      <Diagnosis></Diagnosis>
-      
-
       <div className='col-auto'>
                     <div style={{'marginBottom':'40px'}} onClick={()=>navigate('/ModulsMedic')}  className='ButtonElement'>
-                                <span  className='ButtonText'>Finalizar historia</span>
+                                <span  className='ButtonText'>Terminar cita</span>
                     </div>
       </div>
 

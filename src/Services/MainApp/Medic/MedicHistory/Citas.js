@@ -27,7 +27,7 @@ const actualizarCita=async(body,token)=>{
 
 
 
-    return await axios.post(path,body,config);
+    return await axios.put(path,body,config);
 }
 
 

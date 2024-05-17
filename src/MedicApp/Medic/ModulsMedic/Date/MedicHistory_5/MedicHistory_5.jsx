@@ -384,7 +384,7 @@ export default function MedicHistory_5() {
         setFlagHistory(true);
         setTimeout(()=>{
             setFlagHistory(false);
-            navigate('/ModulsMedic/Date_Medic/FinishProcess')
+            navigate('/ModulsMedic/Date_Medic/CompleteHistory')
         },1000)
         
         }}  className='ButtonElement'>
