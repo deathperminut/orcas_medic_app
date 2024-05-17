@@ -48,6 +48,7 @@ export default function Test1() {
     React.useEffect(()=>{
 
         if(flagHistory){
+            console.log("guardado 3");
             // guardamos en el appContext la información del usuario
             setGeneral(questionario);
         }

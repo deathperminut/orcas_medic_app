@@ -335,6 +335,7 @@ export default function Antecedentes() {
     React.useEffect(()=>{
     
       if(flagHistory){
+        console.log("guardado 2");
         // guardamos en el appContext la información del usuario
         setBeforeDate(pass);
       }

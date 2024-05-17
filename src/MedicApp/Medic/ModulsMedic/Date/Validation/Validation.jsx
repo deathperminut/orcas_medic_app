@@ -311,7 +311,7 @@ export default function Validation() {
 
   let navigate = useNavigate()
   
-  let {typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData,beforeDate,setBeforeDate,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral} = React.useContext(AppContext);
+  let {filerepose,setFilerepose,fileActive,setFileActive,typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData,beforeDate,setBeforeDate,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,setFlagHistory} = React.useContext(AppContext);
 
   /* useState */
 
@@ -585,9 +585,11 @@ export default function Validation() {
             "acceso_atencion_medica_salud_mental": 0,
             "comodidad_buscar_ayuda": 0
           });
+          setFilerepose(null);
+          setFileActive(null);
           // nos dirigimos a la historia clinica
           navigate('/ModulsMedic/Date_Medic/MakeHistory')
-  
+          
         }else{
   
           // llamamos los servicios correspondientes para cada uno de los tests y si tienen una creación previa la colocamos para cargar sus datos
@@ -812,6 +814,8 @@ export default function Validation() {
           "acceso_atencion_medica_salud_mental": 0,
           "comodidad_buscar_ayuda": 0
         });
+        setFileActive(null);
+        setFilerepose(null);
         // nos dirigimos a la historia clinica
         navigate('/ModulsMedic/Date_Medic/MakeHistory')
 
@@ -1087,7 +1091,8 @@ export default function Validation() {
             }else{
               setEstres(result_estres.data);
             }
-            
+            setFilerepose(null);
+            setFileActive(null);
             //TEST Estres
             Swal.fire({
               icon: 'success',

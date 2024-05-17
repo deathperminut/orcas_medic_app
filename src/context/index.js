@@ -25,6 +25,8 @@ function ProviderContext(props){
     let [ansiedad,setAnsiedad] = React.useState(null);
     let [depresion,setDepresion] = React.useState(null); 
     let [flagHistory,setFlagHistory] = React.useState(false);
+    let [fileActive,setFileActive] = React.useState(null);
+    let [filerepose,setFilerepose] = React.useState(null);
 
     /* FUNCTIONS */
 
@@ -41,7 +43,7 @@ function ProviderContext(props){
 
     return (
         
-        <AppContext.Provider value={{flagHistory,setFlagHistory,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,beforeDate,setBeforeDate,userDateData,setUserDateData,dniDateUser,setDniDateUser,cleanContext,userHistoryDni,setUserHistoryDni,datesPatient,setDatesPatient,dni,setDni,token,setToken,userData,setUserData,typeDate,setTypeDate,selectCompleteDate,setSelectCompleteDate}}>
+        <AppContext.Provider value={{filerepose,setFilerepose,fileActive,setFileActive,flagHistory,setFlagHistory,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,beforeDate,setBeforeDate,userDateData,setUserDateData,dniDateUser,setDniDateUser,cleanContext,userHistoryDni,setUserHistoryDni,datesPatient,setDatesPatient,dni,setDni,token,setToken,userData,setUserData,typeDate,setTypeDate,selectCompleteDate,setSelectCompleteDate}}>
             {props.children}
         </AppContext.Provider>
         

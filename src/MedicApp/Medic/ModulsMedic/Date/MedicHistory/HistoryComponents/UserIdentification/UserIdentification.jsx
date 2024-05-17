@@ -446,7 +446,9 @@ export default function UserIdentification() {
     
       if(flagHistory){
         // guardamos en el appContext la información del usuario
+        console.log("guardado 1");
         setUserDateData(Data);
+
       }
     },[flagHistory])
 

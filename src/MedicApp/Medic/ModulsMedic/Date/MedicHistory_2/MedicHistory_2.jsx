@@ -1,22 +1,16 @@
 import React from 'react'
-import './MedicHistory.css'
+import './MedicHistory_2.css'
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../../../../context';
-import Preloader from '../../../../../components/Preloader/Preloader';
 /* MEDICAL HISTORY COMPONENTS */
 
-import UserIdentification from './HistoryComponents/UserIdentification/UserIdentification';
-import Questionaries from './HistoryComponents/Questionaires/Questionaries';
-import PartnerData from './HistoryComponents/PartnerData/PartnerData';
-import Antecedentes from './HistoryComponents/Antecedentes/Antecedentes';
-import ActualSituation from './HistoryComponents/ActualSituation/ActualSituation';
-import EegData from './HistoryComponents/EegData/EegData';
+import EegData from '../MedicHistory/HistoryComponents/EegData/EegData';
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
  */
@@ -324,39 +318,32 @@ const weekDays = [
 ]
 
 
-export default function MedicHistory() {
+export default function MedicHistory_2() {
 
   let navigate = useNavigate()
 
   /* APP CONTEXT */
 
-  let {setFlagHistory,typeDate,setTypeDate} =  React.useContext(AppContext);
-  let [preloader,setPreloader] = React.useState(false);
+  let {typeDate,setTypeDate} =  React.useContext(AppContext);
+
 
   return (
     <React.Fragment>
-      {
-                preloader ?
-                <>
-                <Preloader></Preloader>
-                </>
-                :
-
-                <></>
-      }
+      <div style={{'marginBottom':'100px'}} onClick={()=>{
+        navigate('/ModulsMedic/Date_Medic/MakeHistory')}
+        }  className='ButtonElement'>
+                                <span  className='ButtonText'>Volver</span>
+      </div>
       <div className='row mt-4 mb-4'>
         <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Hístoria clínica</h2>
+          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Registro EEG</h2>
         </div>
       </div>
       
       {/* SEGMENTAMOS POR CITA */} 
       {typeDate == "Evaluación inicial"  ? 
       <>
-      <UserIdentification></UserIdentification>
-      <Antecedentes></Antecedentes>
-      <Questionaries></Questionaries>
-      {/* <EegData></EegData> */}
+      <EegData></EegData>
       </>
       :
       <></>
@@ -364,28 +351,13 @@ export default function MedicHistory() {
 
       {typeDate == "Seguimiento regular"  ? 
       <>
-      <UserIdentification></UserIdentification>
-      <Antecedentes></Antecedentes>
-      <ActualSituation></ActualSituation>
-      <Questionaries></Questionaries>
+      <EegData></EegData>
       </>
       :
       <></>
       }
       
-      <div style={{'marginBottom':'50px'}} onClick={()=>{
-        /* Guardamos los datos */
-        setFlagHistory(true);
-        setPreloader(true);
-        // setFlagHistory(false);
-        setTimeout(()=>{
-          setFlagHistory(false);
-          setPreloader(false);
-          navigate('/ModulsMedic/Date_Medic/MakeHistory2')
-        }, 1000);
-        //navigate('/ModulsMedic/Date_Medic/MakeHistory2')
-        }
-        }  className='ButtonElement'>
+      <div style={{'marginBottom':'50px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
                                 <span  className='ButtonText'>Siguiente</span>
       </div>
     </React.Fragment>

@@ -7,6 +7,7 @@ import MedicHistory from './MedicHistory/MedicHistory';
 import FinishProcess from './FinishProcess/FinishProcess';
 import Appointment from './Appointment/Appointment';
 import Appointment_validation from './Appointment_validation/Appointment_validation';
+import MedicHistory_2 from './MedicHistory_2/MedicHistory_2';
 
 export default function Date_Medic() {
 
@@ -77,6 +78,7 @@ export default function Date_Medic() {
               <Route path="" element={ <Navigate to="Validation" /> }/>
               <Route path="Validation/*" element={<Validation/>} />
               <Route path="MakeHistory/*" element={<MedicHistory/>} />
+              <Route path="MakeHistory2/*" element={<MedicHistory_2/>} />
               <Route path="FinishProcess/*" element={<FinishProcess/>} />
             </Routes>
             </div>
