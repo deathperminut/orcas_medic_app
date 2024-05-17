@@ -331,17 +331,7 @@ export default function MedicHistory_4() {
 
   let {flagHistory,setFlagHistory,si_depresion,setSi_depresion,filerepose,setFilerepose,fileActive,setFileActive,typeDate,setTypeDate} =  React.useContext(AppContext);
   
-  /* useEffect */
 
-  React.useEffect(()=>{
-    if(filerepose == null || fileActive == null){
-        Swal.fire({
-            icon: 'info',
-            title: 'Registra los 2 archivos para continuar'
-        });
-        navigate('/ModulsMedic/Date_Medic/MakeHistory2')
-    }
-  },[])
   /* useState */
 
 
