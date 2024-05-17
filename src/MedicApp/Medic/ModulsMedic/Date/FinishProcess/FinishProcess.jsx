@@ -334,20 +334,7 @@ export default function FinishProcess() {
 
   return (
     <React.Fragment>
-      <div  style={{'width':'20px'}}>
-          <div style={{'marginBottom':'70px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/MakeHistory')}  className='ButtonBack'>
-                                <IoChevronBack  color='white' size={50}/>
-          </div>
-      </div>
-      
-      {/* <Medicamentos></Medicamentos> */}
       <Agendamiento></Agendamiento>
-      <div className='col-auto'>
-                    <div style={{'marginBottom':'40px'}} onClick={()=>navigate('/ModulsMedic')}  className='ButtonElement'>
-                                <span  className='ButtonText'>Terminar cita</span>
-                    </div>
-      </div>
-
     </React.Fragment>
   )
 }

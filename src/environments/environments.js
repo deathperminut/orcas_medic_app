@@ -21,6 +21,7 @@ export const environment = {
     registerUser:'users/register/',
     // DOCTOR DATES
     doctor_dates:'agendamiento/retornar-proximas-citas-doctor/',
+    GetMedics:'users/es_doctor',
 
     // PATIENT DATES
     patient_next_dates:'agendamiento/retornar-proximas-citas-paciente/',

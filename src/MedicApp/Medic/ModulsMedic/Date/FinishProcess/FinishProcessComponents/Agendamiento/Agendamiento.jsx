@@ -7,8 +7,17 @@ import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+
+import moment from 'moment';
 import makeAnimated from 'react-select/animated';
-import Pagination from 'pagination-for-reactjs-component'
+import Preloader from '../../../../../../../components/Preloader/Preloader';
+import Pagination from 'pagination-for-reactjs-component';
+import { AppContext } from '../../../../../../../context';
+import Swal from 'sweetalert2';
+import { MdAutoDelete } from "react-icons/md";
+import { GetMedics } from '../../../../../../../Services/MainApp/Users/User';
+import { crearAgendamiento } from '../../../../../../../Services/MainApp/Medic/MedicHistory/Agendamiento';
+import { crearCita } from '../../../../../../../Services/MainApp/Medic/MedicHistory/Citas';
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -317,10 +326,247 @@ const weekDays = [
 ]
 
 export default function Agendamiento() {
-    const [pageIndex, setPageIndex] = React.useState(1);
-    let pageCount = 10;
+
+  let navigate = useNavigate()
+
+  /* AppContext */
+
+  let {userDateData,flagHistory,setFlagHistory,si_estres,setSi_estres,filerepose,setFilerepose,fileActive,setFileActive,typeDate,setTypeDate,token} =  React.useContext(AppContext);
+  
+
+   /* DATE FUNCTIONS */
+
+
+   const getDateFormat=(date)=>{
+    /* 
+    Función para obtener una fecha en formato
+    string de la forma YYYY-MM-DD
+    */
+    let DATE = new Date(date);
+    return moment(DATE).format('YYYY-MM-DD');
+
+
+  }
+
+  /* READ BIRTHDAY */
+
+  const changeDate = (e,Type) => {
+    setDate({...date,[Type]:getDateFormat(e)})
+  };
+  /* useState */
+
+  let [listDoctors,setListDoctors]  =React.useState([]);
+  let [listDates,setListDates] = React.useState([]);
+  let [preloader,setPreloader] = React.useState(false);
+  let [date,setDate] = React.useState({
+    'type_date':'Seguimiento regular',
+    'fecha':'',
+    'medico':'',
+    'hora':'',
+    'minutos':''
+  })
+
+  /* useEffects */
+
+  React.useEffect(()=>{
+    loadMedics();
+  },[])
+
+
+  const loadMedics=async()=>{
+
+    let result = undefined;
+    setPreloader(true);
+    result = await GetMedics(token).catch((error)=>{
+      console.log(error);
+      setPreloader(false);
+      Swal.fire({
+        icon: 'info',
+        title: 'Problemas al cargar médicos'
+      });
+    });
+
+    if(result){
+      console.log(result.data);
+      setPreloader(false);
+      setListDoctors(result.data.map((obj,index)=>{
+        return(
+          {'value':obj?.id,label:obj?.primer_nombre+' '+obj?.segundo_nombre+' '+obj?.primer_apellido}
+        )
+      }))
+    }
+
+  }
+
+  /* functions */
+
+  const ReadSelect=(event)=>{
+
+    if(event){
+      setDate({...date,['medico']:event.value});
+    }else{
+      setDate({...date,['medico']:""});
+    }
+
+  }
+
+
+  const GetDoctor=(medic)=>{
+    if(medic == ""){
+      return ""
+    }else{
+      console.log("QUE PASA: ",medic)
+      let ob = listDoctors.filter((obj)=>obj?.value == medic)[0]
+      return ob?.label
+    }
+    
+  }
+
+  const readInputs=(event,type)=>{
+ 
+    setDate({...date,[type]:event.target.value})
+
+  }
+
+
+  const appendDate=()=>{
+    if(date?.fecha !=="" && date?.medico !== "" && date?.hora !== "" && date?.minutos !== ""){
+        
+        // GENERAMOS LA FECHA
+        // Dividir las cadenas en sus componentes individuales
+        const [year, month, day] = date?.fecha.split('-').map(Number);
+        // Crear un objeto Date y establecer los componentes de la fecha y la hora
+        const fechaHora = new Date();
+        fechaHora.setFullYear(year);
+        fechaHora.setMonth(month - 1); // Los meses en JavaScript son 0-indexados (0 = Enero, 11 = Diciembre)
+        fechaHora.setDate(day);
+        fechaHora.setHours(Number(date?.hora));
+        fechaHora.setMinutes(Number(date?.minutos));
+        fechaHora.setSeconds(0);
+        fechaHora.setMilliseconds(0);
+        let lista = [...listDates];
+        lista.push({...date,['fecha']:fechaHora})
+        setListDates(lista);
+        setDate({
+          'type_date':'Seguimiento regular',
+          'fecha':'',
+          'medico':'',
+          'hora':'',
+          'minutos':''
+        })
+        
+        
+    }else{
+      Swal.fire({
+        icon: 'info',
+        title: 'Completa todos los campos para crear cita'
+      })
+    }
+  }
+
+
+
+  const deleteDate=(index)=>{
+
+    let array = listDates.filter((obj,ind)=>ind !== index)
+
+    setListDates(array);
+
+  }
+
+
+  const generateAgend=async()=>{
+
+    if(listDates != 0){
+
+      // hacemos un ciclo e iteramos por cada cita para generar la cita y el agendamiento
+      for (var i=0;i<listDates?.length;i++){
+        createDate(listDates[i])
+      }
+      Swal.fire({
+        icon: 'success',
+        title: 'Citas creadas correctamente'
+      })
+      navigate('/ModulsMedic/PorfolioMedic')
+
+
+    }else{
+      navigate('/ModulsMedic/PorfolioMedic')
+    }
+
+  }
+
+
+  const createDate=async(dateData)=>{
+    let result = undefined;
+    setPreloader(true);
+    let body={
+        user_id:userDateData?.id,
+        doctor_id:dateData?.medico
+    }
+    console.log("DATOS CITA: ",body);
+    result = await crearCita(body,token).catch((error)=>{
+        console.log(error);
+        setPreloader(false);
+        Swal.fire({
+            icon: 'info',
+            title: 'Problemas para crear cita'
+        })
+    })
+
+    if(result){
+        console.log(result.data);
+        setPreloader(false);
+        // ACTUALIZAMOS LA CITA CON LA INFORMACIÓN REAL
+        createAgend(result.data,dateData);
+    }
+  }
+
+  const createAgend=async(InfoCita,dateData)=>{
+
+    let result = undefined;
+    setPreloader(true);
+    let body={
+        cita_id:InfoCita?.id,
+        doctor_id:dateData?.medico,
+        tipo_cita:dateData?.type_date,
+        hora_inicio:dateData?.fecha,
+    }
+    console.log("DATOS AGENDAMIENTO: ",body);
+    result = await crearAgendamiento(body,token).catch((error)=>{
+        console.log(error);
+        setPreloader(false);
+        Swal.fire({
+            icon: 'info',
+            title: 'Problemas para crear cita'
+        })
+    })
+
+    if(result){
+        console.log(result.data);
+        setPreloader(false);
+        // ACTUALIZAMOS LA CITA CON LA INFORMACIÓN REAL
+    }
+}
+
+
+
+
+  
+
+  
+    
   return (
     <>
+        {
+                preloader ?
+                <>
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+      }
         <div className='row mt-4 mb-4'>
         <div className='col-12'>
           <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'26px'}}>Agendamiento de citas</h2>
@@ -335,8 +581,10 @@ export default function Agendamiento() {
                             <div className='form-control' id='date-birth'>
                                 <DatePicker
                                 inputClass="custom-style-date-picker- white font_medium"
-                                placeholder="dd/mm/yyyy"
-                                format="DD/MM/YYYY"
+                                placeholder="yyyy-mm-dd"
+                                format="YYYY-MM-DD"
+                                onChange={(event)=>changeDate(event,'fecha')}
+                                value={date?.fecha}
                                 months={months}
                                 weekDays={weekDays}
                                 calendarPosition="bottom-left"
@@ -351,30 +599,38 @@ export default function Agendamiento() {
                             </div>
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Fecha de la cita</label>
                             </div>
+
+                        </div>
+                        
+                        
+            </div>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+                        <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                        <div className='form-floating inner-addon- left-addon-'>
+                        <input value={date?.hora} onChange={(event)=>readInputs(event,'hora')} type="number" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
+                        <label className='fs-5- ff-monse-regular- white font_medium'>Hora</label>
+                        </div>
+                        </div>
+                        <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                            <input value={date?.minutos} onChange={(event)=>readInputs(event,'minutos')} type="number" className='form-control' id='firstName' placeholder="Ingrese su primer nombre" />
+                            <label className='fs-5- ff-monse-regular- white font_medium'>Minuto</label>
+                            </div>
+                        </div>
+
+            </div>
+            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+            <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                            <Select id='medication-order' isDisabled={true} value={{'value':'Seguimiento regular',label:'Seguimiento regular'}} options={[{ value: "Evaluación inicial", label: "Evaluación inicial" },
+                                { value: "Seguimiento regular", label: "Seguimiento regular" },]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir tipo de cita" styles={selectStyles} isClearable={true}/>
+                            </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='medication-order' options={[{ value: "Evaluación inicial", label: "Evaluación inicial" },
-            { value: "Seguimiento regular", label: "Seguimiento regular" },
-            ]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir tipo de cita" styles={selectStyles} isClearable={true}/>
+                            <Select onChange={ReadSelect}  id='medication-order'  value={{'value':GetDoctor(date?.medico),label:GetDoctor(date?.medico)}} options={listDoctors} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir médico" styles={selectStyles} isClearable={true}/>
                             </div>
                         </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-                        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                            <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='medication-order' options={[{ value: "Evaluación inicial", label: "Evaluación inicial" },
-                                { value: "Seguimiento regular", label: "Seguimiento regular" },
-                                { value: "Cita de emergencia", label: "Cita de emergencia" },
-                                { value: "Cita de consulta", label: "Cita de consulta" }]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Elegir médico" styles={selectStyles} isClearable={true}/>
-                            </div>
-                        </div>
-            </div>
-            <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
-                  <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Observaciones</label>
-                  <textarea className='form-control' id="observations-medicaments" rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-              </div>
             </div>
             <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
               <div className='col-auto'>
@@ -384,7 +640,7 @@ export default function Agendamiento() {
                 </button>
               </div>
               <div className='col-auto'>
-                    <div style={{'marginBottom':'20px'}} className='ButtonElement'>
+                    <div onClick={appendDate} style={{'marginBottom':'20px'}} className='ButtonElement'>
                                 <span  className='ButtonText'>Agregar</span>
                     </div>
               </div>
@@ -392,21 +648,14 @@ export default function Agendamiento() {
           </form>
         </div>
       </div>
-      <div className='row mt-4 mb-4'>
+      
+      {listDates.length !== 0 ?
+        <div className='row mt-4 mb-4'>
+        <div className='row mt-4 mb-4'>
             <div className='col-12'>
             <p className='m-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>citas</p>
             </div>
-      </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <form action="" className='position-relative wrapper-search-small- d-block d-sm-block d-md-block d-lg-block d-xl-block d-xxl-block'>
-            <div className='form-search inner-addon- left-addon-'>
-              <input type="text" className='form-control search-' id="buscador-modulos" placeholder="Buscar" />
-            </div>
-          </form>
         </div>
-      </div>
-      <div className='row mt-4 mb-4'>
         <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
           <div className='card border-0 rounded-0 w-100 bg-transparent'>
             <div className='card-body p-0 w-100'>
@@ -426,133 +675,64 @@ export default function Agendamiento() {
                     </th>
                     <th scope="col" className='th-width-md-'>
                       <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Fecha</span>
-                      </div>
-                    </th>
-                    <th scope="col" className='th-width-md-'>
-                      <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
                         <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Médico</span>
                       </div>
                     </th>
                     <th scope="col" className='th-width-md-'>
                       <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Observaciones</span>
+                        <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple-'>Fecha</span>
                       </div>
                     </th>
+                    
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td className='align-middle'>
-                      <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                        <div className='checks-radios- me-3'>
-                          <label>
-                            <input type="checkbox" name="radio"/>
-                            <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple-'></span>
-                          </label>
+                  {listDates.map((obj,index)=>{
+                    return(
+                      <tr key={index}>
+                      <td className='align-middle'>
+                        <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
+                          <div onClick={()=>deleteDate(index)}  className='checks-radios- me-3'>
+                            <MdAutoDelete size={20} color='#d1a207' cursor={'pointer'}></MdAutoDelete>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
+                      </td>
+                      <td className='align-middle'>
+                          <div id='internal-form' className='w-100'>
+                            <textarea value={obj?.type_date} disabled className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                          </div>
+                      </td>
+                      <td className='align-middle'>
                         <div id='internal-form' className='w-100'>
-                          <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                          <textarea value={GetDoctor(obj?.medico)} disabled className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
                         </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='align-middle'>
-                      <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                        <div className='checks-radios- me-3'>
-                          <label>
-                            <input type="checkbox" name="radio"/>
-                            <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple-'></span>
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
+                      </td>
+                      <td className='align-middle'>
                         <div id='internal-form' className='w-100'>
-                          <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
+                          <textarea value={obj?.fecha} disabled className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
                         </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                  </tr><tr>
-                    <td className='align-middle'>
-                      <div className='w-auto d-flex flex-row justify-content-center align-items-center align-self-center'>
-                        <div className='checks-radios- me-3'>
-                          <label>
-                            <input type="checkbox" name="radio"/>
-                            <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple-'></span>
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                        </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      <div id='internal-form' className='w-100'>
-                        <textarea className='form-control p-0 text-center textarea-large-' rows="4" placeholder='Ingrese una corta observación aquí'></textarea>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                      
+                    </tr>
+                    )
+                  })}
+                    
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
+        
       </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12 d-flex flex-row justify-content-center align-items-center align-self-center'>
-          <Pagination
-            pageCount={pageCount}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
-          />
+      
+      :
+      <></>
+      }
+      
+      <div  onClick={generateAgend}  className='ButtonElement'style={{'marginBottom':'80px'}}>
+                                <span  className='ButtonText'>Terminar cita</span>
         </div>
-      </div>
     </>
   )
 }
