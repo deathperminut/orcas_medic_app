@@ -31,6 +31,11 @@ function ProviderContext(props){
     let [si_ansiedad,setSi_ansiedad] = React.useState('No');
     let [si_depresion,setSi_depresion] = React.useState('No');
     let [si_estres,setSi_estres] = React.useState('No');
+    
+
+    // PARA CONTROLAR EL AGENDAMIENTO DE CITAS
+    let [attendedDate,setAttendedDate] = React.useState(null);
+    let [attendedAgend,setAttenderAgend] = React.useState(null);
 
     /* FUNCTIONS */
 
@@ -47,7 +52,7 @@ function ProviderContext(props){
 
     return (
         
-        <AppContext.Provider value={{si_estres,setSi_estres,si_depresion,setSi_depresion,si_ansiedad,setSi_ansiedad,filerepose,setFilerepose,fileActive,setFileActive,flagHistory,setFlagHistory,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,beforeDate,setBeforeDate,userDateData,setUserDateData,dniDateUser,setDniDateUser,cleanContext,userHistoryDni,setUserHistoryDni,datesPatient,setDatesPatient,dni,setDni,token,setToken,userData,setUserData,typeDate,setTypeDate,selectCompleteDate,setSelectCompleteDate}}>
+        <AppContext.Provider value={{attendedAgend,setAttenderAgend,attendedDate,setAttendedDate,si_estres,setSi_estres,si_depresion,setSi_depresion,si_ansiedad,setSi_ansiedad,filerepose,setFilerepose,fileActive,setFileActive,flagHistory,setFlagHistory,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,beforeDate,setBeforeDate,userDateData,setUserDateData,dniDateUser,setDniDateUser,cleanContext,userHistoryDni,setUserHistoryDni,datesPatient,setDatesPatient,dni,setDni,token,setToken,userData,setUserData,typeDate,setTypeDate,selectCompleteDate,setSelectCompleteDate}}>
             {props.children}
         </AppContext.Provider>
         

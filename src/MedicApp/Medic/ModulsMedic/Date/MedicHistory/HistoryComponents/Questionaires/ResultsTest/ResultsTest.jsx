@@ -85,7 +85,7 @@ export default function ResultsTest(props) {
         </>
         :
         <>
-        {props.result >= 66 && props.result <=90 ? 
+        {props.result >= 66  ? 
         <>
         <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
         <span className='orangev2 font_medium text-align'>Test de ansiedad</span>
@@ -129,7 +129,7 @@ export default function ResultsTest(props) {
         </>
         :
         <>
-        {props.result >= 66 && props.result <=90 ? 
+        {props.result >= 66  ? 
         <>
         <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
         <span className='orangev2 font_medium text-align'>Test de depresión</span>
@@ -174,7 +174,7 @@ export default function ResultsTest(props) {
         </>
         :
         <>
-        {props.result >= 66 && props.result <=90 ? 
+        {props.result >= 66  ? 
         <>
         <IoAlertCircleOutline color='#d1a207' size={55}></IoAlertCircleOutline>
         <span className='orangev2 font_medium text-align'>Test de depresión</span>
