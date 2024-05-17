@@ -365,24 +365,6 @@ const Gender = [
   { value: "Femenino", label: "Femenino" },
 ];
 
-const TypeRelationship = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-const Eps = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-const InsuranceCompany = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
 export default function PersonalForm() {
   
   /* APP CONTEXT */

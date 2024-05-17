@@ -9,6 +9,7 @@ import { AppContext } from '../../../../../../../context';
 import Swal from 'sweetalert2';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
+import moment from "moment";
 
 
 /**
@@ -37,34 +38,61 @@ const animatedComponents = makeAnimated();
  * Data que llena los select
  */
 
-const Parentage = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
 const MaritalStatus = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
+  { value: "Soltero", label: "Soltero" },
+  { value: "Casado", label: "Casado" },
+  { value: "Separado", label: "Separado" },
+  { value: "Unión libre", label: "Unión libre" },
+  { value: "Viudo", label: "Viudo" }
 ];
 
 const PopulationGroup  = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
+  { value: "Personas con discapacidad", label: "Personas con discapacidad" },
+  { value: "Poblacion migrante", label: "Poblacion migrante" },
+  { value: "Personas desplazadas por el conflicto armado", label: "Personas desplazadas por el conflicto armado" },
+  { value: "Personas privadas de la libertad", label: "Personas privadas de la libertad" },
+  { value: "Personas en condicion de calle", label: "Personas en condicion de calle" },
+  { value: "Mujeres gestantes", label: "Mujeres gestantes" },
+  { value: "Poblacion infantil a cargo del ICBF", label: "Poblacion infantil a cargo del ICBF" },
+  { value: "Madres comunitarias", label: "Madres comunitarias" },
+  { value: "Personas desmovilizadas", label: "Personas desmovilizadas" },
+  { value: "Internado en centro psiquiatrico", label: "Internado en centro psiquiatrico" },
+  { value: "Comunidades indigenas", label: "Comunidades indigenas" },
+  { value: "Comunidades afrodescendientes", label: "Comunidades afrodescendientes" },
+  { value: "Niños, niñas y adolescentes en situacion de vulnerabilidad", label: "Niños, niñas y adolescentes en situacion de vulnerabilidad" },
+  { value: "Mujeres victimas de violencia de genero", label: "Mujeres victimas de violencia de genero" },
+  { value: "Personas LGTBI", label: "Personas LGTBI" },
+  { value: "Otros grupos poblacionales", label: "Otros grupos poblacionales" },
+  { value: "Ninguno" , label: "Ninguno"},
 ];
 
-const EthnicGroup  = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
+const EthnicGroup  =  [
+  { value: 'Mestizo', label: 'Mestizo' },
+  { value: 'Afrodescendiente', label: 'Afrodescendiente' },
+  { value: 'Indigena', label: 'Indigena' },
+  { value: 'Blanco', label: 'Blanco' },
+  { value: 'Raizal', label: 'Raizal' },
+  { value: 'Palenquero', label: 'Palenquero' },
+  { value: 'Rrom', label: 'Rrom' },
+  { value: 'Arabe', label: 'Arabe' },
+  { value: 'Chino', label: 'Chino' },
+  { value: 'Judio', label: 'Judio' },
+  { value: 'Otro', label: 'Otro' }
 ];
 
-const Religion  = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
+const Religion  =  [
+  { value: 'Ateísmo', label: 'Ateísmo' },
+  { value: 'Iglesia Católica Romana', label: 'Iglesia Católica Romana'},
+  { value: 'Protestantismo', label: 'Protestantismo'},
+  { value: 'Adventistas del Séptimo Día', label: 'Adventistas del Séptimo Día' },
+  { value: 'Testigos de Jehová', label: 'Testigos de Jehová' },
+  { value: 'Mormonismo', label: 'Mormonismo' },
+  { value: 'Judaísmo', label: 'Judaísmo' },
+  { value: 'Islamismo', label: 'Islamismo' },
+  { value: 'Iglesia Universal del Reino de Dios', label: 'Iglesia Universal del Reino de Dios' },
+  { value: 'Iglesia Pentecostal Unida de Colombia', label: 'Iglesia Pentecostal Unida de Colombia' },
+  { value: 'Bahaísmo', label: 'Bahaísmo' },
+  { value: 'Otro', label: 'Otro' }
 ];
 
 /**
@@ -157,6 +185,7 @@ const selectStyles = {
   boxShadow: 'var(--box-shadow-2-)',
   borderRadius: '1rem',
   padding: 0,
+  zIndex:100,
   marginTop: 8,
   marginBottom: 0,
   height: 'auto',
@@ -170,6 +199,7 @@ const selectStyles = {
   }),
   menuList: () => ({
     paddingTop: 0,
+    zIndex:100,
     paddingBottom: 0,
     height: 'auto',
     minHeight: 'auto',
@@ -320,42 +350,17 @@ const weekDays = [
 /* SELECTS OPTIONS */
 
 const TypeIdentification = [
-    { value: "opcion-uno", label: "Opcion uno" },
-    { value: "opcion-dos", label: "Opcion dos" },
-    { value: "opcion-tres", label: "Opcion tres" },
-    { value: "opcion-cuatro", label: "Opcion cuatro" },
-    { value: "opcion-cinco", label: "Opcion cinco" },
-    { value: "opcion-seis", label: "Opcion seis" },
-    { value: "opcion-siete", label: "Opcion siete" },
-    { value: "opcion-ocho", label: "Opcion ocho" },
-    { value: "opcion-nueve", label: "Opcion nueve" },
-    { value: "opcion-diez", label: "Opcion diez" }
-  ];
+  { value: "CC", label: "CC" },
+  { value: "PEP", label: "PEP" },
+  { value: "PETT", label: "PETT" },
+  { value: "CE", label: "CE" }
+];
 
-  const Gender = [
-    { value: "opcion-uno", label: "Opcion uno" },
-    { value: "opcion-dos", label: "Opcion dos" },
-    { value: "opcion-tres", label: "Opcion tres" }
-  ];
-  
-  const TypeRelationship = [
-    { value: "opcion-uno", label: "Opcion uno" },
-    { value: "opcion-dos", label: "Opcion dos" },
-    { value: "opcion-tres", label: "Opcion tres" }
-  ];
-  
-  const Eps = [
-    { value: "opcion-uno", label: "Opcion uno" },
-    { value: "opcion-dos", label: "Opcion dos" },
-    { value: "opcion-tres", label: "Opcion tres" }
-  ];
-  
-  const InsuranceCompany = [
-    { value: "opcion-uno", label: "Opcion uno" },
-    { value: "opcion-dos", label: "Opcion dos" },
-    { value: "opcion-tres", label: "Opcion tres" }
-  ];
-
+const Gender = [
+  { value: "Masculino", label: "Masculino" },
+  { value: "Femenino", label: "Femenino" },
+];
+ 
 export default function UserIdentification() {
 
     /* AppContext */
@@ -384,6 +389,56 @@ export default function UserIdentification() {
       setData({...Data,[type]:event.value})
     }
 
+
+    const ReadSelect =(event,type)=>{
+
+      if(event){
+        setData({...Data,[type]:event.value})
+      }else{
+        setData({...Data,[type]:""})
+      }
+      
+    }
+
+    /* DATE FUNCTIONS */
+
+
+    const getDateFormat=(date)=>{
+      /* 
+      Función para obtener una fecha en formato
+      string de la forma YYYY-MM-DD
+      */
+      let DATE = new Date(date);
+      return moment(DATE).format('YYYY-MM-DD');
+  
+  
+    }
+  
+    /* READ BIRTHDAY */
+  
+    const changeDate = (e,Type) => {
+      setData({... Data,[Type]:getDateFormat(e)})
+    };
+
+    const GetAge=(dateString)=>{
+      /* 
+    Función para obtener la edad segun la fecha
+    de nacimiento.
+    */
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+  
+    if(age == 1){
+      return '1 año'
+    }else{
+      return age + ' años'
+    }
+    }
 
     
     return (
@@ -427,7 +482,7 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                         <div className='form-floating inner-addon- left-addon-'>
-                        <Select id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true}/>
+                        <Select value={{'value':Data['tipo_identificacion'],'label':Data['tipo_identificacion']}} onChange={(event)=>ReadSelect(event,'tipo_identificacion')} id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true}/>
                         </div>
                     </div>
                     <div style={{'position':'relative','bottom':'7px'}} className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
@@ -443,8 +498,10 @@ export default function UserIdentification() {
                             <div className='form-control' id='date-birth'>
                                 <DatePicker
                                 inputClass="custom-style-date-picker- white font_medium"
-                                placeholder="dd/mm/yyyy"
-                                format="DD/MM/YYYY"
+                                placeholder="yyyy-mm-dd"
+                                format="YYYY-MM-DD"
+                                onChange={(event)=>changeDate(event,'fecha_nacimiento')}
+                                value={Data?.fecha_nacimiento}
                                 months={months}
                                 weekDays={weekDays}
                                 calendarPosition="bottom-left"
@@ -462,7 +519,7 @@ export default function UserIdentification() {
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <input disabled   type="text" className='form-control' id='age' placeholder="Ingrese su edad" />
+                            <input value={GetAge(Data?.fecha_nacimiento)} disabled   type="text" className='form-control' id='age' placeholder="Ingrese su edad" />
                             <label className='lh-sm fs-5- ff-monse-regular- white font_medium'>Edad</label>
                             </div>
                         </div>
@@ -470,7 +527,7 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                                 <div className='form-floating inner-addon- left-addon-'>
-                                <Select id='gender' options={Gender} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Genero" styles={selectStyles} isClearable={true}/>
+                                <Select value={{'value':Data['genero'],'label':Data['genero']}} onChange={(event)=>ReadSelect(event,'genero')} id='gender' options={Gender} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Genero" styles={selectStyles} isClearable={true}/>
                                 </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
@@ -511,24 +568,24 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['estado_civil'],'label':Data['estado_civil']}} onChange={(event)=>ReadSelect(event,'estado_civil')}  id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={true}/>
                             </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['grupo_social'],'label':Data['grupo_social']}} onChange={(event)=>ReadSelect(event,'grupo_social')} id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={true}/>
                             </div>
                         </div>
                     </div>
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['grupo_etnico'],'label':Data['grupo_etnico']}} onChange={(event)=>ReadSelect(event,'grupo_etnico')} id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={true}/>
                             </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['religion'],'label':Data['religion']}} onChange={(event)=>ReadSelect(event,'religion')} id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={true}/>
                             </div>
                         </div>
                     </div>
