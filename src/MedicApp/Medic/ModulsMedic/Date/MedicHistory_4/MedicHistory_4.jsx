@@ -5,6 +5,11 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
+import Swal from 'sweetalert2';
+import Preloader from '../../../../../components/Preloader/Preloader';
+import Questionaries from '../MedicHistory/HistoryComponents/Questionaires/Questionaries';
+import Test3 from '../MedicHistory/HistoryComponents/Questionaires/Tests/Test3/Test3';
+
 
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../../../../context';
@@ -324,40 +329,75 @@ export default function MedicHistory_4() {
 
   /* APP CONTEXT */
 
-  let {typeDate,setTypeDate} =  React.useContext(AppContext);
+  let {flagHistory,setFlagHistory,si_depresion,setSi_depresion,filerepose,setFilerepose,fileActive,setFileActive,typeDate,setTypeDate} =  React.useContext(AppContext);
+  
+  /* useEffect */
+
+  React.useEffect(()=>{
+    if(filerepose == null || fileActive == null){
+        Swal.fire({
+            icon: 'info',
+            title: 'Registra los 2 archivos para continuar'
+        });
+        navigate('/ModulsMedic/Date_Medic/MakeHistory2')
+    }
+  },[])
+  /* useState */
 
 
   return (
     <React.Fragment>
+      {
+                flagHistory ?
+                <>
+                
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+      }
       <div style={{'marginBottom':'100px'}} onClick={()=>{
-        navigate('/ModulsMedic/Date_Medic/MakeHistory')}
+        navigate('/ModulsMedic/Date_Medic/MakeHistory3')}
         }  className='ButtonElement'>
                                 <span  className='ButtonText'>Volver</span>
       </div>
       <div className='row mt-4 mb-4'>
-        <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- white font_medium'>Registro EEG</h2>
-        </div>
-      </div>
-      
-      {/* SEGMENTAMOS POR CITA */} 
-      {typeDate == "Evaluación inicial"  ? 
-      <>
-      <EegData></EegData>
-      </>
-      :
-      <></>
-      }
+                <div className='col-12'>
+                    <div className='col-12'>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'33px'}}>Test depresión</p>
+                    </div>
 
-      {typeDate == "Seguimiento regular"  ? 
-      <>
-      <EegData></EegData>
-      </>
-      :
-      <></>
-      }
+                    <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
+                        <div className='form-floating inner-addon- left-addon-'>
+                        <Select  id='type-identification' value={{'value':si_depresion,'label':si_depresion}} onChange={(event)=>setSi_depresion(event.value)} options={[{value:'Si',label:'Si'},{value:'No',label:'No'}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Desea realizar el test?" styles={selectStyles} isClearable={false}/>
+                        </div>
+                    </div>
+                    {si_depresion == 'No' ? 
+                    <></>
+                    :
+                    <form id='internal-form' action='' className='position-relative'>
+                        
+                        <div className='row mt-4 mb-4'>
+                            <div className='col-12'>
+                                <Test3></Test3>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    }
+                </div>
+        </div>
       
-      <div style={{'marginBottom':'50px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
+      
+      <div style={{'marginBottom':'50px'}} onClick={()=>{
+        setFlagHistory(true);
+        setTimeout(()=>{
+            setFlagHistory(false);
+            navigate('/ModulsMedic/Date_Medic/MakeHistory5')
+        },1000)
+        
+        }}  className='ButtonElement'>
                                 <span  className='ButtonText'>Siguiente</span>
       </div>
     </React.Fragment>
