@@ -7,6 +7,8 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
+import { AppContext } from '../../../../../../../context';
+
 
 /**
  * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
@@ -316,6 +318,28 @@ const weekDays = [
 
 
 export default function Antecedentes() {
+    /* appContext */
+    let {flagHistory,typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData,beforeDate,setBeforeDate} = React.useContext(AppContext);
+    
+    /* useState */
+    let [pass,setPass] = React.useState(beforeDate);
+
+    /* functions */
+
+    const ReadInputs=(event,type)=>{
+          setPass({...pass,[type]:event.target.value})
+    }
+
+    /* useEffects */
+
+    React.useEffect(()=>{
+    
+      if(flagHistory){
+        // guardamos en el appContext la información del usuario
+        setBeforeDate(pass);
+      }
+    },[flagHistory])
+    
     return (
         <div className='row mt-4 mb-4'>
             <div className='col-12'>
@@ -329,25 +353,25 @@ export default function Antecedentes() {
                                 <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                                     <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                                         <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Antescedentes familiares</label>
-                                        <textarea className='form-control' id="current-illness" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                        <textarea value={pass?.antecedentes_familiares} onChange={(event)=>ReadInputs(event,'antecedentes_familiares')} className='form-control' id="current-illness" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
                                     </div>
                                 </div>
                                 <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                                     <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                                         <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>Antecedentes médicos</label>
-                                        <textarea className='form-control' id="family-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                        <textarea value={pass?.antecedentes_medicos} onChange={(event)=>ReadInputs(event,'antecedentes_medicos')} className='form-control' id="family-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
                                     </div>
                                 </div>
                                 <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                                     <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                                         <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>historial educativo</label>
-                                        <textarea className='form-control' id="pathological-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                        <textarea value={pass?.historial_educativo} onChange={(event)=>ReadInputs(event,'historial_educativo')} className='form-control' id="pathological-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
                                     </div>
                                 </div>
                                 <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                                     <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                                         <label htmlFor="exampleFormControlTextarea1" className='form-label mb-3 lh-sm fs-5- ff-monse-regular- tx-light-black-'>historial laboral</label>
-                                        <textarea className='form-control' id="pharmacological-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
+                                        <textarea value={pass?.historial_laboral} onChange={(event)=>ReadInputs(event,'historial_laboral')} className='form-control' id="pharmacological-history" rows="4" placeholder='Ingrese una corta descripción aquí'></textarea>
                                     </div>
                                 </div>
                             </form>

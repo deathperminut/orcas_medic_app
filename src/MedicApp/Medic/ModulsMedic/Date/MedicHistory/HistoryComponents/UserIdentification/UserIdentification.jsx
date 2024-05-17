@@ -365,7 +365,7 @@ export default function UserIdentification() {
 
     /* AppContext */
 
-    let {typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData} = React.useContext(AppContext);
+    let {flagHistory,setFlagHistory,typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData} = React.useContext(AppContext);
 
     /* useEffect */
 
@@ -440,6 +440,16 @@ export default function UserIdentification() {
     }
     }
 
+    /* useEffects */
+
+    React.useEffect(()=>{
+    
+      if(flagHistory){
+        // guardamos en el appContext la información del usuario
+        setUserDateData(Data);
+      }
+    },[flagHistory])
+
     
     return (
         <div className='row mt-4 mb-4'>
@@ -482,7 +492,7 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                     <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                         <div className='form-floating inner-addon- left-addon-'>
-                        <Select value={{'value':Data['tipo_identificacion'],'label':Data['tipo_identificacion']}} onChange={(event)=>ReadSelect(event,'tipo_identificacion')} id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true}/>
+                        <Select value={{'value':Data['tipo_identificacion'],'label':Data['tipo_identificacion']}} onChange={(event)=>ReadSelect(event,'tipo_identificacion')} id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={false}/>
                         </div>
                     </div>
                     <div style={{'position':'relative','bottom':'7px'}} className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
@@ -527,7 +537,7 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                                 <div className='form-floating inner-addon- left-addon-'>
-                                <Select value={{'value':Data['genero'],'label':Data['genero']}} onChange={(event)=>ReadSelect(event,'genero')} id='gender' options={Gender} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Genero" styles={selectStyles} isClearable={true}/>
+                                <Select value={{'value':Data['genero'],'label':Data['genero']}} onChange={(event)=>ReadSelect(event,'genero')} id='gender' options={Gender} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Genero" styles={selectStyles} isClearable={false}/>
                                 </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
@@ -568,24 +578,24 @@ export default function UserIdentification() {
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select value={{'value':Data['estado_civil'],'label':Data['estado_civil']}} onChange={(event)=>ReadSelect(event,'estado_civil')}  id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['estado_civil'],'label':Data['estado_civil']}} onChange={(event)=>ReadSelect(event,'estado_civil')}  id='marital-status' options={MaritalStatus} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Estado civil" styles={selectStyles} isClearable={false}/>
                             </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select value={{'value':Data['grupo_social'],'label':Data['grupo_social']}} onChange={(event)=>ReadSelect(event,'grupo_social')} id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['grupo_social'],'label':Data['grupo_social']}} onChange={(event)=>ReadSelect(event,'grupo_social')} id='populationGroup' options={PopulationGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo social" styles={selectStyles} isClearable={false}/>
                             </div>
                         </div>
                     </div>
                     <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select value={{'value':Data['grupo_etnico'],'label':Data['grupo_etnico']}} onChange={(event)=>ReadSelect(event,'grupo_etnico')} id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['grupo_etnico'],'label':Data['grupo_etnico']}} onChange={(event)=>ReadSelect(event,'grupo_etnico')} id='ethnicGroup' options={EthnicGroup} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Grupo étnico" styles={selectStyles} isClearable={false}/>
                             </div>
                         </div>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <Select value={{'value':Data['religion'],'label':Data['religion']}} onChange={(event)=>ReadSelect(event,'religion')} id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={true}/>
+                            <Select value={{'value':Data['religion'],'label':Data['religion']}} onChange={(event)=>ReadSelect(event,'religion')} id='religion' options={Religion} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Religion" styles={selectStyles} isClearable={false}/>
                             </div>
                         </div>
                     </div>
