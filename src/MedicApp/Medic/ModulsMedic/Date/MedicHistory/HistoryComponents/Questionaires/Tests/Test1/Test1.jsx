@@ -7,314 +7,55 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import makeAnimated from 'react-select/animated';
-/**
- * MENSAJES PERSONALIZADOS AL BUSCAR O CARGAR OPCIONES EN REACT SELECT
- */
+import Swal from 'sweetalert2';
+import { AppContext } from '../../../../../../../../../context';
+import ResultsTest from '../../ResultsTest/ResultsTest';
 
-const { NoOptionsMessage } = components;
-
-const customNoOptionsMessage = props => (
-  <NoOptionsMessage {...props} className="custom-no-options-message-internal-form-">No registrado</NoOptionsMessage>
-);
-
-const { LoadingMessage } = components;
-
-const customLoadingMessage = props => (
-  <LoadingMessage {...props} className="custom-loading-message-internal-form-">Cargando</LoadingMessage>
-);
-
-/**
- * ANIMATE DELETE MULTISELECT
- */
-
-const animatedComponents = makeAnimated();
-
-/**
- * Data que llena los select
- */
-
-const Parentage = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-const MaritalStatus = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-const PopulationGroup  = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-const EthnicGroup  = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-const Religion  = [
-  { value: "opcion-uno", label: "Opcion uno" },
-  { value: "opcion-dos", label: "Opcion dos" },
-  { value: "opcion-tres", label: "Opcion tres" }
-];
-
-/**
- * Se genera componente nuevo para soportar el placeholder animado del input 
- */
-
-const { ValueContainer, Placeholder } = components;
-
-const CustomValueContainer = ({ children, ...props }) => {
-  const { inputId, placeholder } = props.selectProps;
-  return (
-    <ValueContainer {...props}>
-      <Placeholder htmlFor={inputId} {...props}>
-        {placeholder}
-      </Placeholder>
-      {React.Children.map(children, child =>
-        child && child.type !== Placeholder ? child : null
-      )}
-    </ValueContainer>
-  );
-};
-
-/**
-* Constante que soporta todo el cambio de los estilo del select
-*/
-
-const selectStyles = {
-  /**
-  * Estilos del icono del dropdown del select
-  * Estilos del separador del select
-  * Estilos del icono de cerrar del select
-  */
-  dropdownIndicator: (styles) => ({ ...styles, 
-    color: "#d1a207", 
-    padding: 0, paddingTop: '0.34rem !important', 
-    paddingRight: '0.5rem !important',
-    width: '25px',
-    height: '25px',
-    "&:hover": {
-      color: "var(--color-black-)",
-    } 
-  }),
-  indicatorSeparator: (styles) => ({ ...styles, display: "none" }),
-  clearIndicator: (styles) => ({ ...styles, 
-    color: "white", 
-    padding: 0, 
-    paddingTop: '0.05rem !important',
-    width: '15px',
-    height: '15px',
-    "&:hover": {
-      color: "white",
-    } 
-  }),
-  /**
-  * Estilos del input global
-  */
-  control: () => ({
-  fontSize: 14,
-  display: "flex",
-  alignItems: "center",
-  alignSelf: "start",
-  justifyContent: "start",
-  height: 'auto',
-  minHeight: 50,
-  maxHeight: 150,
-  paddingLeft: '2.1rem',
-  paddingTop: '0.3rem',
-  width: "100%",
-  backgroundColor: 'transparent',
-  borderRadius: 0,
-  borderBottom: "1px solid #d1a207",
-  }),
-  /**
-  * EESTILOS DEL INPUT
-  */
-  input: (provided) => ({
-  ...provided,
-  color: 'var(--color-quaternary-gray-)',
-  fontSize: 12,
-  textTransform: 'uppercase',
-  fontFamily: 'var(--font-family-regular-)',
-  }),
-  /**
-  * Estilos del menu desplegable del select
-  */
-  menu: (styles) => ({
-  ...styles,
-  border: 'none',
-  backgroundColor: 'var(--color-secondary-white-rgba-)',
-  boxShadow: 'var(--box-shadow-2-)',
-  borderRadius: '1rem',
-  padding: 0,
-  marginTop: 8,
-  marginBottom: 0,
-  height: 'auto',
-  minHeight: 'auto',
-  maxHeight: 300,
-  overflow: "hidden",
-  color: 'var(--color-quaternary-gray-)',
-  fontSize: 12,
-  textTransform: 'uppercase',
-  fontFamily: 'var(--font-family-regular-)',
-  }),
-  menuList: () => ({
-    paddingTop: 0,
-    paddingBottom: 0,
-    height: 'auto',
-    minHeight: 'auto',
-    maxHeight: 300,
-    overflow: "auto",
-    "::-webkit-scrollbar": {
-      width: "0px !important",
-      height: "0px !important",
-    },
-    "::-webkit-scrollbar-track": {
-      background: "transparent !important"
-    },
-    "::-webkit-scrollbar-thumb": {
-      background: "transparent !important"
-    },
-    "::-webkit-scrollbar-thumb:hover": {
-      background: "transparent !important"
-    }
-  }),
-  /**
-  * Estilos de las opciones desplegables
-  */
-  option: (provided, state) => ({
-  ...provided,
-  fontSize: 11,
-  textTransform: 'uppercase',
-  backgroundColor: state.isSelected ? "var(--color-purple-)" : "var(--color-secondary-white-rgba-)",
-  fontFamily: 'var(--font-family-regular-)',
-  padding: '0.5rem 0.8rem 0.5rem 0.8rem',
-  borderRadius: '1rem',
-  ":hover": {
-  background: "var(--color-purple-)",
-  color: 'var(--color-white-)',
-  }
-  }),
-  /**
-  * Estilos del contenedor
-  */
-  container: (provided, state) => ({
-  ...provided,
-  marginTop: 0,
-  width: '100%',
-  position: 'relative',
-  flex: '1 1 auto'
-  }),
-  valueContainer: (provided, state) => ({
-  ...provided,
-  overflow: "visible"
-  }),
-  /**
-  * Estilos placeholder del input
-  */
-  placeholder: (provided, state) => ({
-  ...provided,
-  width: '100%',
-  position: "absolute",
-  top: state.hasValue || state.selectProps.inputValue ? -15 : "28%",
-  left: state.hasValue || state.selectProps.inputValue ? -32 : "0%",
-  transition: "top 0.1s, font-size 0.1s",
-  color: 'var(--color-quaternary-gray-)',
-  fontSize: state.hasValue || state.selectProps.inputValue ? 13 : "14px",
-  lineHeight: 1.25,
-  fontFamily: 'var(--font-family-regular-)',
-  overflow: 'hidden',
-  textAlign: 'start',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap'
-  }),
-  /**
-  * Estilos texto en el input
-  */
-  singleValue: (styles) => ({ 
-  ...styles, 
-  fontSize: 12,
-  textTransform: 'uppercase',
-  color: "var(--color-quaternary-gray-)", 
-  fontFamily: 'var(--font-family-regular-)', 
-  padding: '3px',
-  margin: '0px',
-  marginTop: '7px',
-  marginLeft: 0,
-  marginRight: 0
-  }),
-  multiValue: (styles) => ({ 
-    ...styles, 
-    backgroundColor: 'var(--color-secondary-white-rgba-)',
-    boxShadow: 'var(--box-shadow-2-)',
-    borderRadius: '1rem',
-    margin: '2px',
-    alignItems: 'center',
-    alignSelf: 'center',
-  }),
-  multiValueLabel: (styles, { data }) => ({
-    ...styles,
-    fontFamily: 'var(--font-family-regular-)',
-    fontSize: 12,
-    textTransform: 'uppercase',
-    color: 'var(--color-quaternary-gray-)',
-    borderRadius: '1rem',
-    padding: '5px',
-    paddingLeft: '0.5rem',
-    paddingRight: '0.6rem',
-    paddingBottom: '0.3rem'
-  }),
-  multiValueRemove: (styles, { data }) => ({
-    ...styles,
-    borderRadius: '6rem',
-    paddingLeft: '6px',
-    width: '26px',
-    height: '26px',
-    color: 'var(--color-black-)',
-    backgroundColor: 'var(--color-secondary-gray-)',
-    ':hover': {
-      color: 'var(--color-white-)',
-      backgroundColor: 'var(--color-secondary-purple-)',
-    }
-  })
-}
-
-/**
- * MESES Y DIAS EN ESPAÑOL PARA EL DATEPICKER
- */
-
-const months = [
-  ["Ene", "Ene"],
-  ["Feb", "Feb"],
-  ["Mar", "Mar"],
-  ["Abr", "Abr"],
-  ["May", "May"],
-  ["Jun", "Jun"],
-  ["Jul", "Jul"],
-  ["Agos", "Ago"],
-  ["Sep", "Sep"],
-  ["Oct", "Oct"],
-  ["Nov", "Nov"],
-  ["Dic", "Dic"],
-]
-const weekDays = [
-  ["Lun", "Lu"],
-  ["Mar", "Ma"],
-  ["Mie", "Mi"],
-  ["Jue", "Ju"],
-  ["Vie", "Vi"],
-  ["Sab", "Sa"],
-  ["Dom", "Do"],
-]
 
 
 export default function Test1() {
+
+    /* appContext */
+
+    let {flagHistory,typeDate,setTypeDate,dniDateUser,setDniDateUser,token,general,setGeneral} = React.useContext(AppContext);
+
+
+    /* useState */
+    
+    let [questionario,setQuestionario] = React.useState(general);
+
+    /* functions */
+
+    const ReadCheckbox=(event,type,value)=>{
+
+        // Guardamos la información de los questionarios
+        setQuestionario({...questionario,[type]:value});
+
+    }
+
+    const sumData=()=>{
+        let keys = Object.keys(questionario);
+        let suma = 0
+
+        for (var i=0;i< keys.length; i++){
+            suma = suma + questionario[keys[i]]
+        }
+        return suma
+    } 
+    
+    /* useEffect */
+    
+    React.useEffect(()=>{
+
+        if(flagHistory){
+            // guardamos en el appContext la información del usuario
+            setGeneral(questionario);
+        }
+
+    },[flagHistory])
+
+
+
     return (
         <>
 
@@ -334,13 +75,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.feliz_contenido == 0} onClick={(event)=>ReadCheckbox(event,'feliz_contenido',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.feliz_contenido == 1} onClick={(event)=>ReadCheckbox(event,'feliz_contenido',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -351,13 +92,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.feliz_contenido == 2} onClick={(event)=>ReadCheckbox(event,'feliz_contenido',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.feliz_contenido == 3} onClick={(event)=>ReadCheckbox(event,'feliz_contenido',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -376,13 +117,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.triste_deprimido == 0} onClick={(event)=>ReadCheckbox(event,'triste_deprimido',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.triste_deprimido == 1} onClick={(event)=>ReadCheckbox(event,'triste_deprimido',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -393,13 +134,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.triste_deprimido == 2} onClick={(event)=>ReadCheckbox(event,'triste_deprimido',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.triste_deprimido == 3} onClick={(event)=>ReadCheckbox(event,'triste_deprimido',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -417,13 +158,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.irritable_mal_humor == 0} onClick={(event)=>ReadCheckbox(event,'irritable_mal_humor',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.irritable_mal_humor == 1} onClick={(event)=>ReadCheckbox(event,'irritable_mal_humor',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -434,13 +175,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.irritable_mal_humor == 2} onClick={(event)=>ReadCheckbox(event,'irritable_mal_humor',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.irritable_mal_humor == 3} onClick={(event)=>ReadCheckbox(event,'irritable_mal_humor',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -458,13 +199,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ansioso_preocupado == 0} onClick={(event)=>ReadCheckbox(event,'ansioso_preocupado',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ansioso_preocupado == 1} onClick={(event)=>ReadCheckbox(event,'ansioso_preocupado',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -475,13 +216,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ansioso_preocupado == 2} onClick={(event)=>ReadCheckbox(event,'ansioso_preocupado',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ansioso_preocupado == 3} onClick={(event)=>ReadCheckbox(event,'ansioso_preocupado',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -499,13 +240,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_negativos == 0} onClick={(event)=>ReadCheckbox(event,'pensamientos_negativos',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_negativos == 1} onClick={(event)=>ReadCheckbox(event,'pensamientos_negativos',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -516,13 +257,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_negativos == 2} onClick={(event)=>ReadCheckbox(event,'pensamientos_negativos',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_negativos == 3} onClick={(event)=>ReadCheckbox(event,'pensamientos_negativos',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -540,13 +281,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.energia_vitalidad == 0} onClick={(event)=>ReadCheckbox(event,'energia_vitalidad',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.energia_vitalidad == 1} onClick={(event)=>ReadCheckbox(event,'energia_vitalidad',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -557,13 +298,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.energia_vitalidad == 2} onClick={(event)=>ReadCheckbox(event,'energia_vitalidad',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.energia_vitalidad == 3} onClick={(event)=>ReadCheckbox(event,'energia_vitalidad',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -581,13 +322,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cansado_fatigado == 0} onClick={(event)=>ReadCheckbox(event,'cansado_fatigado',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cansado_fatigado == 1} onClick={(event)=>ReadCheckbox(event,'cansado_fatigado',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -598,13 +339,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cansado_fatigado == 2} onClick={(event)=>ReadCheckbox(event,'cansado_fatigado',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cansado_fatigado == 3} onClick={(event)=>ReadCheckbox(event,'cansado_fatigado',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -622,13 +363,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_dormir_descansar == 0} onClick={(event)=>ReadCheckbox(event,'problemas_dormir_descansar',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_dormir_descansar == 1} onClick={(event)=>ReadCheckbox(event,'problemas_dormir_descansar',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -639,13 +380,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_dormir_descansar == 2} onClick={(event)=>ReadCheckbox(event,'problemas_dormir_descansar',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_dormir_descansar == 3} onClick={(event)=>ReadCheckbox(event,'problemas_dormir_descansar',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -663,13 +404,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cambios_apetito_alimentacion == 0} onClick={(event)=>ReadCheckbox(event,'cambios_apetito_alimentacion',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cambios_apetito_alimentacion == 1} onClick={(event)=>ReadCheckbox(event,'cambios_apetito_alimentacion',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -680,13 +421,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cambios_apetito_alimentacion == 2} onClick={(event)=>ReadCheckbox(event,'cambios_apetito_alimentacion',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.cambios_apetito_alimentacion == 3} onClick={(event)=>ReadCheckbox(event,'cambios_apetito_alimentacion',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -704,13 +445,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.dificultad_concentracion == 0} onClick={(event)=>ReadCheckbox(event,'dificultad_concentracion',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.dificultad_concentracion == 1} onClick={(event)=>ReadCheckbox(event,'dificultad_concentracion',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -721,13 +462,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.dificultad_concentracion == 2} onClick={(event)=>ReadCheckbox(event,'dificultad_concentracion',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.dificultad_concentracion == 3} onClick={(event)=>ReadCheckbox(event,'dificultad_concentracion',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -754,13 +495,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.conectado_familia_amigos == 0} onClick={(event)=>ReadCheckbox(event,'conectado_familia_amigos',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.conectado_familia_amigos == 1} onClick={(event)=>ReadCheckbox(event,'conectado_familia_amigos',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -771,13 +512,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.conectado_familia_amigos == 2} onClick={(event)=>ReadCheckbox(event,'conectado_familia_amigos',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.conectado_familia_amigos == 3} onClick={(event)=>ReadCheckbox(event,'conectado_familia_amigos',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -796,13 +537,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.aislado_solo == 0} onClick={(event)=>ReadCheckbox(event,'aislado_solo',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.aislado_solo == 1} onClick={(event)=>ReadCheckbox(event,'aislado_solo',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -813,13 +554,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.aislado_solo == 2} onClick={(event)=>ReadCheckbox(event,'aislado_solo',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.aislado_solo == 3} onClick={(event)=>ReadCheckbox(event,'aislado_solo',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -837,13 +578,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_relaciones_sociales == 0} onClick={(event)=>ReadCheckbox(event,'problemas_relaciones_sociales',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_relaciones_sociales == 1} onClick={(event)=>ReadCheckbox(event,'problemas_relaciones_sociales',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -854,13 +595,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_relaciones_sociales == 2} onClick={(event)=>ReadCheckbox(event,'problemas_relaciones_sociales',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_relaciones_sociales == 3} onClick={(event)=>ReadCheckbox(event,'fproblemas_relaciones_sociales',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -878,13 +619,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodo_situaciones_sociales== 0} onClick={(event)=>ReadCheckbox(event,'comodo_situaciones_sociales',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodo_situaciones_sociales == 1} onClick={(event)=>ReadCheckbox(event,'comodo_situaciones_sociales',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -895,13 +636,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodo_situaciones_sociales == 2} onClick={(event)=>ReadCheckbox(event,'comodo_situaciones_sociales',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodo_situaciones_sociales == 3} onClick={(event)=>ReadCheckbox(event,'comodo_situaciones_sociales',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -919,13 +660,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.expresion_emociones_necesidades == 0} onClick={(event)=>ReadCheckbox(event,'expresion_emociones_necesidades',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.expresion_emociones_necesidades == 1} onClick={(event)=>ReadCheckbox(event,'expresion_emociones_necesidades',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -936,13 +677,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.expresion_emociones_necesidades == 2} onClick={(event)=>ReadCheckbox(event,'expresion_emociones_necesidades',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.expresion_emociones_necesidades == 3} onClick={(event)=>ReadCheckbox(event,'expresion_emociones_necesidades',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -960,13 +701,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.confianza_en_otros == 0} onClick={(event)=>ReadCheckbox(event,'confianza_en_otros',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.confianza_en_otros == 1} onClick={(event)=>ReadCheckbox(event,'confianza_en_otros',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -977,13 +718,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.confianza_en_otros == 2} onClick={(event)=>ReadCheckbox(event,'confianza_en_otros',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.confianza_en_otros == 3} onClick={(event)=>ReadCheckbox(event,'confianza_en_otros',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1001,13 +742,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.culpa_avergonzado == 0} onClick={(event)=>ReadCheckbox(event,'culpa_avergonzado',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.culpa_avergonzado == 1} onClick={(event)=>ReadCheckbox(event,'culpa_avergonzado',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1018,13 +759,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.culpa_avergonzado == 2} onClick={(event)=>ReadCheckbox(event,'culpa_avergonzado',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.culpa_avergonzado == 3} onClick={(event)=>ReadCheckbox(event,'culpa_avergonzado',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1042,13 +783,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.a_gusto_consigomismo == 0} onClick={(event)=>ReadCheckbox(event,'a_gusto_consigomismo',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.a_gusto_consigomismo == 1} onClick={(event)=>ReadCheckbox(event,'a_gusto_consigomismo',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1059,13 +800,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.a_gusto_consigomismo == 2} onClick={(event)=>ReadCheckbox(event,'a_gusto_consigomismo',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.a_gusto_consigomismo == 3} onClick={(event)=>ReadCheckbox(event,'a_gusto_consigomismo',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1083,13 +824,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.manejo_del_estres == 0} onClick={(event)=>ReadCheckbox(event,'manejo_del_estres',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.manejo_del_estres == 1} onClick={(event)=>ReadCheckbox(event,'manejo_del_estres',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1100,13 +841,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.manejo_del_estres == 2} onClick={(event)=>ReadCheckbox(event,'manejo_del_estres',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.manejo_del_estres == 3} onClick={(event)=>ReadCheckbox(event,'manejo_del_estres',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1124,13 +865,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_autolesion_suicidio == 0} onClick={(event)=>ReadCheckbox(event,'pensamientos_autolesion_suicidio',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_autolesion_suicidio == 1} onClick={(event)=>ReadCheckbox(event,'pensamientos_autolesion_suicidio',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1141,13 +882,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_autolesion_suicidio == 2} onClick={(event)=>ReadCheckbox(event,'pensamientos_autolesion_suicidio',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.pensamientos_autolesion_suicidio == 3} onClick={(event)=>ReadCheckbox(event,'pensamientos_autolesion_suicidio',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1174,13 +915,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_realizar_actividades_cotidianas == 0} onClick={(event)=>ReadCheckbox(event,'capaz_realizar_actividades_cotidianas',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_realizar_actividades_cotidianas == 1} onClick={(event)=>ReadCheckbox(event,'capaz_realizar_actividades_cotidianas',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1191,13 +932,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_realizar_actividades_cotidianas == 2} onClick={(event)=>ReadCheckbox(event,'capaz_realizar_actividades_cotidianas',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_realizar_actividades_cotidianas == 3} onClick={(event)=>ReadCheckbox(event,'capaz_realizar_actividades_cotidianas',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1216,13 +957,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_trabajo_escuela == 0} onClick={(event)=>ReadCheckbox(event,'problemas_trabajo_escuela',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_trabajo_escuela == 1} onClick={(event)=>ReadCheckbox(event,'problemas_trabajo_escuela',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1233,13 +974,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_trabajo_escuela == 2} onClick={(event)=>ReadCheckbox(event,'problemas_trabajo_escuela',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_trabajo_escuela == 3} onClick={(event)=>ReadCheckbox(event,'problemas_trabajo_escuela',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1257,13 +998,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_cuidarse == 0} onClick={(event)=>ReadCheckbox(event,'capaz_cuidarse',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_cuidarse == 1} onClick={(event)=>ReadCheckbox(event,'capaz_cuidarse',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1274,13 +1015,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_cuidarse == 2} onClick={(event)=>ReadCheckbox(event,'capaz_cuidarse',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_cuidarse == 3} onClick={(event)=>ReadCheckbox(event,'capaz_cuidarse',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1298,13 +1039,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_decisiones == 0} onClick={(event)=>ReadCheckbox(event,'problemas_decisiones',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_decisiones == 1} onClick={(event)=>ReadCheckbox(event,'problemas_decisiones',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1315,13 +1056,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_decisiones == 2} onClick={(event)=>ReadCheckbox(event,'problemas_decisiones',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.problemas_decisiones == 3} onClick={(event)=>ReadCheckbox(event,'problemas_decisiones',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1339,13 +1080,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.optimista_sobre_futuro == 0} onClick={(event)=>ReadCheckbox(event,'optimista_sobre_futuro',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.optimista_sobre_futuro == 1} onClick={(event)=>ReadCheckbox(event,'optimista_sobre_futuro',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1356,13 +1097,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.optimista_sobre_futuro == 2} onClick={(event)=>ReadCheckbox(event,'optimista_sobre_futuro',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.optimista_sobre_futuro == 3} onClick={(event)=>ReadCheckbox(event,'optimista_sobre_futuro',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1380,13 +1121,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.hobbies_intereses == 0} onClick={(event)=>ReadCheckbox(event,'hobbies_intereses',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.hobbies_intereses == 1} onClick={(event)=>ReadCheckbox(event,'hobbies_intereses',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1397,13 +1138,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.hobbies_intereses == 2} onClick={(event)=>ReadCheckbox(event,'hobbies_intereses',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.hobbies_intereses == 3} onClick={(event)=>ReadCheckbox(event,'hobbies_intereses',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1421,13 +1162,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.motivado_hacer_cosas_que_gustan == 0} onClick={(event)=>ReadCheckbox(event,'motivado_hacer_cosas_que_gustan',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.motivado_hacer_cosas_que_gustan == 1} onClick={(event)=>ReadCheckbox(event,'motivado_hacer_cosas_que_gustan',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1438,13 +1179,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.motivado_hacer_cosas_que_gustan == 2} onClick={(event)=>ReadCheckbox(event,'motivado_hacer_cosas_que_gustan',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.motivado_hacer_cosas_que_gustan == 3} onClick={(event)=>ReadCheckbox(event,'motivado_hacer_cosas_que_gustan',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1462,13 +1203,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.satisfecho_vida_general == 0} onClick={(event)=>ReadCheckbox(event,'satisfecho_vida_general',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.satisfecho_vida_general == 1} onClick={(event)=>ReadCheckbox(event,'satisfecho_vida_general',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1479,13 +1220,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.satisfecho_vida_general == 2} onClick={(event)=>ReadCheckbox(event,'satisfecho_vida_general',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.satisfecho_vida_general == 3} onClick={(event)=>ReadCheckbox(event,'satisfecho_vida_general',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1503,13 +1244,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_disfrutar_vida == 0} onClick={(event)=>ReadCheckbox(event,'capaz_disfrutar_vida',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_disfrutar_vida == 1} onClick={(event)=>ReadCheckbox(event,'capaz_disfrutar_vida',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1520,13 +1261,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_disfrutar_vida == 2} onClick={(event)=>ReadCheckbox(event,'capaz_disfrutar_vida',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.capaz_disfrutar_vida == 3} onClick={(event)=>ReadCheckbox(event,'capaz_disfrutar_vida',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1544,13 +1285,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.vida_significativa == 0} onClick={(event)=>ReadCheckbox(event,'vida_significativa',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.vida_significativa == 1} onClick={(event)=>ReadCheckbox(event,'vida_significativa',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1561,13 +1302,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.vida_significativa == 2} onClick={(event)=>ReadCheckbox(event,'vida_significativa',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.vida_significativa == 3} onClick={(event)=>ReadCheckbox(event,'vida_significativa',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1594,13 +1335,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.alimentacion_saludable == 0} onClick={(event)=>ReadCheckbox(event,'alimentacion_saludable',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.alimentacion_saludable == 1} onClick={(event)=>ReadCheckbox(event,'alimentacion_saludable',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1611,13 +1352,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.alimentacion_saludable == 2} onClick={(event)=>ReadCheckbox(event,'alimentacion_saludable',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.alimentacion_saludable == 3} onClick={(event)=>ReadCheckbox(event,'alimentacion_saludable',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1636,13 +1377,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ejercicio_fisico_regular == 0} onClick={(event)=>ReadCheckbox(event,'ejercicio_fisico_regular',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ejercicio_fisico_regular == 1} onClick={(event)=>ReadCheckbox(event,'ejercicio_fisico_regular',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1653,13 +1394,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ejercicio_fisico_regular == 2} onClick={(event)=>ReadCheckbox(event,'ejercicio_fisico_regular',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.ejercicio_fisico_regular == 3} onClick={(event)=>ReadCheckbox(event,'ejercicio_fisico_regular',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1677,13 +1418,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.suficiente_sueno == 0} onClick={(event)=>ReadCheckbox(event,'suficiente_sueno',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.suficiente_sueno == 1} onClick={(event)=>ReadCheckbox(event,'suficiente_sueno',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1694,13 +1435,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.suficiente_sueno == 2} onClick={(event)=>ReadCheckbox(event,'suficiente_sueno',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.suficiente_sueno == 3} onClick={(event)=>ReadCheckbox(event,'suficiente_sueno',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1718,13 +1459,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.consumo_excesivo_alcohol_drogas == 0} onClick={(event)=>ReadCheckbox(event,'consumo_excesivo_alcohol_drogas',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.consumo_excesivo_alcohol_drogas == 1} onClick={(event)=>ReadCheckbox(event,'consumo_excesivo_alcohol_drogas',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1735,13 +1476,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.consumo_excesivo_alcohol_drogas == 2} onClick={(event)=>ReadCheckbox(event,'consumo_excesivo_alcohol_drogas',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.consumo_excesivo_alcohol_drogas == 3} onClick={(event)=>ReadCheckbox(event,'consumo_excesivo_alcohol_drogas',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1759,13 +1500,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.fumador == 0} onClick={(event)=>ReadCheckbox(event,'fumador',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.fumador == 1} onClick={(event)=>ReadCheckbox(event,'fumador',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1776,13 +1517,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.fumador == 2} onClick={(event)=>ReadCheckbox(event,'fumador',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.fumador == 3} onClick={(event)=>ReadCheckbox(event,'fumador',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1800,13 +1541,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.tecnicas_relajacion_meditacion == 0} onClick={(event)=>ReadCheckbox(event,'tecnicas_relajacion_meditacion',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.tecnicas_relajacion_meditacion == 1} onClick={(event)=>ReadCheckbox(event,'tecnicas_relajacion_meditacion',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1817,13 +1558,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.tecnicas_relajacion_meditacion == 2} onClick={(event)=>ReadCheckbox(event,'tecnicas_relajacion_meditacion',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.tecnicas_relajacion_meditacion == 3} onClick={(event)=>ReadCheckbox(event,'tecnicas_relajacion_meditacion',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1841,13 +1582,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.red_apoyo_social == 0} onClick={(event)=>ReadCheckbox(event,'red_apoyo_social',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.red_apoyo_social == 1} onClick={(event)=>ReadCheckbox(event,'red_apoyo_social',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1858,13 +1599,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.red_apoyo_social == 2} onClick={(event)=>ReadCheckbox(event,'red_apoyo_social',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.red_apoyo_social == 3} onClick={(event)=>ReadCheckbox(event,'red_apoyo_social',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1882,13 +1623,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.seguridad_entorno == 0} onClick={(event)=>ReadCheckbox(event,'seguridad_entorno',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.seguridad_entorno == 1} onClick={(event)=>ReadCheckbox(event,'seguridad_entorno',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1899,13 +1640,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.seguridad_entorno == 2} onClick={(event)=>ReadCheckbox(event,'seguridad_entorno',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.seguridad_entorno == 3} onClick={(event)=>ReadCheckbox(event,'seguridad_entorno',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1923,13 +1664,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.acceso_atencion_medica_salud_mental == 0} onClick={(event)=>ReadCheckbox(event,'acceso_atencion_medica_salud_mental',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.acceso_atencion_medica_salud_mental == 1} onClick={(event)=>ReadCheckbox(event,'acceso_atencion_medica_salud_mental',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1940,13 +1681,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.acceso_atencion_medica_salud_mental == 2} onClick={(event)=>ReadCheckbox(event,'acceso_atencion_medica_salud_mental',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.acceso_atencion_medica_salud_mental == 3} onClick={(event)=>ReadCheckbox(event,'acceso_atencion_medica_salud_mental',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1964,13 +1705,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodidad_buscar_ayuda == 0} onClick={(event)=>ReadCheckbox(event,'comodidad_buscar_ayuda',0)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Nunca</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodidad_buscar_ayuda == 1} onClick={(event)=>ReadCheckbox(event,'comodidad_buscar_ayuda',1)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>A veces</span>
                                                                 </label>
                                                             </div>
@@ -1981,13 +1722,13 @@ export default function Test1() {
                                                             <div className='d-flex flex-wrap flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center mt-4 mt-sm-4 mt-md-4 mt-lg-4 mt-xl-4 mt-xxl-4'>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodidad_buscar_ayuda == 2} onClick={(event)=>ReadCheckbox(event,'comodidad_buscar_ayuda',2)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Casi siempre</span>
                                                                 </label>
                                                             </div>
                                                             <div className='checks-radios- me-1'>
                                                                 <label>
-                                                                <input type="radio" name="radio"/>
+                                                                <input checked={questionario?.comodidad_buscar_ayuda == 3} onClick={(event)=>ReadCheckbox(event,'comodidad_buscar_ayuda',3)} type="checkbox" name="radio"/>
                                                                 <span className='lh-sm fs-5- ff-monse-regular- tx-dark-purple- font_medium'>Siempre</span>
                                                                 </label>
                                                             </div>
@@ -1999,6 +1740,8 @@ export default function Test1() {
                                             </ul>
                                         </div>
         </form>
+        
+        <ResultsTest type={'General'} result={sumData()}/>
         </>
     )
 }

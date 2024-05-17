@@ -354,11 +354,7 @@ export default function Questionaries() {
                                 <Test1></Test1>
                             </div>
                         </div>
-                        <div className='row mt-4 mb-4'>
-                            <div className='col-12'>
-                                <ResultsTest/>
-                            </div>
-                        </div>
+
                         {/* <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
                             <Select id='type-identification' options={TypeIdentification} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Selecciona los cuestionarios adicionales" isMulti={true} onChange={ReadSelect} value={forms} styles={selectStyles} isClearable={true}/>
