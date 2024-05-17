@@ -1,5 +1,5 @@
 import React from 'react'
-import './MedicHistory_2.css'
+import './MedicHistory_4.css'
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";

@@ -1,10 +1,11 @@
 import React from 'react'
-import './MedicHistory_2.css'
+import './MedicHistory_3.css'
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
+import Swal from 'sweetalert2';
 
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../../../../context';
@@ -324,7 +325,20 @@ export default function MedicHistory_3() {
 
   /* APP CONTEXT */
 
-  let {typeDate,setTypeDate} =  React.useContext(AppContext);
+  let {filerepose,setFilerepose,fileActive,setFileActive,flagHistory,typeDate,setTypeDate} =  React.useContext(AppContext);
+  
+  /* useEffect */
+
+  React.useEffect(()=>{
+    if(filerepose == null || fileActive == null){
+        Swal.fire({
+            icon: 'info',
+            title: 'Registra los 2 archivos para continuar'
+        });
+        navigate('/ModulsMedic/Date_Medic/MakeHistory2')
+    }
+  },[])
+  /* useState */
 
 
   return (

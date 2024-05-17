@@ -5,6 +5,7 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
+import Preloader from '../../../../../components/Preloader/Preloader';
 
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../../../../context';
@@ -320,15 +321,27 @@ const weekDays = [
 
 export default function MedicHistory_2() {
 
+  let [preloader,setPreloader] = React.useState(false);
+
   let navigate = useNavigate()
 
   /* APP CONTEXT */
 
-  let {typeDate,setTypeDate} =  React.useContext(AppContext);
+  let {typeDate,setTypeDate,flagHistory,setFlagHistory} =  React.useContext(AppContext);
 
 
   return (
     <React.Fragment>
+      {
+                preloader ?
+                <>
+                
+                <Preloader></Preloader>
+                </>
+                :
+
+                <></>
+      }
       <div style={{'marginBottom':'100px'}} onClick={()=>{
         navigate('/ModulsMedic/Date_Medic/MakeHistory')}
         }  className='ButtonElement'>
@@ -357,7 +370,18 @@ export default function MedicHistory_2() {
       <></>
       }
       
-      <div style={{'marginBottom':'50px'}} onClick={()=>navigate('/ModulsMedic/Date_Medic/FinishProcess')}  className='ButtonElement'>
+      <div style={{'marginBottom':'50px'}} onClick={()=>{
+        setFlagHistory(true);
+        setPreloader(true);
+        setTimeout(()=>{
+            setFlagHistory(false);
+            setPreloader(false);
+            navigate('/ModulsMedic/Date_Medic/MakeHistory3');
+        },1000)
+        
+        
+
+        }}  className='ButtonElement'>
                                 <span  className='ButtonText'>Siguiente</span>
       </div>
     </React.Fragment>
