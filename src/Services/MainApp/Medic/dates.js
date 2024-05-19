@@ -22,6 +22,7 @@ const GetPdfPatient=async(identificacion,token)=>{
         headers: {
             Authorization: 'Token ' + token,
         },
+        responseType: 'blob' // <-- Añadir esta línea
     };
 
     let body={

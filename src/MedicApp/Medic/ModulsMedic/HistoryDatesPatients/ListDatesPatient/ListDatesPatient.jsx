@@ -131,11 +131,14 @@ export default function ListDatesPatient() {
 
         if(result){
             console.log(result.data);
+            // Crear una URL para el Blob
+            const url = URL.createObjectURL(result.data);
+            window.open(url);
             setPreloader(false);
-            Swal.fire({
-                icon: 'success',
-                title: 'Pdf generado correctamente'
-            })
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Pdf generado correctamente'
+            // })
         }
         
     }
