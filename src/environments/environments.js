@@ -41,6 +41,7 @@ export const environment = {
     // AGENDAMIENTO
     
     'crear_agendamiento':'agendamiento/crear-agendamiento/',
+    'actualizarAgendamiento':'agendamiento/actualizar/',
 
     // CITAS
 

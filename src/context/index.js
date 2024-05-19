@@ -61,7 +61,6 @@ function ProviderContext(props){
         setFlagHistory(false);
         setFileActive(null);
         setFilerepose(null);
-        
         setSi_ansiedad('No');
         setSi_depresion('No');
         setSi_estres('No');

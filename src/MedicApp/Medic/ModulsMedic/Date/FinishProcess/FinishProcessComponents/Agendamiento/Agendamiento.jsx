@@ -481,7 +481,7 @@ export default function Agendamiento() {
 
       // hacemos un ciclo e iteramos por cada cita para generar la cita y el agendamiento
       for (var i=0;i<listDates?.length;i++){
-        createDate(listDates[i])
+          await createDate(listDates[i])
       }
       Swal.fire({
         icon: 'success',

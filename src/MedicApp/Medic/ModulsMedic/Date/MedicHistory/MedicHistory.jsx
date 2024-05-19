@@ -365,6 +365,7 @@ export default function MedicHistory() {
       {typeDate == "Seguimiento regular"  ? 
       <>
       <UserIdentification></UserIdentification>
+      <Antecedentes></Antecedentes>
       <Questionaries></Questionaries>
       </>
       :

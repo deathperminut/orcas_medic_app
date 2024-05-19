@@ -311,7 +311,7 @@ export default function Validation() {
 
   let navigate = useNavigate()
   
-  let {filerepose,setFilerepose,fileActive,setFileActive,typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData,beforeDate,setBeforeDate,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,setFlagHistory} = React.useContext(AppContext);
+  let {setCitaAgend,filerepose,setFilerepose,fileActive,setFileActive,typeDate,setTypeDate,dniDateUser,setDniDateUser,token,userDateData,setUserDateData,beforeDate,setBeforeDate,depresion,setDepresion,ansiedad,setAnsiedad,estres,setEstres,general,setGeneral,setFlagHistory} = React.useContext(AppContext);
 
   /* useState */
 
@@ -587,6 +587,7 @@ export default function Validation() {
           });
           setFilerepose(null);
           setFileActive(null);
+          setCitaAgend(null);
           // nos dirigimos a la historia clinica
           navigate('/ModulsMedic/Date_Medic/MakeHistory')
           
@@ -1098,6 +1099,7 @@ export default function Validation() {
               icon: 'success',
               title: 'Todo Cargado correctamente'
             })
+            setCitaAgend(null);
             // nos dirigimos a la historia clinica
             navigate('/ModulsMedic/Date_Medic/MakeHistory')
           }

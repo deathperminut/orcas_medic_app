@@ -17,8 +17,21 @@ const crearAgendamiento=async(body,token)=>{
     return await axios.post(path,body,config);
 }
 
+const actualizarAgendamiento=async(body,token)=>{
+    const path  = environment.api + environment.actualizarAgendamiento;
+    let config = {
+        headers: {
+            Authorization: 'Token ' + token,
+        },
+    };
+
+
+
+    return await axios.put(path,body,config);
+}
 
 
 
 
-export {crearAgendamiento}
+
+export {crearAgendamiento,actualizarAgendamiento}

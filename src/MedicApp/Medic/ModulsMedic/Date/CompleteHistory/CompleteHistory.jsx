@@ -13,7 +13,7 @@ import { SaveUserData } from '../../../../../Services/Auth/LocalStorage';
 import { updateUser } from '../../../../../Services/MainApp/Users/User';
 import { actualizarAntescedentes } from '../../../../../Services/MainApp/Medic/MedicHistory/Antecedentes';
 import { actualizarCita, crearCita } from '../../../../../Services/MainApp/Medic/MedicHistory/Citas';
-import { crearAgendamiento } from '../../../../../Services/MainApp/Medic/MedicHistory/Agendamiento';
+import { actualizarAgendamiento, crearAgendamiento } from '../../../../../Services/MainApp/Medic/MedicHistory/Agendamiento';
 import { crearTestAnsiedad } from '../../../../../Services/MainApp/Medic/MedicHistory/test_ansiedad';
 import { crearTestGeneral } from '../../../../../Services/MainApp/Medic/MedicHistory/test_general';
 import { crearTestDepresion } from '../../../../../Services/MainApp/Medic/MedicHistory/test_depresion';
@@ -50,7 +50,8 @@ export default function CompleteHistory() {
             title: 'Ingresa una observación para guardar la historia'
         })
     }else{
-
+        
+        
         // GUARDAMOS LOS REGISTROS ESPECIFICOS Y LA INFORMACIÓN DEL USUARIO
         changeUserData();
     }
@@ -94,11 +95,19 @@ export default function CompleteHistory() {
     if(result){
         console.log(result.data);
         setPreloader(false);
-        // CREAMOS LA CITA
-        createDate();
+        if(citaAgend !== null){
+            // ACTUALIZAMOS EL AGENDAMIENTO
+            updateDateV2();
+        }else{
+            // CREAMOS LA CITA
+            createDate();
+        }
+        
     }
 
   }
+
+
 
   const createDate=async()=>{
     let result = undefined;
@@ -154,6 +163,70 @@ export default function CompleteHistory() {
         updateDate(InfoCita,result.data);
         
     }
+}
+
+
+const updateDateV2=async()=>{
+
+    let result = undefined;
+    setPreloader(true);
+
+    let body=new FormData();
+    body.append('id',citaAgend?.cita_id?.id);
+    body.append('fecha_realizacion_consulta',new Date());
+    body.append('tipo_cita',typeDate);
+    body.append('documento_test_reposo',filerepose);
+    body.append('documento_test_activo',fileActive);
+    body.append('id_agendamiento',citaAgend?.id);
+    body.append('doctor_id',userData?.id);
+    body.append('user_id',userDateData?.id);
+
+
+    console.log("DATOS ACTUALIZAR CITA: ",body);
+    
+    result = await actualizarCita(body,token).catch((error)=>{
+        console.log(error);
+        setPreloader(false);
+        Swal.fire({
+            icon: 'info',
+            title: 'Problemas para actualizar cita'
+        })
+    })
+
+    if(result){
+        console.log(result.data);
+        setPreloader(false);
+        // ACTUALIZAMOS EL AGENDAMIENTO A COMPLETADA
+        updateAgendamiento(result.data);
+        //createGeneral(result.data);
+        
+    }
+
+}
+
+const updateAgendamiento=async(infoDate)=>{
+
+    let result =  undefined;
+    setPreloader(true);
+    let body={
+        'id':infoDate?.id,
+        'es_completada':true,
+    }
+    result = await actualizarAgendamiento(body,token).catch((error)=>{
+        console.log(error);
+        setPreloader(false);
+        Swal.fire({
+            icon: 'info',
+            title: 'Problemas para actualizar cita'
+        })
+    })
+
+    if(result){
+        console.log(result.data);
+        setPreloader(false);
+        createGeneral(infoDate);
+    }
+
 }
 
 
