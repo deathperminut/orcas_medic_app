@@ -636,7 +636,7 @@ export default function PersonalForm() {
                     </div>
                 </div>
             </div>
-            <div onClick={UpdateUser}  className='ButtonElement' style={{'marginBottom':'20px'}}>
+            <div onClick={UpdateUser}  className='ButtonElement' style={{'marginBottom':'250px'}}>
                                 <span  className='ButtonText'>Actualizar</span>
             </div>                  
             </form>

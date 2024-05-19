@@ -146,6 +146,13 @@ export default function TableDates() {
 
                 <></>
         }
+        {supportList.length == 0 ? 
+        
+        <>
+          <p className='white font_medium'>No hay citas registradas</p>
+        </>
+        :
+        <>
         <div className='row mt-4 mb-4'>
           <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
             <div className='card border-0 rounded-0 w-100 bg-transparent'>
@@ -236,6 +243,9 @@ export default function TableDates() {
             />
           </div>
         </div>
+        </>
+        }
+        
     </React.Fragment>
   )
 }
