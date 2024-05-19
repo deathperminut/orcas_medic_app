@@ -791,6 +791,11 @@ export default function AdminPanel() {
                             </th>
                             <th scope="col" className='th-width-sm-'>
                               <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
+                                <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple- font_medium'>Super admin</span>
+                              </div>
+                            </th>
+                            <th scope="col" className='th-width-sm-'>
+                              <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
                                 <span className='fs-5- ff-monse-regular- fw-bold tx-dark-purple- font_medium'>Editar</span>
                               </div>
                             </th>
@@ -848,7 +853,18 @@ export default function AdminPanel() {
                                     <></>
                                     }
                                   </td>
-                                  
+                                  <td className='align-middle'>
+                                    {obj?.es_superusuario ? 
+                                    <div className='row gx-1 d-flex flex-row justify-content-center align-items-start align-self-start'>
+                                      <div className='col-auto'>
+                                          <MdGppGood size={'24'} color={'#d1a207'} />
+                                      </div>
+                                    </div>
+                                    :
+                                    <></>
+                                    }
+                                  </td>
+                                  {obj?.es_superusuario && userData?.es_superusuario ? 
                                   <td className='align-middle'>
                                     <div className='row gx-1 d-flex flex-row justify-content-center align-items-start align-self-start'>
                                       <div className='col-auto' onClick={()=>{
@@ -860,6 +876,24 @@ export default function AdminPanel() {
                                       </div>
                                     </div>
                                   </td>
+                                  :
+                                  <></>
+                                  }
+                                  {!obj?.es_superusuario  ? 
+                                  <td className='align-middle'>
+                                    <div className='row gx-1 d-flex flex-row justify-content-center align-items-start align-self-start'>
+                                      <div className='col-auto' onClick={()=>{
+                                        setSelectUser(index);
+                                        setShow(true);
+                                        }}>
+                                          <CiEdit size={'24'} color={'#d1a207'} style={{'cursor':'pointer'}}/>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  :
+                                  <></>
+                                  }
+                                  
                                 </tr>
                               )
                           })}
@@ -1249,7 +1283,8 @@ export default function AdminPanel() {
                       </div>
                     </div>
                   </div>
-                  <div className='row g-0 g-sm-0 g-md-2 g-lg-2 g-xl-2 g-xxl-2 mt-3'>
+                  {userData?.es_superusuario ? 
+                    <div className='row g-0 g-sm-0 g-md-2 g-lg-2 g-xl-2 g-xxl-2 mt-3'>
                     <div className='col-12 d-flex flex-column flex-sm-column flex-md-column flex-lg-column flex-xl-column flex-xxl-column justify-content-between align-items-center align-self-center mb-2'>
                     <p className='m-0 me-0 me-sm-3 me-md-3 me-lg-3 me-xl-3 me-xxl-3 mb-3 lh-sm text-center fs-5- ff-monse-regular- fw-normal tx-light-black-'>¿Desea activar este usuario <br /> <span className='fs-6- white'>(Aqui podra proporcionar el rol de  <strong>"Admin"</strong>)  a su usuario correspondiente</span></p>
                       <div className='d-flex flex-row justify-content-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-center align-self-center'>
@@ -1268,6 +1303,10 @@ export default function AdminPanel() {
                       </div>
                     </div>
                   </div>
+                  :
+                  <></>
+                  }
+                  
                   <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
                     <div className='col-auto'>
                       <button onClick={editUser} className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-dark-purple- bs-1- btn-offcanvas' type="button">

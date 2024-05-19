@@ -351,12 +351,19 @@ export default function Validation_history() {
       setPreloader(true);
       console.log("DATOS : ",userData?.identificacion)
       result = await GetPatientCompleteDates(dniUser,token).catch((error)=>{
-        console.log(error);
         setPreloader(false);
-        Swal.fire({
-          icon: 'info',
-          title: 'Problemas para cargar la información del paciente'
-        })
+        if(error?.response?.data?.error == "Error al retornar el objeto [User matching query does not exist.]"){
+
+          Swal.fire({
+            icon: 'info',
+            title: 'El usuario no se encuentra registrado como paciente, completa este paso en la administración de usuarios'
+          })
+        }else{
+            Swal.fire({
+              icon: 'info',
+              title: 'Problemas para verificar el usuario'
+            })
+        }
       })
 
       if(result){

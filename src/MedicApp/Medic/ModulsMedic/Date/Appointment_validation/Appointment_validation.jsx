@@ -153,6 +153,11 @@ export default function Appointment_validation() {
 
       }
 
+
+      const getDate=()=>{
+        // llamamos los mismo servicios 
+      }
+
   return (
     <React.Fragment>
         {
@@ -218,7 +223,7 @@ export default function Appointment_validation() {
                             <div className='row g-2'>
                               {dates.map((obj,index)=>{
                                 return(
-                                  <div className='col-12' key={index}>
+                                  <div className='col-12' onClick={()=>getDate(obj)} key={index} style={{'cursor':'pointer'}}>
                                     <div id="card-user-appointment" className='card border-0 rounded-3 w-100'>
                                       <div className='card-body w-100'>
                                         <div className='d-flex flex-row justify-content-between align-items-start align-self-center'>
