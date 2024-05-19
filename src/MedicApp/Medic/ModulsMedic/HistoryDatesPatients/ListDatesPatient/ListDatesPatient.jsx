@@ -25,8 +25,8 @@ export default function ListDatesPatient() {
     let [dates,setDates] = React.useState([]);
 
     React.useEffect(()=>{
-      console.log("DAtES PATIENT",);
-      setDates([...datesPatient].reverse());
+      console.log("DATES PATIENT");
+      setDates([...datesPatient.filter((obj,index)=>obj?.documento_topoplot_test !== null)].reverse());
     },[])
 
 
@@ -209,7 +209,7 @@ export default function ListDatesPatient() {
                               </div>
                             </td>
                             <td className='align-middle'>
-                              {obj?.analisis_senal_activo !== null ? 
+                              {obj?.documento_topoplot_test !== null ? 
                                 <div id='internal-form' className='w-100'>
                                 <p  className='p-0 text-center input-large- white font_medium'>
                                 <FaEye onClick={()=>{
