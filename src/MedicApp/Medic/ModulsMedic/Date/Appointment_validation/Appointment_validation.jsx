@@ -749,29 +749,29 @@ export default function Appointment_validation() {
                             <div className='row g-2'>
                               {dates.map((obj,index)=>{
                                 return(
-                                  <div className='col-12' onClick={()=>getDate(obj)} key={index} style={{'cursor':'pointer'}}>
+                                  <div className='col-12' key={index} >
                                     <div id="card-user-appointment" className='card border-0 rounded-3 w-100'>
                                       <div className='card-body w-100'>
                                         <div className='d-flex flex-row justify-content-between align-items-start align-self-center'>
                                           <div className='d-flex flex-row justify-content-start align-items-start align-self-center'>
                                             <div className='p-2 me-2 rounded-circle bg-burgundy-'></div>
-                                            <div className='w-auto'>
+                                            <div className='w-auto' onClick={()=>getDate(obj)}  style={{'cursor':'pointer'}}>
                                               <p className='m-0 lh-sm fs-4- ff-monse-regular- fw-normal tx-black- white font_medium'>{obj?.cita_id?.user_id?.primer_nombre + ' ' + obj?.cita_id?.user_id?.segundo_nombre + ' ' + obj?.cita_id?.user_id?.primer_apellido + ' ' + obj?.cita_id?.user_id?.segundo_apellido}</p>
                                             </div>
                                           </div>
                                         </div>
-                                        <div className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
+                                        <div onClick={()=>getDate(obj)}  style={{'cursor':'pointer'}} className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
                                           <div className='w-auto'>
                                             <p className='m-0 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-bold white font_medium'>Email</span> | <span className='fw-normal'>{obj?.cita_id?.user_id?.email}</span></p>
                                           </div>
                                         </div>
-                                        <div className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
+                                        <div onClick={()=>getDate(obj)}  style={{'cursor':'pointer'}} className='d-flex flex-row justify-content-start align-items-start align-self-center ps-4'>
                                           <div className='w-auto'>
                                             <p className='m-0 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-bold white font_medium'>Celular</span> | <span className='fw-normal'>{obj?.cita_id?.user_id?.numero_celular}</span></p>
                                           </div>
                                         </div>
                                         <div className='d-grid gap-3 d-flex flex-row justify-content-between align-items-center align-self-center mt-3 ps-4 pe-1'>
-                                          <p className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{GetDataHour(obj?.hora_inicio)[0]}</span> / <span className='fw-normal '>{GetDataHour(obj?.hora_inicio)[1]}</span></p>
+                                          <p onClick={()=>getDate(obj)}  style={{'cursor':'pointer'}} className='m-0 me-2 lh-sm fs-6- ff-monse-regular- tx-black- white'> <span className='fw-normal'>{GetDataHour(obj?.hora_inicio)[0]}</span> / <span className='fw-normal '>{GetDataHour(obj?.hora_inicio)[1]}</span></p>
                                           <a className='btn bg-transparent btn-transparent- p-0' data-bs-toggle="collapse" href={"#collapseExample"+index} role="button" aria-expanded="false" aria-controls={"collapseExample"+index}>
                                           <p className='p-0 m-0 lh-sm fs-6- ff-monse-regular- tx-neutral-purple- white'>Detalles</p>
                                           </a>

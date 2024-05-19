@@ -173,7 +173,7 @@ const updateDateV2=async()=>{
 
     let body=new FormData();
     body.append('id',citaAgend?.cita_id?.id);
-    body.append('fecha_realizacion_consulta',new Date());
+    body.append('fecha_realizacion_consulta',new Date().toISOString().slice(0, 16));
     body.append('tipo_cita',typeDate);
     body.append('documento_test_reposo',filerepose);
     body.append('documento_test_activo',fileActive);

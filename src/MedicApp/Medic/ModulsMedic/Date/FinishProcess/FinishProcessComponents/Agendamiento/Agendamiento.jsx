@@ -431,7 +431,6 @@ export default function Agendamiento() {
 
   const appendDate=()=>{
     if(date?.fecha !=="" && date?.medico !== "" && date?.hora !== "" && date?.minutos !== ""){
-        
         // GENERAMOS LA FECHA
         // Dividir las cadenas en sus componentes individuales
         const [year, month, day] = date?.fecha.split('-').map(Number);
