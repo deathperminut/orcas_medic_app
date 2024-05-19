@@ -171,10 +171,18 @@ const updateDateV2=async()=>{
     let result = undefined;
     setPreloader(true);
 
+    /* calculamos fecha actual */
+    let fechaActual =  new Date()
+    const milisegundosPorHora = 3600000; // Hay 3.600.000 milisegundos en una hora
+    const horasARestar = 5;
+    const milisegundosARestar = milisegundosPorHora * horasARestar;
+    const fechaConCincoHorasMenos = new Date(fechaActual.getTime() - milisegundosARestar);
+
     let body=new FormData();
     body.append('id',citaAgend?.cita_id?.id);
-    body.append('fecha_realizacion_consulta',new Date().toISOString().slice(0, 16));
+    body.append('fecha_realizacion_consulta',fechaConCincoHorasMenos.toISOString().slice(0, 16));
     body.append('tipo_cita',typeDate);
+    body.append('recomendaciones',valor);
     body.append('documento_test_reposo',filerepose);
     body.append('documento_test_activo',fileActive);
     body.append('id_agendamiento',citaAgend?.id);
@@ -209,7 +217,7 @@ const updateAgendamiento=async(infoDate)=>{
     let result =  undefined;
     setPreloader(true);
     let body={
-        'id':infoDate?.id,
+        'id':citaAgend?.id,
         'es_completada':true,
     }
     result = await actualizarAgendamiento(body,token).catch((error)=>{
@@ -240,6 +248,7 @@ const updateDate=async(InfoCita,InfoAgend)=>{
     body.append('id',InfoCita?.id);
     body.append('fecha_realizacion_consulta',InfoCita?.fecha_realizacion_consulta);
     body.append('tipo_cita',typeDate);
+    body.append('recomendaciones',valor);
     body.append('documento_test_reposo',filerepose);
     body.append('documento_test_activo',fileActive);
     body.append('id_agendamiento',InfoAgend?.id);
