@@ -50,6 +50,26 @@ function ProviderContext(props){
         setSelectCompleteDate(null);
         setDatesPatient([]);
         setUserHistoryDni(null);
+        setDniDateUser("");
+        setUserDateData(null);
+        setTypeDate(null);
+        setBeforeDate(null);
+        setGeneral(null);
+        setEstres(null);
+        setAnsiedad(null);
+        setDepresion(null); 
+        setFlagHistory(false);
+        setFileActive(null);
+        setFilerepose(null);
+        
+        setSi_ansiedad('No');
+        setSi_depresion('No');
+        setSi_estres('No');
+        // PARA CONTROLAR EL AGENDAMIENTO DE CITAS
+        setAttendedDate(null);
+        setAttenderAgend(null);
+        // cita guardada para generar agendamientos
+        setCitaAgend(null);
     }
     
 
