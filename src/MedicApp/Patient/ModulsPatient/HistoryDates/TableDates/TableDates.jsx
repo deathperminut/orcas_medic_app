@@ -52,7 +52,7 @@ export default function TableDates() {
     if(result){
       console.log("RESULTADOS CITAS PREVIAS: ",result.data);
       setPreloader(false);
-      setDates(result.data.reverse())
+      setDates(result.data.filter((obj)=> obj?.documento_topoplot_test !== null).reverse())
     }
   }
   
