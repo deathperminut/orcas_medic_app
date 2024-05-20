@@ -596,7 +596,7 @@ export default function Agendamiento() {
       }
         <div className='row mt-4 mb-4'>
         <div className='col-12'>
-          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'26px'}}>Agendamiento de citas</h2>
+          <h2 className='m-0 p-0 lh-sm fs-4- ff-monse-regular- fw-bold tx-dark-purple- gray font_medium' style={{'fontSize':'26px'}}>Agendamiento de citas (Hora en formato 24 h)</h2>
         </div>
       </div>
       <div className='row mt-4 mb-4'>
