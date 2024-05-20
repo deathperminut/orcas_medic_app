@@ -423,8 +423,36 @@ export default function Agendamiento() {
   }
 
   const readInputs=(event,type)=>{
+    console.log("DATA: ",event.target.value)
+    if(event.target.value == "+" || event.target.value =="-"){
+      return ""
+    }else{
+      if(event.target.value == ""){
+        setDate({...date,[type]:event.target.value})
+      }else{
+        let Data = parseInt(event.target.value);
+        if(type == 'hora'){
+          if(Data < 0 || Data > 23){
+            return ""
+          }else{
+            setDate({...date,[type]:event.target.value})
+          }
+        }else{
+  
+          if(Data < 0 || Data > 59){
+            return ""
+          }else{
+            setDate({...date,[type]:event.target.value})
+          }
+  
+        }
+      }
+
+    }
+   
+    
  
-    setDate({...date,[type]:event.target.value})
+    
 
   }
 
