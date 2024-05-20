@@ -7,7 +7,8 @@ import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-
+import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright } from "react-icons/io";
 import moment from 'moment';
 import makeAnimated from 'react-select/animated';
 import Preloader from '../../../../../../../components/Preloader/Preloader';
@@ -605,7 +606,7 @@ export default function Agendamiento() {
             <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
                         <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-4 mb-lg-4 mb-xl-4 mb-xxl-4'>
                             <div className='form-floating inner-addon- left-addon-'>
-                            <div className='form-control' id='date-birth'>
+                            <div className='form-control'>
                                 <DatePicker
                                 inputClass="custom-style-date-picker- white font_medium"
                                 placeholder="yyyy-mm-dd"
@@ -621,9 +622,19 @@ export default function Agendamiento() {
                                 fixMainPosition={true}
                                 shadow={true}
                                 animation={true}
+                                button={true}
+                                renderButton={(event,handleClick)=>{
+                                  console.log("EVENTO :",event)
+                                  if(event == "left"){
+                                    return <IoIosArrowDropleft onClick={handleClick} size={20}></IoIosArrowDropleft>
+                                  }else{
+                                    return <IoIosArrowDropright onClick={handleClick} size={20}></IoIosArrowDropright>
+                                  }
+                                  
+                                }
+                                }
                                 arrowStyle={{
-                                    width:'50px',
-                                    fill:'red !important'
+                                    display:'none'
                                 }}
                                 />
                             </div>
