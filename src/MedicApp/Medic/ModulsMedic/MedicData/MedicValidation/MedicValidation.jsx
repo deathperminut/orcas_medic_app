@@ -4,6 +4,8 @@ import Select, { components } from 'react-select'
 import DatePicker from "react-multi-date-picker";
 import "react-tooltip/dist/react-tooltip.css";
 import makeAnimated from 'react-select/animated';
+import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright } from "react-icons/io";
 import { AppContext } from '../../../../../context';
 import Swal from 'sweetalert2';
 import moment from "moment";
@@ -535,6 +537,17 @@ export default function MedicValidation() {
                                   fixMainPosition={true}
                                   shadow={true}
                                   animation={true}
+                                  maxDate={new Date()}
+                                  renderButton={(event,handleClick)=>{
+                                    console.log("EVENTO :",event)
+                                    if(event == "left"){
+                                      return <IoIosArrowDropleft onClick={handleClick} size={20}></IoIosArrowDropleft>
+                                    }else{
+                                      return <IoIosArrowDropright onClick={handleClick} size={20}></IoIosArrowDropright>
+                                    }
+                                    
+                                  }
+                                  }
                                   arrowStyle={{
                                       display: "none"
                                   }}

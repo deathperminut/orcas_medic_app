@@ -3,6 +3,8 @@ import './UserIdentification.css'
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import DatePicker from "react-multi-date-picker";
+import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright } from "react-icons/io";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import "react-tooltip/dist/react-tooltip.css";
 import { AppContext } from '../../../../../../../context';
@@ -516,6 +518,17 @@ export default function UserIdentification() {
                                 value={Data?.fecha_nacimiento}
                                 months={months}
                                 weekDays={weekDays}
+                                maxDate={new Date()}
+                                renderButton={(event,handleClick)=>{
+                                  console.log("EVENTO :",event)
+                                  if(event == "left"){
+                                    return <IoIosArrowDropleft onClick={handleClick} size={20}></IoIosArrowDropleft>
+                                  }else{
+                                    return <IoIosArrowDropright onClick={handleClick} size={20}></IoIosArrowDropright>
+                                  }
+                                  
+                                }
+                                }
                                 calendarPosition="bottom-left"
                                 showOtherDays={true}
                                 fixMainPosition={true}

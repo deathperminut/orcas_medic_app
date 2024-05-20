@@ -4,6 +4,8 @@ import {NavLink} from "react-router-dom"
 import Pagination from 'pagination-for-reactjs-component'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { CiEdit } from "react-icons/ci";
+import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright } from "react-icons/io";
 import DatePicker from "react-multi-date-picker";
 import Select,{ components} from 'react-select'
 import { MdGppGood } from "react-icons/md";
@@ -1082,6 +1084,18 @@ export default function AdminPanel() {
                                       onChange={(event)=>changeDate(event,'fecha_nacimiento')}
                                       value={userRegister?.fecha_nacimiento}
                                       weekDays={weekDays}
+                                      button={true}
+                                      maxDate={new Date()}
+                                      renderButton={(event,handleClick)=>{
+                                        console.log("EVENTO :",event)
+                                        if(event == "left"){
+                                          return <IoIosArrowDropleft onClick={handleClick} size={20}></IoIosArrowDropleft>
+                                        }else{
+                                          return <IoIosArrowDropright onClick={handleClick} size={20}></IoIosArrowDropright>
+                                        }
+                                        
+                                      }
+                                      }
                                       calendarPosition="bottom-left"
                                       showOtherDays={true}
                                       fixMainPosition={true}
