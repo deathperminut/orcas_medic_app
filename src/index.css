@@ -3265,6 +3265,10 @@ input[type=number]::-webkit-outer-spin-button {
     border-color: transparent !important;
     border-style: inherit !important;
   }
+
+  .rmdp-arrow-container.rmdp-right {
+    background-color: red !important;
+  }
   
   .table-general- .table.table-no-border- tbody.total- {
     background-color: transparent !important;

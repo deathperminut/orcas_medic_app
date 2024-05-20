@@ -610,17 +610,20 @@ export default function Agendamiento() {
                                 inputClass="custom-style-date-picker- white font_medium"
                                 placeholder="yyyy-mm-dd"
                                 format="YYYY-MM-DD"
+                                arrowClassName='classArrow'
                                 onChange={(event)=>changeDate(event,'fecha')}
                                 value={date?.fecha}
                                 months={months}
+                                minDate={new Date()}
                                 weekDays={weekDays}
                                 calendarPosition="bottom-left"
-                                showOtherDays={true}
+                                // showOtherDays={true}
                                 fixMainPosition={true}
                                 shadow={true}
                                 animation={true}
                                 arrowStyle={{
-                                    display: "none"
+                                    width:'50px',
+                                    fill:'red !important'
                                 }}
                                 />
                             </div>
