@@ -660,20 +660,7 @@
     line-height: 1.25rem;
   }
   
-  #internal-form-modals input.custom-style-date-picker- {
-    font-size: 14px !important;
-    line-height: 1.7;
-    background-color: transparent !important;
-    border: 0 !important;
-    padding-left: 0px !important;
-    color: var(--color-quaternary-gray-) !important;
-    font-family: var(--font-family-regular-) !important;
-  }
-  
-  #internal-form-modals .custom-style-date-picker-::placeholder {
-    font-size: 14px !important;
-    color: var(--color-quaternary-gray-) !important;
-  }
+ 
   
   #internal-form-modals .rmdp-range {
     background-color: var(--color-purple-) !important;
@@ -814,9 +801,9 @@
   }
   
   #internal-date- .inner-addon- .fa {
-    width: 40px;
-    height: 40px;
-    color: var(--color-black-);
+    width: 10px;
+    height: 10px;
+    color: red !important;
   }
   
   #internal-date- .left-addon- .fa {
@@ -859,34 +846,6 @@
     padding-left: 2.5rem;
   }
   
-  #internal-date- .form-control.rangedate .custom-style-date-picker- {
-    width: 155px !important;
-  }
-  
-  #internal-date- .form-control.month .custom-style-date-picker- {
-    width: 84px !important;
-  }
-  
-  #internal-date- .form-control.only-month .custom-style-date-picker- {
-    width: 72px !important;
-  }
-  
-  #internal-date- input.custom-style-date-picker-::placeholder {
-    color: var(--color-quaternary-gray-) !important;
-  }
-  
-  #internal-date- .custom-style-date-picker- {
-    font-size: 13px !important;
-    background-color: transparent !important;
-    border: 0 !important;
-    padding-left: 0px !important;
-    color: var(--color-quaternary-gray-) !important;
-    font-family: var(--font-family-regular-) !important;
-  }
-  
-  #internal-date- .custom-style-date-picker-::placeholder {
-    font-size: 13px !important;
-  }
 
 
   /* ICONS*/

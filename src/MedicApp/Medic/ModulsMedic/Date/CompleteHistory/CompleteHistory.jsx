@@ -2,8 +2,7 @@ import React from 'react'
 import './CompleteHistory.css'
 import Select, { components } from 'react-select'
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
-import DatePicker from "react-multi-date-picker";
-import TimePicker from "react-multi-date-picker/plugins/time_picker";
+
 import "react-tooltip/dist/react-tooltip.css";
 import Preloader from '../../../../../components/Preloader/Preloader';
 import makeAnimated from 'react-select/animated';
