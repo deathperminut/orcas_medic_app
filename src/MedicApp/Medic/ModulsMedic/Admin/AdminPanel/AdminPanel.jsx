@@ -1165,13 +1165,16 @@ export default function AdminPanel() {
                       </div>
                     </div>
                   </div> */}
-                  <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
+                  <div onClick={RegisterData} className='ButtonElement' style={{'marginBottom':'70px'}}>
+                                <span  className='ButtonText'>Registrar</span>
+                  </div>
+                  {/* <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
                     <div className='col-auto'>
-                      <button onClick={RegisterData} className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-dark-purple- bs-1- btn-offcanvas' type="button">
+                      <button  className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-dark-purple- bs-1- btn-offcanvas' type="button">
                           <span className='lh-1 fs-5- ff-monse-regular- d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block'>Guardar</span>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>
@@ -1320,14 +1323,16 @@ export default function AdminPanel() {
                   :
                   <></>
                   }
-                  
-                  <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
+                  <div onClick={editUser} className='ButtonElement'  style={{'marginBottom':'70px'}}>
+                                <span  className='ButtonText'>Guardar</span>
+                  </div>
+                  {/* <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-4 mb-4'>
                     <div className='col-auto'>
-                      <button onClick={editUser} className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-dark-purple- bs-1- btn-offcanvas' type="button">
+                      <button  className='btn rounded-pill ps-3 pe-3 ps-sm-3 pe-sm-3 ps-md-3 pe-md-3 ps-lg-5 pe-lg-5 ps-xl-5 pe-xl-5 ps-xxl-5 pe-xxl-5 h-45- d-flex flex-row justify-content-center align-items-center align-self-center btn-dark-purple- bs-1- btn-offcanvas' type="button">
                           <span className='lh-1 fs-5- ff-monse-regular- d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block'>Guardar</span>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>
