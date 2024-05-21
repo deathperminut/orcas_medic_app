@@ -5,9 +5,14 @@ import PersonalIcon from '../../../../components/SvgComponents/Patient/PersonalI
 import HistorialIcon from '../../../../components/SvgComponents/Patient/HistorialIcon/HistorialIcon';
 import NextIcon from '../../../../components/SvgComponents/Patient/NextIcon/NextIcon';
 import StadisticsIcon from '../../../../components/SvgComponents/Patient/StadisticsIcon/StadisticsIcon';
+import { AppContext } from '../../../../context';
+import Swal from 'sweetalert2';
 
 export default function Portafolio_medic() {
     let navigate=useNavigate()
+    let {userData} = React.useContext(AppContext);
+
+    
   return (
     <div className='container-fluid'>
         <div className='row gx-4 d-flex flex-wrap flex-row justify-content-between align-items-start align-self-start align-self-xxl-center'>
@@ -17,7 +22,22 @@ export default function Portafolio_medic() {
         </div>
         <div className='row row-cols-auto d-flex flex-wrap justify-content-center align-items-center align-self-center justify-content-sm-center align-items-sm-center align-self-sm-center justify-content-md-center align-items-md-center align-self-md-center justify-content-lg-start align-items-lg-center align-self-lg-center justify-content-xl-start align-items-xl-center align-self-xl-center justify-content-xxl-start align-items-xxl-center align-self-xxl-center g-4   d-md-flex d-lg-flex d-xl-flex d-xxl-flex mt-2'>
             <div className='col'>
-                <div id="card-portfolio" onClick={()=>navigate('/ModulsMedic/Date_Medic')} className='w-100 cursor-' >
+                <div id="card-portfolio" onClick={()=>{
+                    // REVISAMOS EL ROL
+                    if(userData?.es_doctor){
+
+                    navigate('/ModulsMedic/Date_Medic')
+
+                    }else{
+
+                        Swal.fire({
+                        icon: 'info',
+                        title: 'Activa la funcionalidad de médico en el panel de administración para acceder a este apartado'
+                        })
+
+                    }
+                    
+                    }} className='w-100 cursor-' >
                     <div className='card border-0 box-shadow-card-aplications overflow-hidden'>
                         <div style={{ 'display':'flex','position':'relative','left':'45px','top':'70px'}}>
                             <HistorialIcon width={'90px'} height={'100px'} ></HistorialIcon>
